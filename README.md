@@ -1,3 +1,3 @@
-# PyCaptain
+# PyRaiders
 ## WORK IN PROGRESS...
-## Nifty tool written in Python using Tk to help you play Stream Raiders on your captain account
+## SR assistant written in Python using Tk.

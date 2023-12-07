@@ -13,9 +13,11 @@ from tkinter import (
     Scrollbar,
     Entry,
 )
-from utils.settings import get_user, delete_settings
+from utils.settings import get_user, delete_settings, open_file
 from utils.game_requests import get_display_data, get_units_data
 from utils.bot_settings import update_settings
+from utils.utils import position_screen
+from utils import constants
 import sys, os, json
 
 
@@ -28,35 +30,11 @@ def restart():
     os.execl(python, python, *sys.argv)
 
 
-def display_chests(self, master):
-    self.icon_paths = [
-        "assets/chests/chestbronze.png",
-        "assets/chests/chestsilver.png",
-        "assets/chests/chestgold.png",
-        "assets/chests/chestboostedgold.png",
-        "assets/chests/chestboostedscroll.png",
-        "assets/chests/chestboostedskin.png",
-        "assets/chests/chestboostedtoken.png",
-        "assets/chests/chestboss.png",
-        "assets/chests/chestbosssuper.png",
-    ]
-
-    array_of_chest_Ids = [
-        "chestbronze",
-        "chestsilver",
-        "chestgold",
-        "chestboostedgold",
-        "chestboostedscroll",
-        "chestboostedskin",
-        "chestboostedtoken",
-        "chestboss",
-        "chestbosssuper",
-    ]
-
+def display_chests(master):
     # Create a list to store PhotoImage objects
     img_list = []
 
-    for i, icon_path in enumerate(self.icon_paths[:9]):
+    for i, icon_path in enumerate(constants.icon_paths[:9]):
         img = PhotoImage(file=icon_path)
         img = img.subsample(2, 2)
         img_list.append(img)
@@ -69,9 +47,21 @@ def display_chests(self, master):
             image=img,
         )
 
-        entry_id = array_of_chest_Ids[i]
-        entry_p1 = Entry(master, width=5, name=f"{entry_id}_P1")
-        entry_p2 = Entry(master, width=5, name=f"{entry_id}_P2")
+        entry_id = constants.array_of_chest_Ids[i]
+        chest_p1 = f"{entry_id}_P1"
+        chest_p2 = f"{entry_id}_P2"
+
+        settings_data = open_file()
+
+        # Retrieve values for chest_p1 and chest_p2, defaulting to None if the keys are not present
+        value_p1 = settings_data.get(chest_p1, "")
+        value_p2 = settings_data.get(chest_p2, "")
+
+        entry_p1 = Entry(master, width=5, name=chest_p1)
+        entry_p2 = Entry(master, width=5, name=chest_p2)
+
+        entry_p1.insert(0, value_p1)
+        entry_p2.insert(0, value_p2)
 
         x_coordinate = 20 + (i % 3) * 150
         y_coordinate = 520 + (i // 3) * 70
@@ -83,57 +73,84 @@ def display_chests(self, master):
         label.img_ref = img
         label.configure(image=img)
 
+
 def display_units(self, master):
-    with open("pycaptain_settings.json", "r") as file:
-        settings_data = json.load(file)
-        userUnits = settings_data.get("userUnits", {})
-        # Canvas for scrollable grid
-        self.canvas = Canvas(master, height=500, width=500)
-        self.canvas.grid(row=1, column=3, rowspan=5, columnspan=3, sticky=N + S + E + W)
+    settings_data = open_file()
+        
+    userUnits = settings_data.get("userUnits", {})
+    # Canvas for scrollable grid
+    self.canvas = Canvas(master, height=500, width=500)
+    self.canvas.grid(row=1, column=3, rowspan=5, columnspan=3, sticky=N + S + E + W)
 
-        # Add a scrollbar to the canvas
-        scrollbar = Scrollbar(master, command=self.canvas.yview)
-        scrollbar.grid(row=1, rowspan=5, column=6, sticky=N + S)
+    # Add a scrollbar to the canvas
+    scrollbar = Scrollbar(master, command=self.canvas.yview)
+    scrollbar.grid(row=1, rowspan=5, column=6, sticky=N + S)
 
-        # Configure the canvas to scroll with the scrollbar
-        self.canvas.configure(yscrollcommand=scrollbar.set)
+    # Configure the canvas to scroll with the scrollbar
+    self.canvas.configure(yscrollcommand=scrollbar.set)
 
-        # Create a frame inside the canvas to hold the scrollable grid
-        self.frame = Frame(self.canvas)
-        self.canvas.create_window((0, 0), window=self.frame, anchor=N + W)
+    # Create a frame inside the canvas to hold the scrollable grid
+    self.frame = Frame(self.canvas)
+    self.canvas.create_window((0, 0), window=self.frame, anchor=N + W)
 
-        for i, unit in enumerate(userUnits):
-            unitId = unit["unitId"]
-            unitName = unit["unitType"]
-            icon_path = f"assets/units/{unitName}.gif"
-            img = PhotoImage(file=icon_path)
-            img = img.subsample(3, 3)
-            unitLevel = unit["level"]
-            unitSoul = unit["soulType"]
-            unitSpec = unit["specializationUid"]
-            unitPriority = unit["priority"]
-            label = Label(
-                self.frame,
-                borderwidth=2,
-                relief="solid",
-                text=f"{unitName}\nLevel: {unitLevel}\nSpecialization: {unitSpec}\nSoul: {unitSoul}\nPriority: {unitPriority}",
-                compound="top",
-                image=img,
-            )
-            label.grid(row=i // 3, column=i % 3, padx=5, pady=5, sticky=W)
-            label.img_ref = img  # Keep a reference to the PhotoImage object
-            label.configure(image=img)
-            
-            entry = Entry(self.frame, width=10, name=str(unitId))
-            entry.grid(row=i // 3, column=i % 3, padx=5, pady=10, sticky=N)
+    for i, unit in enumerate(userUnits):
+        unitId = unit["unitId"]
+        unitName = unit["unitType"]
+        icon_path = f"assets/units/{unitName}.gif"
+        img = PhotoImage(file=icon_path)
+        img = img.subsample(2, 2)
+        unitLevel = unit["level"]
+        unitSoul = unit["soulType"]
+        unitSpec = unit["specializationUid"]
+        unitPriority = unit["priority"]
+        label = Label(
+            self.frame,
+            borderwidth=2,
+            relief="solid",
+            text=f"{unitName}\nLevel: {unitLevel}\nSpecialization: {unitSpec}\nSoul: {unitSoul}",
+            compound="top",
+            image=img,
+        )
+        label.grid(row=i // 3, column=i % 3, padx=5, pady=5, sticky=W)
+        label.img_ref = img  # Keep a reference to the PhotoImage object
+        label.configure(image=img)
 
-        # Update the canvas to configure the scroll region
-        self.frame.update_idletasks()
-        self.canvas.config(scrollregion=self.canvas.bbox("all"))
+        entry = Entry(self.frame, width=10, name=str(unitId))
+        entry.insert(0, unitPriority)
+        entry.grid(row=i // 3, column=i % 3, padx=5, pady=10, sticky=N)
+
+    # Update the canvas to configure the scroll region
+    self.frame.update_idletasks()
+    self.canvas.config(scrollregion=self.canvas.bbox("all"))
+
+
+def update_data(self):
+    entry_chest = {}
+    entry_unit = {}
+    queue = [self.master]
+
+    while queue:
+        current_widget = queue.pop(0)
+
+        if isinstance(current_widget, Entry):
+            entry_id = current_widget.winfo_name()
+            value = current_widget.get()
+            if "chest" in entry_id:
+                entry_chest[entry_id] = value
+            else:
+                entry_unit[entry_id] = value
+
+        elif isinstance(current_widget, Canvas):
+            # Add Canvas children to the queue
+            queue.extend(current_widget.winfo_children())
+
+        else:
+            # Add other widget's children to the queue
+            queue.extend(current_widget.winfo_children())
+    update_settings(entry_chest, entry_unit)
 
 
 class BotApp:
-
     def __init__(self, master):
         self.master = master
 
@@ -157,20 +174,18 @@ class BotApp:
 
         currencies_to_display = [
             "gold",
-            "keys",
+            # "keys",
             # "bones",
-            "commonspelltome",
-            "retrytoken",
+            # "commonspelltome",
+            # "retrytoken",
         ]
-        self.icon_paths = [
+        icon_path = [
             "assets/currencies/gold.png",
-            "assets/currencies/keys.png",
+            # "assets/currencies/keys.png",
             # "assets/currencies/bones.png",
-            "assets/currencies/commonspelltome.png",
-            "assets/currencies/retrytoken.png",
+            # "assets/currencies/commonspelltome.png",
+            # "assets/currencies/retrytoken.png",
         ]
-
-        master.title("PyCaptain")
 
         self.photo_images = []
         self.currency_images = []
@@ -182,7 +197,7 @@ class BotApp:
                 column_index = currencies_to_display.index(currency_id)
 
                 # Load the image for the specific currency
-                currency_img = PhotoImage(file=self.icon_paths[column_index])
+                currency_img = PhotoImage(file=icon_path[column_index])
                 currency_img = currency_img.subsample(3, 3)
                 self.currency_images.append(currency_img)
 
@@ -197,38 +212,24 @@ class BotApp:
         # Assuming display_units is a function that places widgets using place method
         display_units(self, master)
 
-        display_chests(self, master)
-        
-        self.button = Button(master, text="UPDATE", command=self.update_data())
+        display_chests(master)
+
+        self.button = Button(master, text="UPDATE", command=lambda: update_data(self))
         self.button.place(x=500, y=600)
 
         # When the bot screen is closed, show the main screen again
         master.protocol("WM_DELETE_WINDOW", self.show_main_screen)
 
         # Set the minimum size (width, height)
-        master.minsize(750, 900)
+        master.minsize(700, 720)
 
         # Center the window on the screen
-        self.center_window()
-        
-    def update_data(self):
-        update_settings()
-        
+        position_screen(self, 4, 4)
+
     def show_main_screen(self):
         # Show the main screen
         self.master.destroy()
 
-    def center_window(self):
-        # Get the screen width and height
-        screen_width = self.master.winfo_screenwidth()
-        screen_height = self.master.winfo_screenheight()
-
-        # Calculate the position of the window
-        x_position = (screen_width - self.master.winfo_reqwidth()) // 4
-        y_position = (screen_height - self.master.winfo_reqheight()) // 4
-
-        # Set the window position
-        self.master.geometry("+{}+{}".format(x_position, y_position))
 
 if __name__ == "__main__":
     bot_root = Tk()

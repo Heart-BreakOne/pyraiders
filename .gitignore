@@ -1,6 +1,6 @@
 token.temp
 __pycache__
-pycaptain_settings.json
+.pyraiders_settings.json
 .DS_Store
 *.tm_build_errors
 build/*
@@ -29,3 +29,4 @@ profile
 *.moved-aside
 *~.nib
 .*.sw*
+timeline.txt
