@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import (messagebox)
 from utils.settings import get_user, delete_settings, open_file
 from utils.game_requests import get_display_data, get_units_data
 from utils.bot_settings import update_settings
@@ -9,7 +10,7 @@ import sys, os
 
 def restart():
     delete_settings()
-    tk.messagebox.showinfo(
+    messagebox.showinfo(
         "Alert", "Something went wrong while trying to log in.\nCheck your access token"
     )
     python = sys.executable
@@ -146,6 +147,7 @@ class CaptainApp:
         try:
             tokenIsValid = get_user()
         except Exception as e:
+            print(e)
             tokenIsValid = False
             restart()
             return

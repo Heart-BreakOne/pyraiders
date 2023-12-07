@@ -40,8 +40,7 @@ def get_user():
                 
                 existing_data = open_file()
                 existing_data.update(data_to_save)
-               
-                data_to_save(existing_data)
+                write_file(existing_data)
                 return True
         else:
             return False 
