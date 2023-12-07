@@ -12,7 +12,7 @@ from tkinter import (
 )
 from utils.settings import save_settings, check_settings
 from utils.utils import position_screen
-from components.bot import BotApp
+from components.bot import CaptainApp
 from utils import constants
 
 
@@ -23,7 +23,7 @@ class CaptainGUI:
         # check if settings exist, if it does, skip everything here and load the bot screen
         if check_settings():
             # self.master.withdraw()
-            BotApp(self.master)
+            CaptainApp(self.master)
             return
 
         # Add label, an entry text for the token and a button for confirmation
@@ -59,7 +59,7 @@ class CaptainGUI:
             save_settings(ACCESS_INFO)
             self.master.withdraw()
             bot_root = Toplevel()
-            BotApp(bot_root)
+            CaptainApp(bot_root)
 
 
 if __name__ == "__main__":

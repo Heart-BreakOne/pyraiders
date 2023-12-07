@@ -1,6 +1,7 @@
 token.temp
 __pycache__
 .pyraiders_settings.json
+.pyraiders_accounts.json
 .DS_Store
 *.tm_build_errors
 build/*

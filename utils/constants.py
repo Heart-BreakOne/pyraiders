@@ -7,6 +7,8 @@ Not URL encoded (must have % symbols)"""
 
 gameDataURL = "https://www.streamraiders.com/api/game/"
 
+mapPlacements = "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
+
 user_agents = [
     # Google Chrome
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",

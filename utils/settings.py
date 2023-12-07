@@ -38,8 +38,7 @@ def get_user():
                 
                 existing_data = {}
                 
-                with open(".pyraiders_settings.json", "r") as json_file:
-                    existing_data = json.load(json_file)
+                existing_data = open_file()
                 existing_data.update(data_to_save)
                
                 with open(".pyraiders_settings.json", "w") as json_file:

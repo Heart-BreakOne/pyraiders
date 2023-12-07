@@ -150,7 +150,7 @@ def update_data(self):
     update_settings(entry_chest, entry_unit)
 
 
-class BotApp:
+class CaptainApp:
     def __init__(self, master):
         self.master = master
 
@@ -233,5 +233,5 @@ class BotApp:
 
 if __name__ == "__main__":
     bot_root = Tk()
-    bot_app = BotApp(bot_root)
+    bot_app = CaptainApp(bot_root)
     bot_root.mainloop()
