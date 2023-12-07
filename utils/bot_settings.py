@@ -1,6 +1,5 @@
-import json
 from utils import constants
-from utils.settings import open_file
+from utils.settings import open_file, write_file
 
 # Save the chest priority levels and unit priority levels on their respective keys.
 def update_settings(entry_chest, entry_unit):
@@ -26,8 +25,7 @@ def update_settings(entry_chest, entry_unit):
                 unit["priority"] = priority
 
     # Save the updated JSON data back to the file
-    with open(".pyraiders_settings.json", "w") as file:
-        json.dump(settings_data, file, indent=2)
+    write_file(settings_data)
 
 def convert_to_integer(value):
     try:

@@ -1,29 +1,15 @@
-from tkinter import (
-    Tk,
-    Label,
-    Button,
-    W,
-    E,
-    N,
-    S,
-    messagebox,
-    PhotoImage,
-    Frame,
-    Canvas,
-    Scrollbar,
-    Entry,
-)
+import tkinter as tk
 from utils.settings import get_user, delete_settings, open_file
 from utils.game_requests import get_display_data, get_units_data
 from utils.bot_settings import update_settings
 from utils.utils import position_screen
 from utils import constants
-import sys, os, json
+import sys, os
 
 
 def restart():
     delete_settings()
-    messagebox.showinfo(
+    tk.messagebox.showinfo(
         "Alert", "Something went wrong while trying to log in.\nCheck your access token"
     )
     python = sys.executable
@@ -35,12 +21,12 @@ def display_chests(master):
     img_list = []
 
     for i, icon_path in enumerate(constants.icon_paths[:9]):
-        img = PhotoImage(file=icon_path)
+        img = tk.PhotoImage(file=icon_path)
         img = img.subsample(2, 2)
         img_list.append(img)
 
         # Set of labels and entries
-        label = Label(
+        label = tk.Label(
             master,
             text=f"P1: \nP2: ",
             compound="left",
@@ -57,8 +43,8 @@ def display_chests(master):
         value_p1 = settings_data.get(chest_p1, "")
         value_p2 = settings_data.get(chest_p2, "")
 
-        entry_p1 = Entry(master, width=5, name=chest_p1)
-        entry_p2 = Entry(master, width=5, name=chest_p2)
+        entry_p1 = tk.Entry(master, width=5, name=chest_p1)
+        entry_p2 = tk.Entry(master, width=5, name=chest_p2)
 
         entry_p1.insert(0, value_p1)
         entry_p2.insert(0, value_p2)
@@ -76,34 +62,34 @@ def display_chests(master):
 
 def display_units(self, master):
     settings_data = open_file()
-        
+
     userUnits = settings_data.get("userUnits", {})
     # Canvas for scrollable grid
-    self.canvas = Canvas(master, height=500, width=500)
-    self.canvas.grid(row=1, column=3, rowspan=5, columnspan=3, sticky=N + S + E + W)
+    self.canvas = tk.Canvas(master, height=500, width=500)
+    self.canvas.grid(row=1, column=3, rowspan=5, columnspan=3, sticky=tk.N + tk.S + tk.E + tk.W)
 
     # Add a scrollbar to the canvas
-    scrollbar = Scrollbar(master, command=self.canvas.yview)
-    scrollbar.grid(row=1, rowspan=5, column=6, sticky=N + S)
+    scrollbar = tk.Scrollbar(master, command=self.canvas.yview)
+    scrollbar.grid(row=1, rowspan=5, column=6, sticky=tk.N + tk.S)
 
     # Configure the canvas to scroll with the scrollbar
     self.canvas.configure(yscrollcommand=scrollbar.set)
 
     # Create a frame inside the canvas to hold the scrollable grid
-    self.frame = Frame(self.canvas)
-    self.canvas.create_window((0, 0), window=self.frame, anchor=N + W)
+    self.frame = tk.Frame(self.canvas)
+    self.canvas.create_window((0, 0), window=self.frame, anchor=tk.N + tk.W)
 
     for i, unit in enumerate(userUnits):
         unitId = unit["unitId"]
         unitName = unit["unitType"]
         icon_path = f"assets/units/{unitName}.gif"
-        img = PhotoImage(file=icon_path)
+        img = tk.PhotoImage(file=icon_path)
         img = img.subsample(2, 2)
         unitLevel = unit["level"]
         unitSoul = unit["soulType"]
         unitSpec = unit["specializationUid"]
         unitPriority = unit["priority"]
-        label = Label(
+        label = tk.Label(
             self.frame,
             borderwidth=2,
             relief="solid",
@@ -111,13 +97,13 @@ def display_units(self, master):
             compound="top",
             image=img,
         )
-        label.grid(row=i // 3, column=i % 3, padx=5, pady=5, sticky=W)
+        label.grid(row=i // 3, column=i % 3, padx=5, pady=5, sticky=tk.W)
         label.img_ref = img  # Keep a reference to the PhotoImage object
         label.configure(image=img)
 
-        entry = Entry(self.frame, width=10, name=str(unitId))
+        entry = tk.Entry(self.frame, width=10, name=str(unitId))
         entry.insert(0, unitPriority)
-        entry.grid(row=i // 3, column=i % 3, padx=5, pady=10, sticky=N)
+        entry.grid(row=i // 3, column=i % 3, padx=5, pady=10, sticky=tk.N)
 
     # Update the canvas to configure the scroll region
     self.frame.update_idletasks()
@@ -132,7 +118,7 @@ def update_data(self):
     while queue:
         current_widget = queue.pop(0)
 
-        if isinstance(current_widget, Entry):
+        if isinstance(current_widget, tk.Entry):
             entry_id = current_widget.winfo_name()
             value = current_widget.get()
             if "chest" in entry_id:
@@ -140,7 +126,7 @@ def update_data(self):
             else:
                 entry_unit[entry_id] = value
 
-        elif isinstance(current_widget, Canvas):
+        elif isinstance(current_widget, tk.Canvas):
             # Add Canvas children to the queue
             queue.extend(current_widget.winfo_children())
 
@@ -197,11 +183,11 @@ class CaptainApp:
                 column_index = currencies_to_display.index(currency_id)
 
                 # Load the image for the specific currency
-                currency_img = PhotoImage(file=icon_path[column_index])
+                currency_img = tk.PhotoImage(file=icon_path[column_index])
                 currency_img = currency_img.subsample(3, 3)
                 self.currency_images.append(currency_img)
 
-                label = Label(
+                label = tk.Label(
                     master,
                     text=f"{quantity}",
                     compound="left",
@@ -214,7 +200,7 @@ class CaptainApp:
 
         display_chests(master)
 
-        self.button = Button(master, text="UPDATE", command=lambda: update_data(self))
+        self.button = tk.Button(master, text="UPDATE", command=lambda: update_data(self))
         self.button.place(x=500, y=600)
 
         # When the bot screen is closed, show the main screen again
@@ -232,6 +218,6 @@ class CaptainApp:
 
 
 if __name__ == "__main__":
-    bot_root = Tk()
+    bot_root = tk.Tk()
     bot_app = CaptainApp(bot_root)
     bot_root.mainloop()

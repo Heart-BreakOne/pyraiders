@@ -41,8 +41,7 @@ def get_user():
                 existing_data = open_file()
                 existing_data.update(data_to_save)
                
-                with open(".pyraiders_settings.json", "w") as json_file:
-                    json.dump(existing_data, json_file)
+                data_to_save(existing_data)
                 return True
         else:
             return False 
@@ -62,13 +61,16 @@ def save_settings(ACCESS_INFO):
     
     # Save the data to a JSON file
     data_to_save = {'access_info': ACCESS_INFO, 'user_agent': random_user_agent}
-    with open(".pyraiders_settings.json", "w") as json_file:
-        json.dump(data_to_save, json_file)
+    write_file(data_to_save)
         
 def delete_settings():
     os.remove(".pyraiders_settings.json")
     
 def open_file():
-     with open(".pyraiders_settings.json", "r") as file:
-        settings_data = json.load(file)
+     with open(".pyraiders_settings.json", "r") as json_file:
+        settings_data = json.load(json_file)
         return settings_data
+    
+def write_file(data_to_save):
+     with open(".pyraiders_settings.json", "w") as json_file:
+        json.dump(data_to_save, json_file, indent=2)
