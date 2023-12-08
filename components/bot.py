@@ -38,7 +38,7 @@ def display_chests(master):
         chest_p1 = f"{entry_id}_P1"
         chest_p2 = f"{entry_id}_P2"
 
-        settings_data = open_file()
+        settings_data = open_file(constants.py_captain)
 
         # Retrieve values for chest_p1 and chest_p2, defaulting to None if the keys are not present
         value_p1 = settings_data.get(chest_p1, "")
@@ -62,7 +62,7 @@ def display_chests(master):
 
 
 def display_units(self, master):
-    settings_data = open_file()
+    settings_data = open_file(constants.py_captain)
 
     userUnits = settings_data.get("userUnits", {})
     # Canvas for scrollable grid

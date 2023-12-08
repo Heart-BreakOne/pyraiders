@@ -1,8 +1,9 @@
 import requests
 from utils.settings import open_file, write_file
+from utils import constants
 
 def get_variables():
-    settings_data = open_file()
+    settings_data = open_file(constants.py_captain)
     version = settings_data.get("version", {})
     data_version = settings_data.get("data_version", {})
     userId = settings_data.get("userId", {})
@@ -32,7 +33,7 @@ def get_display_data():
         return response.json()
 
 def get_units_data():
-    settings = open_file()
+    settings = open_file(constants.py_captain)
 
     if "userUnits" not in settings:
         variables = get_variables()
@@ -52,4 +53,4 @@ def get_units_data():
                 each_unit["priority"] = 0
             # add an integer key called priority to each item before saving
             settings["userUnits"] = units
-            write_file(settings)
+            write_file(constants.py_captain, settings)

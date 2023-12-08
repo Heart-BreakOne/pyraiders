@@ -1,7 +1,8 @@
+import random
 import tkinter as tk
-import json
+from utils import constants
 from utils.utils import position_screen
-
+from utils.settings import write_file
 
 class ViewerGUI:
     def __init__(self, master):
@@ -49,7 +50,6 @@ class ViewerGUI:
 
         position_screen(self, 2, 2)
 
-
 def save_accounts(frame):
     entry_dict = {}
     children = frame.winfo_children()
@@ -63,7 +63,10 @@ def save_accounts(frame):
                 # Get the values from the Entry widgets and store as a pair
                 entry_name = children[i].get()
                 entry_token = children[i + 1].get()
-                entry_dict[entry_name] = {"name": entry_name, "token": entry_token}
+                user_agent = random.choice(constants.user_agents)
+                proxy = random.choice(constants.proxies)
+                
+                entry_dict[entry_name] = {"name": entry_name, "token": entry_token, "user_agent": user_agent, "proxy": proxy}
 
     filtered_entries = {}
     seen_names = set()
@@ -90,9 +93,8 @@ def save_accounts(frame):
         # Update the sets to keep track of seen names and tokens
         seen_names.add(name)
         seen_tokens.add(token)
-
-    with open(".pyraiders_accounts.json", "w") as json_file:
-        json.dump(filtered_entries, json_file, indent=2)
+        
+    write_file(constants.py_accounts, filtered_entries)
 
 if __name__ == "__main__":
     root = tk.Tk()

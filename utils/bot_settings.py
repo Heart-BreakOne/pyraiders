@@ -5,7 +5,7 @@ from utils.settings import open_file, write_file
 def update_settings(entry_chest, entry_unit):
 
     # Load the existing JSON data
-    settings_data = open_file()
+    settings_data = open_file(constants.py_captain)
 
     # Update values for "chest"
     for chest_key in constants.chest_priorities:
@@ -25,7 +25,7 @@ def update_settings(entry_chest, entry_unit):
                 unit["priority"] = priority
 
     # Save the updated JSON data back to the file
-    write_file(settings_data)
+    write_file(constants.py_captain, settings_data)
 
 def convert_to_integer(value):
     try:

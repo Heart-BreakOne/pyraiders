@@ -17,7 +17,7 @@ def get_user():
         data_version = response_json['info']['dataVersion']
         validateURL = "https://www.streamraiders.com/api/game/?cn=getUser&gameDataVersion="+ data_version +"0&command=getUser&skipDataCheck=true&isLogin=true&clientVersion="+ version + "&clientPlatform=WebGL"
         
-        settings_data = open_file()
+        settings_data = open_file(constants.py_captain)
         access_info = settings_data.get('access_info', {})
         user_agent = settings_data.get('user_agent', {})
         headers = {
@@ -38,9 +38,9 @@ def get_user():
                 
                 existing_data = {}
                 
-                existing_data = open_file()
+                existing_data = open_file(constants.py_captain)
                 existing_data.update(data_to_save)
-                write_file(existing_data)
+                write_file(constants.py_captain, existing_data)
                 return True
         else:
             return False 
@@ -49,7 +49,7 @@ def get_user():
         return False
     
 def check_settings():
-    file_path = ".pyraiders_settings.json"
+    file_path = constants.py_captain
     if os.path.exists(file_path):
         return True
     else:
@@ -60,16 +60,16 @@ def save_settings(ACCESS_INFO):
     
     # Save the data to a JSON file
     data_to_save = {'access_info': ACCESS_INFO, 'user_agent': random_user_agent}
-    write_file(data_to_save)
+    write_file(constants.py_captain, data_to_save)
         
 def delete_settings():
-    os.remove(".pyraiders_settings.json")
+    os.remove(constants.py_captain)
     
-def open_file():
-     with open(".pyraiders_settings.json", "r") as json_file:
+def open_file(file_name):
+     with open(file_name, "r") as json_file:
         settings_data = json.load(json_file)
         return settings_data
     
-def write_file(data_to_save):
-     with open(".pyraiders_settings.json", "w") as json_file:
+def write_file(file_name, data_to_save):
+     with open(file_name, "w") as json_file:
         json.dump(data_to_save, json_file, indent=2)
