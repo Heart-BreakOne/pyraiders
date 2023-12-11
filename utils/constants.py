@@ -1,19 +1,13 @@
 # Constants file
 
-main_screen_label = """
-DO NOT SHARE THIS TOKEN WITH ANYONE BE IT BY TEXT, BY SCREENSHOT OR BY SHARING YOU SETTINGS.JSON FILE
-Copy and paste your ACCESS_INFO token to get started
-Not URL encoded (must have % symbols)"""
-
 gameDataURL = "https://www.streamraiders.com/api/game/"
 
 mapPlacements = (
     "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
 )
 
-
-py_accounts = ".pyraiders_accounts.json"
-py_captain = ".pyraiders_settings.json"
+py_accounts = "pyraiders_accounts.json"
+py_captain = "pyraiders_settings.json"
 
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -640,49 +634,4 @@ proxies = [
     "103.118.78.194:80",
     "223.215.176.37:8089",
     "123.245.249.185:8089",
-]
-
-icon_paths = [
-    "assets/chests/chestbronze.png",
-    "assets/chests/chestsilver.png",
-    "assets/chests/chestgold.png",
-    "assets/chests/chestboostedgold.png",
-    "assets/chests/chestboostedscroll.png",
-    "assets/chests/chestboostedskin.png",
-    "assets/chests/chestboostedtoken.png",
-    "assets/chests/chestboss.png",
-    "assets/chests/chestbosssuper.png",
-]
-
-array_of_chest_Ids = [
-    "chestbronze",
-    "chestsilver",
-    "chestgold",
-    "chestboostedgold",
-    "chestboostedscroll",
-    "chestboostedskin",
-    "chestboostedtoken",
-    "chestboss",
-    "chestbosssuper",
-]
-
-chest_priorities = [
-    "chestbronze_P1",
-    "chestbronze_P2",
-    "chestsilver_P1",
-    "chestsilver_P2",
-    "chestgold_P1",
-    "chestgold_P2",
-    "chestboostedgold_P1",
-    "chestboostedgold_P2",
-    "chestboostedscroll_P1",
-    "chestboostedscroll_P2",
-    "chestboostedskin_P1",
-    "chestboostedskin_P2",
-    "chestboostedtoken_P1",
-    "chestboostedtoken_P2",
-    "chestboss_P1",
-    "chestboss_P2",
-    "chestbosssuper_P1",
-    "chestbosssuper_P2",
 ]

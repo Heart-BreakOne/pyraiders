@@ -1,0 +1,17 @@
+{
+    "version": "0.8.0-alpha",
+    "name": "PyRaiders",
+    "author": "HeartBreak-One",
+    "description": "SR assistant for viewers and captains written in Python",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Heart-BreakOne/pyraiders.git"
+    },
+    "keywords": [
+        "Python",
+        "CLI",
+        "SR assistant",
+        "Twitch"
+    ],
+    "license": "MIT"
+}

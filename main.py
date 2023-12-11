@@ -1,64 +1,32 @@
-import tkinter as tk
-from components.captain import CaptainGUI
-from components.viewer import ViewerGUI
-from utils.utils import position_screen
+import asyncio
+from utils.settings import write_file, open_file, setup_accounts
+from utils.game_requests import set_user_data
+from utils.behavior_emulator import make_dummy_requests
+from utils import constants
+from utils.create_accounts import create_account
 
-class PyRaidersGUI:
-    def __init__(self, master):
-        
-        #Attemps to set application icon on windows
-        try:
-            root.iconbitmap(default="assets/icons/icon-128.ico")
-        except tk.TclError as e:
-            try:
-                # Try MacOS
-                root.call(
-                    "wm",
-                    "iconphoto",
-                    root._w,
-                    tk.PhotoImage(file="assets/icons/icon-128.png"),
-                )
-            except tk.TclError as e:
-                #User is probably using linux
-                print("Probably linux")
 
-        self.master = master
-        master.title("PyRaiders")
+async def main():
+    # Check if accounts file exist, if not create one.
+    data = open_file(constants.py_accounts)
+    if data is None:
+        create_account()
+        return
 
-        # Load the first image
-        image_path1 = "assets/images/viewer.png"
-        self.photo1 = tk.PhotoImage(file=image_path1)
-        self.photo1 = self.photo1.subsample(2, 2)
-        self.label1 = tk.Label(master, text="VIEWER", image=self.photo1, compound="top")
-        self.label1.place(x=0, y=0)
-        self.label1.bind("<Button-1>", self.on_viewer_click)
+    # Add user-agents, proxies and remove duplicates entries
+    data = setup_accounts(data)
 
-        # Load the second image
-        image_path2 = "assets/images/captain.png"
-        self.photo2 = tk.PhotoImage(file=image_path2)
-        self.photo2 = self.photo2.subsample(2, 2)
-        self.label2 = tk.Label(master, text="CAPTAIN", image=self.photo2, compound="top")
-        self.label2.place(x=200, y=0)
-        self.label2.bind("<Button-1>", self.on_captain_click)
+    # Load unitIds and units.
+    data = set_user_data(data)
 
-        # Set the minimum size (width, height)
-        master.minsize(375, 260)
+    write_file(constants.py_accounts, data)
 
-        # Center the window on the screen
-        position_screen(self, 2, 2)
+    # Start dummy requests here
+    asyncio.create_task(make_dummy_requests())
 
-    #User is viewer
-    def on_viewer_click(self, event):
-        self.master.withdraw()
-        viewerGui = tk.Toplevel()
-        ViewerGUI(viewerGui)
-    #User is a captain
-    def on_captain_click(self, event):
-        self.master.withdraw()
-        captainGui = tk.Toplevel()
-        CaptainGUI(captainGui)
+    while True:
+        await asyncio.sleep(1)
+
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = PyRaidersGUI(root)
-    root.mainloop()
+    asyncio.run(main())
