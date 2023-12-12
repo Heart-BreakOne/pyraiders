@@ -24,7 +24,6 @@ def get_units_data(userId, token, user_agent, proxy, version, data_version):
     )
 
     headers, proxies = get_request_strings(token, user_agent, proxy)
-
     response = requests.get(url, proxies=proxies, headers=headers)
     if response.status_code == 200:
         units = response.json().get("data", [])
@@ -84,6 +83,9 @@ def set_user_data(account_data):
     version, data_version = get_game_data()
 
     for account in account_data:
+        if account["powered_on"] == False:
+            continue
+
         token = account["token"]
         user_agent = account["user_agent"]
         proxy = account["proxy"]
@@ -129,7 +131,7 @@ def get_battlepass(userId, token, user_agent, proxy, version, data_version):
         data = parsedResponse["data"]
         if data == None:
             return False
-        
+
         for each in data:
             if each["eventUid"] == "snowfall_02":
                 has_pass = each["hasBattlePass"]

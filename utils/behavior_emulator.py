@@ -33,6 +33,8 @@ async def make_dummy_requests():
 
         tasks = []
         for account in accounts:
+            if account["powered_on"] == False:
+                continue
             user_id = account["userId"]
             token = account["token"]
             user_agent = account["user_agent"]
@@ -61,6 +63,8 @@ async def start_up_requests():
 
     tasks = []
     for account in accounts:
+        if account["powered_on"] == False:
+            continue
         user_id = account["userId"]
         token = account["token"]
         user_agent = account["user_agent"]
