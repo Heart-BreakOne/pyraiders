@@ -7,7 +7,7 @@ from utils.settings import open_file
 from utils.game_requests import get_request_strings, get_game_data
 
 #Requester
-async def requester(user_id, token, user_agent, proxy, version, data_version, list_of_urls):
+async def requester(user_id, token, user_agent, proxy, _, __, list_of_urls):
     headers, proxies = get_request_strings(token, user_agent, proxy)
     
     for url in list_of_urls:
@@ -41,7 +41,7 @@ async def make_dummy_requests():
             proxy = account["proxy"]
             list_of_periodic_requests = [
                 f"{constants.gameDataURL}?cn=getLiveAndPlayingCaptainCount&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getLiveAndPlayingCaptainCount&clientVersion={version}&clientPlatform=WebGL",
-                f"{constants.gameDataURL}?cn=getActiveRaidsByUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getActiveRaidsByUser&placementStartIndices=%7",
+                f"{constants.gameDataURL}?cn=getActiveRaidsByUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getActiveRaidsByUser",
                 f"{constants.gameDataURL}?cn=getUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUser&clientVersion={version}&clientPlatform=WebGL",
                 f"{constants.gameDataURL}?cn=getFactionInfo&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getFactionInfo&clientVersion={version}&clientPlatform=WebGL",
                 f"{constants.gameDataURL}?cn=getOpenCountTrackedChests&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getOpenCountTrackedChests&clientVersion={version}&clientPlatform=WebGL",

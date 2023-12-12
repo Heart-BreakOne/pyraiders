@@ -37,15 +37,13 @@ DO NOT EDIT THE VALUES BELOW UNLESS YOU ARE HAVING ISSUES.
 THESE VALUES WILL BE FILLED ONCE YOU SET THE "name" AND THE "token" values.
 "temporary_ignore" -> DO NOT EDIT THIS VALUE, IT'S TEMPORARY DATA TO AVOID CAPTAIN SLOT SWITCH LOOPING.
 "user_agent": "", LEAVE BLANK, DO NOT EDIT THIS VALUE UNLESS YOU HAVE ISSUES WITH THE USER AGENT. DUPLICATE USER AGENTS ARE NOT ALLOWED.
-"proxy": "", -> LEAVE BLANK, DO NOT EDIT THIS VALUE UNLESS YOU HAVE ISSUES WITH THE PROXY. DUPLICATE PROXIES ARE NOT ALLOWED.
-"userId": "", -> LEAVE BLANK, WILL BE FILLED THE  "name" AND THE "token" values.
-"favoriteCaptainIds": "" -> LEAVE BLANK, WILL BE FILLED THE  "name" AND THE "token" values.
-"units": "" -> LEAVE BLANK, WILL BE FILLED ONCE YOU SET THE  "name" AND THE "token" values.
+"proxy": -> LEAVE BLANK, DO NOT EDIT THIS VALUE UNLESS YOU HAVE ISSUES WITH THE PROXY. DUPLICATE PROXIES ARE NOT ALLOWED.
+"userId":, "favoriteCaptainIds": "", "units": -> LEAVE BLANK, WILL BE FILLED ONCE YOU SET THE  "name" AND THE "token" values.
 
-Once the "units" are filled with all of your units, you can edit two values:
+Once the "units" are filled with all of your units after running the tool once, you can edit two values:
 
 "priority": 0 -> Never ever place the unit. 1 -> Highest placement priority. The higher the number, the lower the priority.
-"level_up": -> Whether or not unit should be leveled up.
+"level_up": -> Whether or not unit should be leveled up. (This is a future implementation not yet supported.)
 
 Here's what it will look like:
     "units": [
