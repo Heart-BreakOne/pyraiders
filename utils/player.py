@@ -231,5 +231,5 @@ def fill_empty_slots(
     if len(acceptable_captains) == 0 and any_captain:
         acceptable_captains = unique_data
 
-    # Now that the list of usable captains has been made, filter out active captains and avoid duplicate pvp/dungeon
+    # Now that the list of usable live captains has been made, filter out active captains and avoid a duplicate pvp/dungeon captain
     print(acceptable_captains)

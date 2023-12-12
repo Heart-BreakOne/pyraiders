@@ -19,18 +19,18 @@ def setup_accounts(data):
     #Generate unique user agent
     def generate_unique_user_agent(existing_user_agents):
         base_user_agent = random.choice(constants.user_agents)
-        new_user_agent = f"{base_user_agent}_{random.randint(1, 1000)}"
+        new_user_agent = base_user_agent
         while new_user_agent in existing_user_agents:
-            new_user_agent = f"{base_user_agent}_{random.randint(1, 1000)}"
+            new_user_agent = base_user_agent
         existing_user_agents.add(new_user_agent)
         return new_user_agent
 
     #Generate unique proxy
     def generate_unique_proxy(existing_proxies):
         base_proxy = random.choice(constants.proxies)
-        new_proxy = f"{base_proxy}_{random.randint(1, 1000)}"
+        new_proxy = base_proxy
         while new_proxy in existing_proxies:
-            new_proxy = f"{base_proxy}_{random.randint(1, 1000)}"
+            new_proxy = base_proxy
         existing_proxies.add(new_proxy)
         return new_proxy
 
