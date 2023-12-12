@@ -22,6 +22,8 @@ default_entry = [
         "temporary_ignore": {"cptName": 0},
         "user_agent": "",
         "proxy": "",
+        "proxy_user": "",
+        "proxy_password": "",
         "has_pass": False,
         "userId": "",
         "favorites_only": False,
@@ -662,3 +664,15 @@ proxies = [
     "223.215.176.37:8089",
     "123.245.249.185:8089",
 ]
+
+welcome_message = """
+*Accounts file created successfully.
+*To add multiple accounts simply copy and paste the default account.
+*Add unique names and unique tokens.
+*The name can be anything you want, they don't have to be the Twitch account. Tokens must match your account.
+*Customize the other settings as you need.
+*Accounts with duplicate names and tokens will be wiped from the file.
+*If you have any issues with the user agent or the proxy, replace them.
+*Duplicate user agents and proxies will be automatically replaced, you can manually edit if you have issues with faulty ones, but make sure they are not duplicates.
+*Once the file is set up, run main.py again.
+"""

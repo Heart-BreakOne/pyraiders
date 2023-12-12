@@ -1,7 +1,7 @@
 import asyncio, requests
 from utils.time_generator import get_four_quarters, get_quarter
 from utils.settings import open_file
-from utils.game_requests import get_request_strings, get_game_data
+from utils.game_requests import get_request_strings, get_game_data, get_proxy_auth
 from utils import constants
 
 
@@ -27,6 +27,8 @@ def fill_slots():
         token = account["token"]
         user_agent = account["user_agent"]
         proxy = account["proxy"]
+        proxy_user = account["proxy_user"]
+        proxy_password = account["proxy_password"]
 
         # Data for the conditional checks
         preserve_loyalty = account["preserve_loyalty"]
@@ -52,7 +54,7 @@ def fill_slots():
         temporary_ignore = account["temporary_ignore"]
         has_pass = account["has_pass"]
 
-        activeRaids = getActiveraids(user_id, token, user_agent, proxy)
+        activeRaids = getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password)
         # There are empty slots
         if (
             (has_pass and len(activeRaids) != 4)
@@ -66,6 +68,8 @@ def fill_slots():
                 token,
                 user_agent,
                 proxy,
+                proxy_user,
+                proxy_password,
                 temporary_ignore,
                 masterlist,
                 favoriteCaptainIds,
@@ -90,9 +94,9 @@ def place_units():
     pass
 
 
-def getActiveraids(user_id, token, user_agent, proxy):
+def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password):
     headers, proxies = get_request_strings(token, user_agent, proxy)
-    _, data_version = get_game_data()
+    _, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
     url = (
         constants.gameDataURL
         + "?cn=getActiveRaidsByUser&userId="
@@ -101,7 +105,11 @@ def getActiveraids(user_id, token, user_agent, proxy):
         + data_version
         + "&command=getActiveRaidsByUser"
     )
-    response = requests.get(url, proxies=proxies, headers=headers)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    if has_proxy:
+        response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+    else:
+        response = requests.get(url, proxies=proxies, headers=headers)
     if response.status_code == 200:
         parsedResponse = response.json()
         raid_data = parsedResponse["data"]
@@ -144,6 +152,8 @@ def fill_empty_slots(
     token,
     user_agent,
     proxy,
+    proxy_user,
+    proxy_password,
     temporary_ignore,
     masterlist,
     favoriteCaptainIds,
@@ -154,8 +164,8 @@ def fill_empty_slots(
     # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blacklist
     live_captains_list = []
     headers, proxies = get_request_strings(token, user_agent, proxy)
-    version, data_version = get_game_data()
-
+    version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     for i in range(6):
         url = (
             constants.gameDataURL
@@ -167,7 +177,10 @@ def fill_empty_slots(
             + data_version
             + "&command=getCaptainsForSearch&isCaptain=0"
         )
-        response = requests.get(url, proxies=proxies, headers=headers)
+        if has_proxy:
+            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+        else:
+            response = requests.get(url, proxies=proxies, headers=headers)
         live_captains_list.append(response.json())
 
     for i in range(3):
@@ -181,7 +194,10 @@ def fill_empty_slots(
             + data_version
             + "&command=getCaptainsForSearch&isCaptain=0"
         )
-        response = requests.get(url, proxies=proxies, headers=headers)
+        if has_proxy:
+            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+        else:
+            response = requests.get(url, proxies=proxies, headers=headers)
         live_captains_list.append(response.json())
 
     merged_data = []

@@ -38,6 +38,8 @@ THESE VALUES WILL BE FILLED ONCE YOU SET THE "name" AND THE "token" values.
 "temporary_ignore" -> DO NOT EDIT THIS VALUE, IT'S TEMPORARY DATA TO AVOID CAPTAIN SLOT SWITCH LOOPING.
 "user_agent": "", LEAVE BLANK, DO NOT EDIT THIS VALUE UNLESS YOU HAVE ISSUES WITH THE USER AGENT. DUPLICATE USER AGENTS ARE NOT ALLOWED.
 "proxy": -> LEAVE BLANK, DO NOT EDIT THIS VALUE UNLESS YOU HAVE ISSUES WITH THE PROXY. DUPLICATE PROXIES ARE NOT ALLOWED.
+"proxy_user": -> Proxy auth login.
+"proxy_password": -> Proxy auth password.
 "userId":, "favoriteCaptainIds": "", "units": -> LEAVE BLANK, WILL BE FILLED ONCE YOU SET THE  "name" AND THE "token" values.
 
 Once the "units" are filled with all of your units after running the tool once, you can edit two values:
