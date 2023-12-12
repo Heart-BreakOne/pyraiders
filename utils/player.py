@@ -6,98 +6,93 @@ from utils.game_requests import get_request_strings, get_game_data, get_proxy_au
 from utils import constants
 
 
-async def play():
+async def fill_slots():
     while True:
         await asyncio.sleep(get_quarter())
-
-        # Two tasks to perform in here
-
         # Fill empty slots.
-        fill_slots()
-        # Place units.
+        accounts = open_file(constants.py_accounts)
+        for account in accounts:
+            # Check if account is running
+            if account["powered_on"] == False:
+                continue
+            # Required data
+            user_id = account["userId"]
+            token = account["token"]
+            user_agent = account["user_agent"]
+            proxy = account["proxy"]
+            proxy_user = account["proxy_user"]
+            proxy_password = account["proxy_password"]
 
+            # Data for the conditional checks
+            preserve_loyalty = account["preserve_loyalty"]
+            switch_if_preserve_loyalty = account["switch_if_preserve_loyalty"]
+            switch_on_idle = account["switch_on_idle"]
+            minimum_idle_time = account["minimum_idle_time"]
+            unlimited_campaign = account["unlimited_campaign"]
+            unlimited_pvp = account["unlimited_pvp"]
+            only_masterlist = account["only_masterlist"]
+            masterlist = []
+            if only_masterlist:
+                masterlist = account["masterlist"]
+            ignore_blacklist = account["ignore_blacklist"]
+            blacklist = []
+            if ignore_blacklist:
+                blacklist = account["blacklist"]
+            favorites_only = account["favorites_only"]
+            favoriteCaptainIds = []
+            if favorites_only:
+                favoriteCaptainIds = account["favoriteCaptainIds"]
+            any_captain = account["any_captain"]
+            temporary_ignore = account["temporary_ignore"]
+            has_pass = account["has_pass"]
+            slots_quantity = account["slots"]
 
-def fill_slots():
-    accounts = open_file(constants.py_accounts)
-    for account in accounts:
-        # Check if account is running
-        if account["powered_on"] == False:
-            continue
-        # Required data
-        user_id = account["userId"]
-        token = account["token"]
-        user_agent = account["user_agent"]
-        proxy = account["proxy"]
-        proxy_user = account["proxy_user"]
-        proxy_password = account["proxy_password"]
-
-        # Data for the conditional checks
-        preserve_loyalty = account["preserve_loyalty"]
-        switch_if_no_loyalty = account["switch_if_no_loyalty"]
-        switch_on_idle = account["switch_on_idle"]
-        minimum_idle_time = account["minimum_idle_time"]
-        unlimited_campaign = account["unlimited_campaign"]
-        unlimited_pvp = account["unlimited_pvp"]
-        only_masterlist = account["only_masterlist"]
-        masterlist = []
-        if only_masterlist:
-            masterlist = account["masterlist"]
-        ignore_blacklist = account["ignore_blacklist"]
-        blacklist = []
-        if ignore_blacklist:
-            blacklist = account["blacklist"]
-        favorites_only = account["favorites_only"]
-        favoriteCaptainIds = []
-        if favorites_only:
-            favoriteCaptainIds = account["favoriteCaptainIds"]
-        any_captain = account["any_captain"]
-        temporary_ignore = account["temporary_ignore"]
-        has_pass = account["has_pass"]
-
-        activeRaids = getActiveraids(
-            user_id, token, user_agent, proxy, proxy_user, proxy_password
-        )
-        # There are empty slots
-        if (
-            (has_pass and len(activeRaids) != 4)
-            or (not has_pass and len(activeRaids) != 4)
-            or activeRaids == None
-            or activeRaids == []
-        ):
-            fill_empty_slots(
-                activeRaids,
-                user_id,
-                token,
-                user_agent,
-                proxy,
-                proxy_user,
-                proxy_password,
-                temporary_ignore,
-                masterlist,
-                favoriteCaptainIds,
-                blacklist,
-                any_captain,
-                switch_on_idle,
-                minimum_idle_time,
-                has_pass,
+            activeRaids = getActiveraids(
+                user_id, token, user_agent, proxy, proxy_user, proxy_password
             )
-            continue
-        else:
-            # All slots are filled, check if slot should be replace or if an unit should be placed
-            pass
-
-    # Task 3 -> Place available greenlighted captains based on the ruleset on any slots that may be available.
-    # Task 4 -> Flag captains that may be idling.
-    # Task 5 -> Check if there greenlighted captains and if there idling captains. Replace them.
-
-    # TODO fill slots
-    pass
-
-
-def place_units():
-    # TODO place units
-    pass
-
+            # There are empty slots
+            if (
+                (has_pass and len(activeRaids) != 4)
+                or (not has_pass and len(activeRaids) != 3)
+                or activeRaids == None
+                or activeRaids == []
+            ):
+                fill_empty_slots(
+                    activeRaids,
+                    user_id,
+                    token,
+                    user_agent,
+                    proxy,
+                    proxy_user,
+                    proxy_password,
+                    temporary_ignore,
+                    masterlist,
+                    favoriteCaptainIds,
+                    blacklist,
+                    any_captain,
+                    has_pass,
+                    slots_quantity,
+                    preserve_loyalty,
+                    switch_if_preserve_loyalty,
+                    switch_on_idle,
+                    minimum_idle_time,
+                )
+                continue
+            else:
+                # All slots are full, checks slots, place units
+                place_units(
+                    user_id,
+                    token,
+                    user_agent,
+                    proxy,
+                    proxy_user,
+                    proxy_password,
+                    preserve_loyalty,
+                    switch_if_preserve_loyalty,
+                    switch_on_idle,
+                    minimum_idle_time,
+                )
+                continue
 
 def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password):
     headers, proxies = get_request_strings(token, user_agent, proxy)
@@ -110,7 +105,7 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
         + user_id
         + "&isCaptain=0&gameDataVersion="
         + data_version
-        + "&command=getActiveRaidsByUser"
+        + "&clientPlatform:WebGL&command=getActiveRaidsByUser"
     )
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     if has_proxy:
@@ -165,9 +160,12 @@ def fill_empty_slots(
     favoriteCaptainIds,
     blacklist,
     any_captain,
+    has_pass,
+    slots_quantity,
+    preserve_loyalty,
+    switch_if_preserve_loyalty,
     switch_on_idle,
     minimum_idle_time,
-    has_pass,
 ):
     # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blacklist
     live_captains_list = []
@@ -223,7 +221,7 @@ def fill_empty_slots(
     unique_user_ids = set()
     unique_data = []
 
-    #Clean up list to remove duplicate captains
+    # Clean up list to remove duplicate captains
     for entry in merged_data:
         id = entry["userId"]
         if id not in unique_user_ids:
@@ -338,7 +336,26 @@ def fill_empty_slots(
             proxy,
             proxy_user,
             proxy_password,
+            slots_quantity,
+            preserve_loyalty,
+            switch_if_preserve_loyalty,
+            switch_on_idle,
+            minimum_idle_time,
         )
+    else:
+        place_units(
+            user_id,
+            token,
+            user_agent,
+            proxy,
+            proxy_user,
+            proxy_password,
+            preserve_loyalty,
+            switch_if_preserve_loyalty,
+            switch_on_idle,
+            minimum_idle_time,
+        )
+        return
 
 
 # Place captain on slot
@@ -357,13 +374,30 @@ def select_captain(
     proxy,
     proxy_user,
     proxy_password,
+    slots_quantity,
+    preserve_loyalty,
+    switch_if_preserve_loyalty,
+    switch_on_idle,
+    minimum_idle_time,
 ):
-    
     for i, slot in enumerate(possible_slots):
-        if i < len(acceptable_captains):
+        slot_integer = int(slot)
+        if i < len(acceptable_captains) and slot_integer < slots_quantity:
             captain_id = acceptable_captains[i]["userId"]
             captain_name = acceptable_captains[i]["twitchUserName"]
         else:
+            place_units(
+                user_id,
+                token,
+                user_agent,
+                proxy,
+                proxy_user,
+                proxy_password,
+                preserve_loyalty,
+                switch_if_preserve_loyalty,
+                switch_on_idle,
+                minimum_idle_time,
+            )
             return
 
         url = (
@@ -410,6 +444,34 @@ def select_captain(
     for account in accounts:
         if account["userId"] == user_id or account["otherUserId"] == user_id:
             account["slots"] = real_slot_quantity
-    
+
     write_file(constants.py_accounts, accounts)
+
+
+# Check idle captains and loyalty switch.
+def place_units(
+    user_id,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+    preserve_loyalty,
+    switch_if_preserve_loyalty,
+    switch_on_idle,
+    minimum_idle_time,
+):
+    #Once again, get active raids
+    activeRaids = getActiveraids(
+        user_id, token, user_agent, proxy, proxy_user, proxy_password
+    )
     
+    #Remove idle captains from the slots.
+    if switch_on_idle:
+        for raid in activeRaids:
+            print(raid)
+    
+    print("TODO - CLEAN IDLE CAPTAINS AND LOYALTY CAPTAINS")
+    # Get active raids.
+    # Check captains running on loyalty switch
+    # Check captains idling

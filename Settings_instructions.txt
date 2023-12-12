@@ -11,7 +11,7 @@ These two keys are MANDATORY as the application can not function without them:
 These are optional, they have default values that will allow the account to run without changing them:
 "powered_on" Whether the assistant should run the account or not.
 "preserve_loyalty" 0 -> Does not preserve loyalty. 1 -> Place on loyalty chests only if bronze loyalty. 2 -> Only if silver. 3 -> Only if gold. 4 -> Only if diamond.
-"switch_if_no_loyalty" -> Replace a captain slot if there's no loyalty during a loyalty chest.
+"switch_if_preserve_loyalty" -> Replace a captain slot if there's no loyalty during a loyalty chest.
 "switch_on_idle": -> Automatically switch a captain after a period of idleing.
 "minimum_idle_time": -> Integer number without decimal points that determine the idle time in minutes.
 "unlimited_campaign": -> Place more than one unit on campaign.

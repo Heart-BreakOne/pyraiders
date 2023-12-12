@@ -1,6 +1,5 @@
 import requests
 from utils import constants
-from utils import current_event
 from requests.auth import HTTPProxyAuth
 
 
@@ -149,13 +148,13 @@ def set_user_data(account_data):
 def get_battlepass(userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password):
     url = (
         constants.gameDataURL
-        + "?cn=getUserEventProgression&userId="
+        + "?cn=getEventProgressionLite&userId="
         + userId
         + "&isCaptain=0&gameDataVersion="
         + data_version
-        + "&command=getUserEventProgression&clientVersion="
+        + "&command=getEventProgressionLite&clientVersion="
         + version
-        + "&clientPlatform=WebGL"
+        + "&clientPlatform=MobileLite"
     )
 
     headers, proxies = get_request_strings(token, user_agent, proxy)
@@ -169,11 +168,8 @@ def get_battlepass(userId, token, user_agent, proxy, version, data_version, prox
         data = parsedResponse["data"]
         if data == None:
             return False
-
-        for each in data:
-            if each["eventUid"] == current_event.current_event:
-                has_pass = each["hasBattlePass"]
-                break
+        
+        has_pass = data["hasBattlePass"]
         if has_pass == "1":
             return True
         else:

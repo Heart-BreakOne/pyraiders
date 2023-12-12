@@ -9,7 +9,7 @@
         "token": "",
         "powered_on": True,
         "preserve_loyalty": 0,
-        "switch_if_no_loyalty": False,
+        "switch_if_preserve_loyalty": False,
         "switch_on_idle": True,
         "minimum_idle_time": 15,
         "unlimited_campaign": True,

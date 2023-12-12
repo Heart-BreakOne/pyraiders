@@ -2,7 +2,7 @@ import asyncio
 from utils.settings import write_file, open_file, setup_accounts, clean_temp_times
 from utils.game_requests import set_user_data
 from utils.behavior_emulator import start_up_requests, make_dummy_requests
-from utils.player import play
+from utils.player import fill_slots
 from utils import constants
 from utils.create_accounts import create_account
 
@@ -30,8 +30,9 @@ async def main():
     # Periodic requests here
     asyncio.create_task(make_dummy_requests())
     
-    #Play the game
-    asyncio.create_task(play())
+    #Fill and clean slots
+    asyncio.create_task(fill_slots())
+    
 
     while True:
         await asyncio.sleep(1)

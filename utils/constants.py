@@ -8,7 +8,7 @@ default_entry = [
         "token": "",
         "powered_on": True,
         "preserve_loyalty": 0,
-        "switch_if_no_loyalty": False,
+        "switch_if_preserve_loyalty": False,
         "switch_on_idle": True,
         "minimum_idle_time": 15,
         "unlimited_campaign": True,
@@ -39,6 +39,10 @@ mapPlacements = (
 )
 
 py_accounts = "pyraiders_accounts.json"
+
+map_nodes_path = "assets/map_nodes.json"
+
+map_nodes_url = "https://streamcap-prod1.s3.amazonaws.com/data/data.9f44db04a984.json"
 
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",

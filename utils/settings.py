@@ -2,6 +2,7 @@ import json, random
 from datetime import datetime, timedelta
 from utils import constants
 
+
 def open_file(file_name):
     try:
         with open(file_name, "r") as json_file:
@@ -17,7 +18,7 @@ def write_file(file_name, data_to_save):
 
 
 def setup_accounts(data):
-    #Generate unique user agent
+    # Generate unique user agent
     def generate_unique_user_agent(existing_user_agents):
         base_user_agent = random.choice(constants.user_agents)
         new_user_agent = base_user_agent
@@ -26,7 +27,7 @@ def setup_accounts(data):
         existing_user_agents.add(new_user_agent)
         return new_user_agent
 
-    #Generate unique proxy
+    # Generate unique proxy
     def generate_unique_proxy(existing_proxies):
         base_proxy = random.choice(constants.proxies)
         new_proxy = base_proxy
@@ -35,15 +36,15 @@ def setup_accounts(data):
         existing_proxies.add(new_proxy)
         return new_proxy
 
-    #Set of existing values
+    # Set of existing values
     existing_user_agents = set()
     existing_proxies = set()
     existing_names = set()
     existing_tokens = set()
 
     unique_accounts = []
-    
-    #Clean up the data.
+
+    # Clean up the data.
     for account_data in data:
         # Remove entries with empty name or token strings
         if account_data["name"] != "" and account_data["token"] != "":
@@ -59,13 +60,21 @@ def setup_accounts(data):
                 account_data["proxy"] = ""
 
             # Add user agent if empty or duplicate
-            if account_data["user_agent"] == "" or account_data["user_agent"] in existing_user_agents:
-                account_data["user_agent"] = generate_unique_user_agent(existing_user_agents)
+            if (
+                account_data["user_agent"] == ""
+                or account_data["user_agent"] in existing_user_agents
+            ):
+                account_data["user_agent"] = generate_unique_user_agent(
+                    existing_user_agents
+                )
 
             # Add proxy if empty, "none", or duplicate
-            if account_data["proxy"].lower() in ["none", ""] or account_data["proxy"] in existing_proxies:
+            if (
+                account_data["proxy"].lower() in ["none", ""]
+                or account_data["proxy"] in existing_proxies
+            ):
                 account_data["proxy"] = generate_unique_proxy(existing_proxies)
-                
+
             existing_names.add(account_data["name"])
             existing_tokens.add(account_data["token"])
             existing_user_agents.add(account_data["user_agent"])
@@ -75,16 +84,23 @@ def setup_accounts(data):
 
     return unique_accounts
 
-#Remove temporary data that is older than 30 minutes
+
+# Remove temporary data that is older than 30 minutes
 def clean_temp_times(accounts):
     for account in accounts:
         temp_ignore_list = account["temporary_ignore"]
-        
-        temp_ignore_times = [datetime.strptime(entry['time'], '%Y-%m-%d %H:%M:%S.%f') for entry in temp_ignore_list]
+
+        temp_ignore_times = [
+            datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S.%f")
+            for entry in temp_ignore_list
+        ]
         current_time = datetime.now()
         threshold_time = timedelta(minutes=30)
-        temp_ignore_list = [entry for entry, time_entry in zip(temp_ignore_list, temp_ignore_times)
-                            if current_time - time_entry < threshold_time]
+        temp_ignore_list = [
+            entry
+            for entry, time_entry in zip(temp_ignore_list, temp_ignore_times)
+            if current_time - time_entry < threshold_time
+        ]
         account["temporary_ignore"] = temp_ignore_list
-    
+
     return accounts
