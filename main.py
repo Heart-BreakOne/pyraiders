@@ -1,7 +1,8 @@
 import asyncio
 from utils.settings import write_file, open_file, setup_accounts
 from utils.game_requests import set_user_data
-from utils.behavior_emulator import make_dummy_requests
+from utils.behavior_emulator import start_up_requests, make_dummy_requests
+from utils.player import play
 from utils import constants
 from utils.create_accounts import create_account
 
@@ -20,9 +21,15 @@ async def main():
     data = set_user_data(data)
 
     write_file(constants.py_accounts, data)
+    
+    # Start up dummy requests here
+    asyncio.create_task(start_up_requests())
 
-    # Start dummy requests here
+    # Periodic requests here
     asyncio.create_task(make_dummy_requests())
+    
+    #Play the game
+    asyncio.create_task(play())
 
     while True:
         await asyncio.sleep(1)

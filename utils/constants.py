@@ -2,12 +2,64 @@
 
 gameDataURL = "https://www.streamraiders.com/api/game/"
 
+default_entry = [
+    {
+        "name": "",
+        "token": "",
+        "powered_on": True,
+        "preserve_loyalty": 0,
+        "switch_if_no_loyalty": False,
+        "switch_on_idle": True,
+        "minimum_idle_time": 15,
+        "unlimited_campaign": True,
+        "unlimited_clash": True,
+        "unlimited_dungeons": True,
+        "unlimited_clash": True,
+        "any_captain": True,
+        "only_masterlist": False,
+        "masterlist": ["", "", ""],
+        "ignore_blacklist": False,
+        "blacklist": ["", "", ""],
+        "temporary_ignore": {"cptName": 0},
+        "user_agent": "",
+        "proxy": "",
+        "has_pass": False,
+        "userId": "",
+        "favoriteCaptainIds": "",
+        "units": "",
+    },
+    {
+        "name": "",
+        "token": "",
+        "powered_on": True,
+        "preserve_loyalty": 0,
+        "switch_if_no_loyalty": False,
+        "switch_on_idle": True,
+        "minimum_idle_time": 15,
+        "unlimited_campaign": True,
+        "unlimited_clash": True,
+        "unlimited_dungeons": True,
+        "unlimited_clash": True,
+        "any_captain": True,
+        "only_masterlist": False,
+        "masterlist": ["", "", ""],
+        "ignore_blacklist": False,
+        "blacklist": ["", "", ""],
+        "temporary_ignore": {"cptName": 0},
+        "user_agent": "",
+        "proxy": "",
+        "has_pass": False,
+        "userId": "",
+        "favoriteCaptainIds": "",
+        "units": "",
+    },
+]
+
 mapPlacements = (
     "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
 )
 
 py_accounts = "pyraiders_accounts.json"
-py_captain = "pyraiders_settings.json"
 
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",

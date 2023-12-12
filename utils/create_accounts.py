@@ -3,58 +3,8 @@ from utils import constants
 
 
 def create_account():
-    default_entry = [
-        {
-            "name": "",
-            "token": "",
-            "powered_on": True,
-            "preserve_loyalty": 0,
-            "switch_if_no_loyalty": False,
-            "switch_on_idle": True,
-            "minimum_idle_time": 15,
-            "unlimited_campaign": True,
-            "unlimited_clash": True,
-            "unlimited_dungeons": True,
-            "unlimited_clash": True,
-            "any_captain": True,
-            "only_masterlist": False,
-            "masterlist": ["", "", ""],
-            "ignore_blacklist": False,
-            "blacklist": ["", "", ""],
-            "temporary_ignore": {"cptName": 0},
-            "user_agent": "",
-            "proxy": "",
-            "userId": "",
-            "favoriteCaptainIds": "",
-            "units": ""
-        },
-        {
-            "name": "",
-            "token": "",
-            "powered_on": True,
-            "preserve_loyalty": 0,
-            "switch_if_no_loyalty": False,
-            "switch_on_idle": True,
-            "minimum_idle_time": 15,
-            "unlimited_campaign": True,
-            "unlimited_clash": True,
-            "unlimited_dungeons": True,
-            "unlimited_clash": True,
-            "any_captain": True,
-            "only_masterlist": False,
-            "masterlist": ["", "", ""],
-            "ignore_blacklist": False,
-            "blacklist": ["", "", ""],
-            "temporary_ignore": {"cptName": 0},
-            "user_agent": "",
-            "proxy": "",
-            "userId": "",
-            "favoriteCaptainIds": "",
-            "units": ""
-        }
-    ]
     
-    write_file(constants.py_accounts, default_entry)
+    write_file(constants.py_accounts, constants.default_entry)
 
     print("*Accounts file created successfully.")
     print("*To add multiple accounts simply copy and paste the default account.")
