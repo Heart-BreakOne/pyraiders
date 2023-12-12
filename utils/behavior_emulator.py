@@ -17,8 +17,9 @@ async def requester(user_id, token, user_agent, proxy, _, __, list_of_urls, prox
             requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
         else:
             requests.get(url, proxies=proxies, headers=headers)  
-        #print(response.json())
-        print(f"Random request successful for account {user_id}")
+        #If needed, print the response to check the content
+        #response = print(response.json())
+        #print(f"Random request successful for account {user_id}")
         
         
 #These are the requests made periodically by the game

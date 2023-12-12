@@ -1,4 +1,5 @@
 import json, random
+from datetime import datetime, timedelta
 from utils import constants
 
 def open_file(file_name):
@@ -73,3 +74,17 @@ def setup_accounts(data):
             unique_accounts.append(account_data)
 
     return unique_accounts
+
+#Remove temporary data that is older than 30 minutes
+def clean_temp_times(accounts):
+    for account in accounts:
+        temp_ignore_list = account["temporary_ignore"]
+        
+        temp_ignore_times = [datetime.strptime(entry['time'], '%Y-%m-%d %H:%M:%S.%f') for entry in temp_ignore_list]
+        current_time = datetime.now()
+        threshold_time = timedelta(minutes=30)
+        temp_ignore_list = [entry for entry, time_entry in zip(temp_ignore_list, temp_ignore_times)
+                            if current_time - time_entry < threshold_time]
+        account["temporary_ignore"] = temp_ignore_list
+    
+    return accounts

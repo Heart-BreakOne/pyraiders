@@ -19,15 +19,17 @@ default_entry = [
         "masterlist": ["", "", ""],
         "ignore_blacklist": False,
         "blacklist": ["", "", ""],
-        "temporary_ignore": {"cptName": 0},
+        "temporary_ignore": [{"capNm": "", "time": ""}],
         "user_agent": "",
         "proxy": "",
         "proxy_user": "",
         "proxy_password": "",
         "has_pass": False,
         "userId": "",
+        "otherUserId": "",
         "favorites_only": False,
         "favoriteCaptainIds": "",
+        "slots": 3,
         "units": "",
     }
 ]

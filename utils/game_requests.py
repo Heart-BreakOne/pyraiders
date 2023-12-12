@@ -1,5 +1,6 @@
 import requests
 from utils import constants
+from utils import current_event
 from requests.auth import HTTPProxyAuth
 
 
@@ -63,7 +64,6 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
 
     # Check if the request was successful (status code 200)
     if gameDataResponse.status_code == 200:
-        # Print the response content
         response_json = gameDataResponse.json()
 
         # Extract version from the JSON response
@@ -100,7 +100,12 @@ def get_user_id(token, user_agent, proxy, version, data_version, proxy_user, pro
             favoriteCaptains = parsedResponse["data"]["favoriteCaptainIds"]
         except KeyError:
             favoriteCaptains = ""
-    return userId, favoriteCaptains
+        try:
+            other_user_id = parsedResponse["data"]["otherUserId"]
+        except KeyError:
+            other_user_id = ""
+            
+    return userId, other_user_id, favoriteCaptains
 
 
 # Get userId, favorite captains and call to get the user units
@@ -119,10 +124,11 @@ def set_user_data(account_data):
         
         version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
 
-        userId, favoriteCaptainIds = get_user_id(
+        userId, other_user_id, favoriteCaptainIds = get_user_id(
             token, user_agent, proxy, version, data_version, proxy_user, proxy_password
         )
         account["userId"] = userId
+        account["otherUserId"] = other_user_id
         account["favoriteCaptainIds"] = favoriteCaptainIds
 
         account["has_pass"] = get_battlepass(
@@ -165,7 +171,7 @@ def get_battlepass(userId, token, user_agent, proxy, version, data_version, prox
             return False
 
         for each in data:
-            if each["eventUid"] == "snowfall_02":
+            if each["eventUid"] == current_event.current_event:
                 has_pass = each["hasBattlePass"]
                 break
         if has_pass == "1":

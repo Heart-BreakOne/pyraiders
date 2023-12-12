@@ -27,8 +27,10 @@
         "proxy_password": "",
         "has_pass": False,
         "userId": "",
+        "otherUserId": "",
         "favorites_only": False,
         "favoriteCaptainIds": "",
         "units": "",
+        "slots": 3
     }
 ```

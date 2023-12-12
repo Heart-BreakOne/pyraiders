@@ -1,6 +1,7 @@
 import asyncio, requests
+from datetime import datetime, timedelta
 from utils.time_generator import get_four_quarters, get_quarter
-from utils.settings import open_file
+from utils.settings import open_file, write_file
 from utils.game_requests import get_request_strings, get_game_data, get_proxy_auth
 from utils import constants
 
@@ -34,8 +35,7 @@ def fill_slots():
         preserve_loyalty = account["preserve_loyalty"]
         switch_if_no_loyalty = account["switch_if_no_loyalty"]
         switch_on_idle = account["switch_on_idle"]
-        if switch_on_idle:
-            minimum_idle_time = account["minimum_idle_time"]
+        minimum_idle_time = account["minimum_idle_time"]
         unlimited_campaign = account["unlimited_campaign"]
         unlimited_pvp = account["unlimited_pvp"]
         only_masterlist = account["only_masterlist"]
@@ -54,7 +54,9 @@ def fill_slots():
         temporary_ignore = account["temporary_ignore"]
         has_pass = account["has_pass"]
 
-        activeRaids = getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password)
+        activeRaids = getActiveraids(
+            user_id, token, user_agent, proxy, proxy_user, proxy_password
+        )
         # There are empty slots
         if (
             (has_pass and len(activeRaids) != 4)
@@ -75,6 +77,9 @@ def fill_slots():
                 favoriteCaptainIds,
                 blacklist,
                 any_captain,
+                switch_on_idle,
+                minimum_idle_time,
+                has_pass,
             )
             continue
         else:
@@ -96,7 +101,9 @@ def place_units():
 
 def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password):
     headers, proxies = get_request_strings(token, user_agent, proxy)
-    _, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+    _, data_version = get_game_data(
+        token, user_agent, proxy, proxy_user, proxy_password
+    )
     url = (
         constants.gameDataURL
         + "?cn=getActiveRaidsByUser&userId="
@@ -116,7 +123,6 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
         activeRaids = []
         if raid_data == None:
             return activeRaids.append("all slots are empty")
-        occupied_slots = len(raid_data)
 
         for raid in raid_data:
             raidId = raid["raidId"]
@@ -131,19 +137,19 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
             type = raid["type"]
             battleground = raid["battleground"]
             activeRaids.append(
-                (
-                    raidId,
-                    captainId,
-                    userSortIndex,
-                    twitchUserName,
-                    lastUnitPlacedTime,
-                    startTime,
-                    nodeId,
-                    type,
-                    battleground,
-                )
+                {
+                    "raidId": raidId,
+                    "captainId": captainId,
+                    "userSortIndex": userSortIndex,
+                    "twitchUserName": twitchUserName,
+                    "lastUnitPlacedTime": lastUnitPlacedTime,
+                    "startTime": startTime,
+                    "nodeId": nodeId,
+                    "type": type,
+                    "battleground": battleground,
+                }
             )
-        return activeRaids, occupied_slots
+        return activeRaids
 
 
 def fill_empty_slots(
@@ -159,12 +165,16 @@ def fill_empty_slots(
     favoriteCaptainIds,
     blacklist,
     any_captain,
+    switch_on_idle,
+    minimum_idle_time,
+    has_pass,
 ):
-
     # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blacklist
     live_captains_list = []
     headers, proxies = get_request_strings(token, user_agent, proxy)
-    version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+    version, data_version = get_game_data(
+        token, user_agent, proxy, proxy_user, proxy_password
+    )
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     for i in range(6):
         url = (
@@ -178,7 +188,9 @@ def fill_empty_slots(
             + "&command=getCaptainsForSearch&isCaptain=0"
         )
         if has_proxy:
-            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+            response = requests.get(
+                url, proxies=proxies, headers=headers, auth=proxy_auth
+            )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
         live_captains_list.append(response.json())
@@ -195,7 +207,9 @@ def fill_empty_slots(
             + "&command=getCaptainsForSearch&isCaptain=0"
         )
         if has_proxy:
-            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+            response = requests.get(
+                url, proxies=proxies, headers=headers, auth=proxy_auth
+            )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
         live_captains_list.append(response.json())
@@ -209,10 +223,11 @@ def fill_empty_slots(
     unique_user_ids = set()
     unique_data = []
 
+    #Clean up list to remove duplicate captains
     for entry in merged_data:
-        user_id = entry["userId"]
-        if user_id not in unique_user_ids:
-            unique_user_ids.add(user_id)
+        id = entry["userId"]
+        if id not in unique_user_ids:
+            unique_user_ids.add(id)
             unique_data.append(entry)
 
     acceptable_captains = []
@@ -248,4 +263,153 @@ def fill_empty_slots(
         acceptable_captains = unique_data
 
     # Now that the list of usable live captains has been made, filter out active captains and avoid a duplicate pvp/dungeon captain
-    print(acceptable_captains)
+
+    # Remove active captains from the live captains list
+    active_captain_ids = set(entry["captainId"] for entry in activeRaids)
+    acceptable_captains = [
+        entry
+        for entry in acceptable_captains
+        if entry["userId"] not in active_captain_ids
+    ]
+
+    # Remove live captains that are running special modes that active captains are also running to avoid.
+    active_types = {entry["type"] for entry in activeRaids if "type" in entry}
+    acceptable_captains = [
+        entry
+        for entry in acceptable_captains
+        if entry.get("type") == "1"
+        or (
+            entry.get("type")
+            and set(entry["type"]) != {"1"}
+            and set(entry["type"]) != active_types
+        )
+    ]
+
+    # Remove captains that are on the temporary idle list for the last 30 minutes
+    # Convert the time strings to datetime variables
+    temporary_ignore_times = [
+        datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S.%f")
+        for entry in temporary_ignore
+    ]
+
+    current_time = datetime.now()
+    # Define the threshold for acceptable captains (30 minutes)
+    threshold_time = timedelta(minutes=30)
+    # Filter out captains younger than 30 minutes in temporary_ignore
+    captains_to_remove = [
+        entry["capNm"].upper()
+        for entry, time_entry in zip(temporary_ignore, temporary_ignore_times)
+        if current_time - time_entry < threshold_time
+    ]
+    # Remove corresponding entries from acceptable_captains
+    acceptable_captains = [
+        entry
+        for entry in acceptable_captains
+        if entry["twitchUserName"].upper() not in captains_to_remove
+    ]
+
+    # The list left is ready to be used for placement, now figure out what slots are available
+    # Initialize slots list
+    slots = []
+    for raid in activeRaids:
+        slots.append(raid["userSortIndex"])
+    possible_slots = []
+
+    if has_pass and len(slots) != 4:
+        possible_slots = list(set(["0", "1", "2", "3"]) - set(slots))
+
+    elif not has_pass and len(slots) != 3:
+        possible_slots = list(set(["0", "1", "2"]) - set(slots))
+
+    # If possible_slots is not empty it means there are slots that can be filled up, fill them up the acceptable_captains list.
+    if len(possible_slots) != 0:
+        select_captain(
+            user_id,
+            headers,
+            proxies,
+            version,
+            data_version,
+            has_proxy,
+            proxy_auth,
+            possible_slots,
+            acceptable_captains,
+            token,
+            user_agent,
+            proxy,
+            proxy_user,
+            proxy_password,
+        )
+
+
+# Place captain on slot
+def select_captain(
+    user_id,
+    headers,
+    proxies,
+    version,
+    data_version,
+    has_proxy,
+    proxy_auth,
+    possible_slots,
+    acceptable_captains,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+):
+    
+    for i, slot in enumerate(possible_slots):
+        if i < len(acceptable_captains):
+            captain_id = acceptable_captains[i]["userId"]
+            captain_name = acceptable_captains[i]["twitchUserName"]
+        else:
+            return
+
+        url = (
+            constants.gameDataURL
+            + "?cn=addPlayerToRaid&userId="
+            + user_id
+            + "&isCaptain=0&gameDataVersion="
+            + data_version
+            + "&command=addPlayerToRaid&userSortIndex="
+            + slot
+            + "&captainId="
+            + captain_id
+            + "&clientVersion="
+            + version
+            + "&clientPlatform=WebGL"
+        )
+        if has_proxy:
+            requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+            print(
+                "Account:"
+                + user_id
+                + ". Added "
+                + captain_name
+                + " to slot number "
+                + slot
+            )
+        else:
+            requests.get(url, proxies=proxies, headers=headers)
+            print(
+                "Account:"
+                + user_id
+                + ". Added "
+                + captain_name
+                + " to slot number "
+                + slot
+            )
+
+    # get active raids again and count the occupied slots, that is the real amount of slots
+    activeRaids = getActiveraids(
+        user_id, token, user_agent, proxy, proxy_user, proxy_password
+    )
+    real_slot_quantity = len(activeRaids)
+    accounts = open_file(constants.py_accounts)
+    for account in accounts:
+        if account["userId"] == user_id or account["otherUserId"] == user_id:
+            account["slots"] = real_slot_quantity
+    
+    write_file(constants.py_accounts, accounts)
+    

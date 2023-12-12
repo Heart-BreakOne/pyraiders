@@ -1,5 +1,5 @@
 import asyncio
-from utils.settings import write_file, open_file, setup_accounts
+from utils.settings import write_file, open_file, setup_accounts, clean_temp_times
 from utils.game_requests import set_user_data
 from utils.behavior_emulator import start_up_requests, make_dummy_requests
 from utils.player import play
@@ -19,7 +19,9 @@ async def main():
 
     # Load unitIds and units.
     data = set_user_data(data)
-
+    
+    data = clean_temp_times(data)
+    
     write_file(constants.py_accounts, data)
     
     # Start up dummy requests here
