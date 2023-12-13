@@ -55,7 +55,7 @@ async def fill_slots():
             activeRaids = getActiveraids(
                 user_id, token, user_agent, proxy, proxy_user, proxy_password
             )
-            
+
             if activeRaids == None:
                 continue
             # There are empty slots
@@ -88,7 +88,7 @@ async def fill_slots():
                 continue
             else:
                 # All slots are full, checks slots, place units
-                place_units(
+                clean_slots(
                     user_id,
                     token,
                     user_agent,
@@ -359,7 +359,7 @@ def fill_empty_slots(
             minimum_idle_time,
         )
     else:
-        place_units(
+        clean_slots(
             user_id,
             token,
             user_agent,
@@ -402,7 +402,7 @@ def select_captain(
             captain_id = acceptable_captains[i]["userId"]
             captain_name = acceptable_captains[i]["twitchUserName"]
         else:
-            place_units(
+            clean_slots(
                 user_id,
                 token,
                 user_agent,
@@ -465,7 +465,7 @@ def select_captain(
 
 
 # Check idle captains and loyalty switch.
-def place_units(
+def clean_slots(
     user_id,
     token,
     user_agent,
@@ -536,7 +536,10 @@ def place_units(
                             proxy_user,
                             proxy_password,
                         )
-                        print(captain_id + " is in a loyalty chest without loyalty. Switching...")
+                        print(
+                            captain_id
+                            + " is in a loyalty chest without loyalty. Switching..."
+                        )
                     elif (
                         "ChestType" in node_info
                         and node_info["ChestType"] in constants.regular_chests
@@ -547,11 +550,10 @@ def place_units(
                         print("Couldn't find chest info")
                 else:
                     print("Couldn't find chest infos")
-                    
-    place_units()
-    
-    
-    
-#place units based on the loyalty skip and unlimited states
-def place_units():
-    print("place units")
+
+    place_units(user_id)
+
+
+# place units based on the loyalty skip and unlimited states
+def place_units(user_id):
+    print("TODO place units for account " + user_id)
