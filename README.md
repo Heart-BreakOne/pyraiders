@@ -14,7 +14,7 @@
         "minimum_idle_time": 15,
         "unlimited_campaign": True,
         "unlimited_pvp": True,
-        "unlimited_dungeons": True,
+        "unlimited_dungeons": False,
         "any_captain": True,
         "only_masterlist": False,
         "masterlist": ["", "", ""],

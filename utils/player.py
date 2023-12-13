@@ -2,7 +2,12 @@ import asyncio, requests
 from datetime import datetime, timedelta
 from utils.time_generator import get_four_quarters, get_quarter
 from utils.settings import open_file, write_file
-from utils.game_requests import get_request_strings, get_game_data, get_proxy_auth
+from utils.game_requests import (
+    get_request_strings,
+    get_game_data,
+    get_proxy_auth,
+    leave_captain,
+)
 from utils import constants
 
 
@@ -50,6 +55,9 @@ async def fill_slots():
             activeRaids = getActiveraids(
                 user_id, token, user_agent, proxy, proxy_user, proxy_password
             )
+            
+            if activeRaids == None:
+                continue
             # There are empty slots
             if (
                 (has_pass and len(activeRaids) != 4)
@@ -94,6 +102,7 @@ async def fill_slots():
                 )
                 continue
 
+
 def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password):
     headers, proxies = get_request_strings(token, user_agent, proxy)
     _, data_version = get_game_data(
@@ -127,10 +136,14 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
             userSortIndex = raid["userSortIndex"]
             twitchUserName = raid["twitchUserName"]
             lastUnitPlacedTime = raid["lastUnitPlacedTime"]
+            creationDate = raid["creationDate"]
+            pveLoyaltyLevel = raid["pveLoyaltyLevel"]
             startTime = raid["startTime"]
+            isCodeLocked = raid["isCodeLocked"]
             nodeId = raid["nodeId"]
             type = raid["type"]
             battleground = raid["battleground"]
+
             activeRaids.append(
                 {
                     "raidId": raidId,
@@ -138,7 +151,10 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
                     "userSortIndex": userSortIndex,
                     "twitchUserName": twitchUserName,
                     "lastUnitPlacedTime": lastUnitPlacedTime,
+                    "creationDate": creationDate,
+                    "pveLoyaltyLevel": pveLoyaltyLevel,
                     "startTime": startTime,
+                    "isCodeLocked": isCodeLocked,
                     "nodeId": nodeId,
                     "type": type,
                     "battleground": battleground,
@@ -461,17 +477,81 @@ def place_units(
     switch_on_idle,
     minimum_idle_time,
 ):
-    #Once again, get active raids
+    # Once again, get active raids
     activeRaids = getActiveraids(
         user_id, token, user_agent, proxy, proxy_user, proxy_password
     )
-    
-    #Remove idle captains from the slots.
+
+    # Remove idle captains from the slots.
     if switch_on_idle:
         for raid in activeRaids:
-            print(raid)
+            time_str = raid["creationDate"]
+            current_time = datetime.now()
+            idle_time = timedelta(minutes=30 + minimum_idle_time)
+            creation_time = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+            if current_time > creation_time + idle_time:
+                # captain is idling, switch
+                captain_id = raid["captainId"]
+                captain_name = raid["twitchUserName"]
+
+                leave_captain(
+                    captain_id,
+                    captain_name,
+                    user_id,
+                    token,
+                    user_agent,
+                    proxy,
+                    proxy_user,
+                    proxy_password,
+                )
+                print(captain_id + " is idling. Switching...")
+
+    # Remove captains that are on loyalty switch
+    if switch_if_preserve_loyalty and preserve_loyalty != 0:
+        activeRaids = getActiveraids(
+            user_id, token, user_agent, proxy, proxy_user, proxy_password
+        )
+        for raid in activeRaids:
+            raid_loyalty = raid["pveLoyaltyLevel"]
+            if raid_loyalty < preserve_loyalty and raid["type"] == "1":
+                # Check map, if it's a loyalty map, replace captain.
+                mapNode = raid["nodeId"]
+                map_nodes = open_file(constants.map_nodes_path)
+                if mapNode in map_nodes:
+                    node_info = map_nodes[mapNode]
+
+                    if (
+                        "ChestType" in node_info
+                        and node_info["ChestType"] not in constants.regular_chests
+                    ):
+                        captain_id = raid["captainId"]
+                        captain_name = raid["twitchUserName"]
+                        leave_captain(
+                            captain_id,
+                            captain_name,
+                            user_id,
+                            token,
+                            user_agent,
+                            proxy,
+                            proxy_user,
+                            proxy_password,
+                        )
+                        print(captain_id + " is in a loyalty chest without loyalty. Switching...")
+                    elif (
+                        "ChestType" in node_info
+                        and node_info["ChestType"] in constants.regular_chests
+                    ):
+                        # not a loyalty chest
+                        pass
+                    else:
+                        print("Couldn't find chest info")
+                else:
+                    print("Couldn't find chest infos")
+                    
+    place_units()
     
-    print("TODO - CLEAN IDLE CAPTAINS AND LOYALTY CAPTAINS")
-    # Get active raids.
-    # Check captains running on loyalty switch
-    # Check captains idling
+    
+    
+#place units based on the loyalty skip and unlimited states
+def place_units():
+    print("place units")

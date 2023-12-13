@@ -85,6 +85,22 @@ def setup_accounts(data):
     return unique_accounts
 
 
+#Add temporary ignore captains
+def add_temporary_ignore(user_id, captain_name):
+    accounts = open_file(constants.py_accounts)
+    
+    # Add captain to the temporary ignore list to avoid a loop switch
+    for account in accounts:
+        if account["userId"] == user_id or account["otherUserId"] == user_id:
+            temporary_ignore = account.get("temporary_ignore", [])
+
+            new_entry = {"capNm": captain_name, "time": str(datetime.now())}
+            temporary_ignore.append(new_entry)
+            account["temporary_ignore"] = temporary_ignore
+    
+    write_file(constants.py_accounts, accounts)
+
+
 # Remove temporary data that is older than 30 minutes
 def clean_temp_times(accounts):
     for account in accounts:

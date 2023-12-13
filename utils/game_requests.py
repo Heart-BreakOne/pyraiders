@@ -1,6 +1,7 @@
 import requests
-from utils import constants
+from utils import constants, current_event
 from requests.auth import HTTPProxyAuth
+from utils.settings import add_temporary_ignore, open_file, write_file
 
 
 # Pass the headers and proxy formatted strings so requests can be performed.
@@ -8,6 +9,7 @@ def get_request_strings(token, user_agent, proxy):
     headers = {"Cookie": "ACCESS_INFO=" + token, "User-Agent": user_agent}
     proxies = {"http": "http://" + proxy}
     return headers, proxies
+
 
 def get_proxy_auth(proxy_user, proxy_pass):
     if proxy_user and proxy_pass:
@@ -17,8 +19,72 @@ def get_proxy_auth(proxy_user, proxy_pass):
         return False, ""
 
 
+# Check if current event is a new one, if it is load map.
+def check_for_new_event():
+    # Load and replace event Id if needed
+    accounts = open_file(constants.py_accounts)
+    userId = accounts[0]["userId"]
+    token = accounts[0]["token"]
+    user_agent = accounts[0]["user_agent"]
+    proxy = accounts[0]["proxy"]
+    proxy_user = accounts[0]["proxy_user"]
+    proxy_password = accounts[0]["proxy_password"]
+
+    version, data_version = get_game_data(
+        token, user_agent, proxy, proxy_user, proxy_password
+    )
+    url = (
+        constants.gameDataURL
+        + "?cn=getEventProgressionLite&userId="
+        + userId
+        + "&isCaptain=0&gameDataVersion="
+        + data_version
+        + "&command=getEventProgressionLite&clientVersion="
+        + version
+        + "&clientPlatform=MobileLite"
+    )
+
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    if has_proxy:
+        response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+    else:
+        response = requests.get(url, proxies=proxies, headers=headers)
+    if response.status_code == 200:
+        parsedResponse = response.json()
+        data = parsedResponse["data"]
+        if data == None:
+            return
+
+        eventUid = data["eventUid"]
+        if eventUid != current_event.current_event:
+            with open("utils/current_event.py", "w") as file:
+                file.write('current_event = "' + eventUid + '"')
+            get_new_event_map()
+
+    else:
+        print(f"Error: {response.status_code}")
+
+
+def get_new_event_map():
+    # Update mapIds
+    print("Getting map nodes for the new event, this may take a few seconds...")
+    response = requests.get(constants.map_nodes_url)
+    if response.status_code == 200:
+        data_json = response.json()["sheets"]["MapNodes"]
+        for entry in data_json.values():
+            for key in constants.keys_to_remove:
+                entry.pop(key, None)
+        write_file(constants.map_nodes_path, data_json)
+        print("\nMap nodes updated successfully.\n")
+    else:
+        print(f"\nError: {response.status_code}")
+
+
 # Get each user's units, append priority and levelup permissions to each unit
-def get_units_data(userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password):
+def get_units_data(
+    userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+):
     url = (
         constants.gameDataURL
         + "?cn=getUserUnits&userId="
@@ -36,7 +102,7 @@ def get_units_data(userId, token, user_agent, proxy, version, data_version, prox
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-        
+
     if response.status_code == 200:
         units = response.json().get("data", [])
         for each_unit in units:
@@ -51,15 +117,18 @@ def get_units_data(userId, token, user_agent, proxy, version, data_version, prox
 
 # Get the game version and data_version for the api calls
 def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
-    
     _, proxies = get_request_strings(token, user_agent, proxy)
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     headers = {"User-Agent": user_agent}
-    
+
     if has_proxy:
-        gameDataResponse = requests.get(constants.gameDataURL, proxies=proxies, headers=headers, auth=proxy_auth)
+        gameDataResponse = requests.get(
+            constants.gameDataURL, proxies=proxies, headers=headers, auth=proxy_auth
+        )
     else:
-        gameDataResponse = requests.get(constants.gameDataURL, proxies=proxies, headers=headers)
+        gameDataResponse = requests.get(
+            constants.gameDataURL, proxies=proxies, headers=headers
+        )
 
     # Check if the request was successful (status code 200)
     if gameDataResponse.status_code == 200:
@@ -75,7 +144,9 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
 
 
 # Get userId and a list of favorite captains
-def get_user_id(token, user_agent, proxy, version, data_version, proxy_user, proxy_password):
+def get_user_id(
+    token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+):
     url = (
         constants.gameDataURL
         + "?cn=getUser&gameDataVersion="
@@ -103,14 +174,12 @@ def get_user_id(token, user_agent, proxy, version, data_version, proxy_user, pro
             other_user_id = parsedResponse["data"]["otherUserId"]
         except KeyError:
             other_user_id = ""
-            
+
     return userId, other_user_id, favoriteCaptains
 
 
 # Get userId, favorite captains and call to get the user units
 def set_user_data(account_data):
-    
-
     for account in account_data:
         if account["powered_on"] == False:
             continue
@@ -120,8 +189,10 @@ def set_user_data(account_data):
         proxy = account["proxy"]
         proxy_user = account["proxy_user"]
         proxy_password = account["proxy_password"]
-        
-        version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+
+        version, data_version = get_game_data(
+            token, user_agent, proxy, proxy_user, proxy_password
+        )
 
         userId, other_user_id, favoriteCaptainIds = get_user_id(
             token, user_agent, proxy, version, data_version, proxy_user, proxy_password
@@ -131,11 +202,25 @@ def set_user_data(account_data):
         account["favoriteCaptainIds"] = favoriteCaptainIds
 
         account["has_pass"] = get_battlepass(
-            userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+            userId,
+            token,
+            user_agent,
+            proxy,
+            version,
+            data_version,
+            proxy_user,
+            proxy_password,
         )
         if account["units"] == "":
             units = get_units_data(
-                userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+                userId,
+                token,
+                user_agent,
+                proxy,
+                version,
+                data_version,
+                proxy_user,
+                proxy_password,
             )
             account["units"] = units
         else:
@@ -145,7 +230,9 @@ def set_user_data(account_data):
     return account_data
 
 
-def get_battlepass(userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password):
+def get_battlepass(
+    userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+):
     url = (
         constants.gameDataURL
         + "?cn=getEventProgressionLite&userId="
@@ -168,9 +255,45 @@ def get_battlepass(userId, token, user_agent, proxy, version, data_version, prox
         data = parsedResponse["data"]
         if data == None:
             return False
-        
+
         has_pass = data["hasBattlePass"]
         if has_pass == "1":
             return True
         else:
             return False
+
+
+def leave_captain(
+    captain_id,
+    captain_name,
+    user_id,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+):
+    version, data_version = get_game_data(
+        token, user_agent, proxy, proxy_user, proxy_password
+    )
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    url = (
+        constants.gameDataURL
+        + "?cn=leaveCaptain&userId="
+        + user_id
+        + "&isCaptain=0&gameDataVersion="
+        + data_version
+        + "&command=leaveCaptain&captainId="
+        + captain_id
+        + "&clientVersion="
+        + version
+        + "&clientPlatform=WebGL"
+    )
+
+    if has_proxy:
+        requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+    else:
+        requests.get(url, proxies=proxies, headers=headers)
+
+    add_temporary_ignore(user_id, captain_name)

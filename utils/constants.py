@@ -13,7 +13,7 @@ default_entry = [
         "minimum_idle_time": 15,
         "unlimited_campaign": True,
         "unlimited_pvp": True,
-        "unlimited_dungeons": True,
+        "unlimited_dungeons": False,
         "any_captain": True,
         "only_masterlist": False,
         "masterlist": ["", "", ""],
@@ -37,11 +37,17 @@ default_entry = [
 mapPlacements = (
     "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
 )
-
 py_accounts = "pyraiders_accounts.json"
+keys_to_remove = [
+    "NodeDifficulty",
+    "MapTags",
+    "OnLoseDialog",
+    "OnStartDialog",
+    "OnWinDialog",
+]
 
+regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
-
 map_nodes_url = "https://streamcap-prod1.s3.amazonaws.com/data/data.9f44db04a984.json"
 
 user_agents = [
