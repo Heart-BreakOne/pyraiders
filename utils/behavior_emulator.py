@@ -22,6 +22,7 @@ async def requester(account_name, token, user_agent, proxy, _, __, list_of_urls,
         if response["status"] == "success":
             print(f"Random request successful for account {account_name}.")
         else:
+            print(url)
             print(f"Couldn't make request for account {account_name}.")
             print(response)
         
