@@ -23,6 +23,7 @@ async def requester(account_name, token, user_agent, proxy, _, __, list_of_urls,
             print(f"Random request successful for account {account_name}.")
         else:
             print(f"Couldn't make request for account {account_name}.")
+            print(response)
         
         
 #These are the requests made periodically by the game

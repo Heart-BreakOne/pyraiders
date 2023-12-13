@@ -70,6 +70,7 @@ def change_priority():
 
 def load_browser():
     name = input("Enter the account name you want to open a browser for: ")
+
     print("opening browser for " + name)
 
 def main():

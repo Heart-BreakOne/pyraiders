@@ -304,26 +304,31 @@ def fill_empty_slots(
 
     # Remove captains that are on the temporary idle list for the last 30 minutes
     # Convert the time strings to datetime variables
-    temporary_ignore_times = [
-        datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S.%f")
-        for entry in temporary_ignore
-    ]
+    try: 
+        temporary_ignore_times = [
+        datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
+            for entry in temporary_ignore
+        ]
+        time = datetime.utcnow()
+        current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+        # Define the threshold for acceptable captains (30 minutes)
+        threshold_time = timedelta(minutes=30)
+        # Filter out captains younger than 30 minutes in temporary_ignore
+        captains_to_remove = [
+            entry["capNm"].upper()
+            for entry, time_entry in zip(temporary_ignore, temporary_ignore_times)
+            if current_time - time_entry < threshold_time
+        ]
+        # Remove corresponding entries from acceptable_captains
+        acceptable_captains = [
+            entry
+            for entry in acceptable_captains
+            if entry["twitchUserName"].upper() not in captains_to_remove
+        ]
+    except:
+        pass
+        
 
-    current_time = datetime.utcnow()
-    # Define the threshold for acceptable captains (30 minutes)
-    threshold_time = timedelta(minutes=30)
-    # Filter out captains younger than 30 minutes in temporary_ignore
-    captains_to_remove = [
-        entry["capNm"].upper()
-        for entry, time_entry in zip(temporary_ignore, temporary_ignore_times)
-        if current_time - time_entry < threshold_time
-    ]
-    # Remove corresponding entries from acceptable_captains
-    acceptable_captains = [
-        entry
-        for entry in acceptable_captains
-        if entry["twitchUserName"].upper() not in captains_to_remove
-    ]
 
     # The list left is ready to be used for placement, now figure out what slots are available
     # Initialize slots list
@@ -438,7 +443,7 @@ def select_captain(
         if has_proxy:
             requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
             print(
-                "Account:"
+                "Account "
                 + user_name
                 + ": Added "
                 + captain_name
@@ -448,7 +453,7 @@ def select_captain(
         else:
             requests.get(url, proxies=proxies, headers=headers)
             print(
-                "Account:"
+                "Account "
                 + user_name
                 + ": Added "
                 + captain_name
@@ -492,6 +497,7 @@ def clean_slots(
         for raid in activeRaids:
             time_str = raid["creationDate"]
             is_code_locked = raid["isCodeLocked"]
+            #This data object is not being stored so there's need to remove the milliseconds
             current_time = datetime.utcnow()
             idle_time = timedelta(minutes=30 + minimum_idle_time)
             creation_time = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")

@@ -93,8 +93,9 @@ def add_temporary_ignore(user_id, captain_name):
     for account in accounts:
         if account["userId"] == user_id or account["otherUserId"] == user_id:
             temporary_ignore = account.get("temporary_ignore", [])
-
-            new_entry = {"capNm": captain_name, "time": str(datetime.utcnow())}
+            time = datetime.utcnow()
+            current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+            new_entry = {"capNm": captain_name, "time": current_time}
             temporary_ignore.append(new_entry)
             account["temporary_ignore"] = temporary_ignore
     
@@ -105,12 +106,13 @@ def add_temporary_ignore(user_id, captain_name):
 def clean_temp_times(accounts):
     for account in accounts:
         temp_ignore_list = account["temporary_ignore"]
-
-        temp_ignore_times = [
-            datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S.%f")
-            for entry in temp_ignore_list
-        ]
-        current_time = datetime.utcnow()
+        
+        try:
+            temp_ignore_times = [datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S") for entry in temp_ignore_list]
+        except:
+            continue
+        time = datetime.utcnow()
+        current_time = time.strftime("%Y-%m-%d %H:%M:%S")
         threshold_time = timedelta(minutes=30)
         temp_ignore_list = [
             entry
