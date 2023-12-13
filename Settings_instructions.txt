@@ -4,6 +4,12 @@ true and false are lowercase without quotes.
 Strings are in between double quotes.
 Keep numbers outside quotes.
 
+*** IF YOU ARE RUNNING A CAPTAIN ACCOUNT WHILE TRYING TO PLACE UNITS ON THE VIEWER SIDE SOME TASKS WILL FAIL.
+*** I'M NOT SURE IF IT WON'T PLACE ANY UNITS ON THE VIEWER WHEN THIS DUALITY OCCURS AS I HAVEN'T PERFORMED IN-DEPTH TESTS, BUT I KNOW SOME BASIC FAIL.
+*** So I can't use captain accounts on this tool? You can run the viewer side of your captain account without issues.
+*** You CAN NOT run the viewer side on this tool while accessing the captain side on the browser SIMULTANEOUSLY.
+*** Can I access the viewer account on the browser while this tool runs? Yes.
+
 These two keys are MANDATORY as the application can not function without them:
 "name" Unique account name, does not need to be your Twitch account name.
 "token" Not URL encoded ACCESS_INFO token used to identify your login.

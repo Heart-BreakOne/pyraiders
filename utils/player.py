@@ -22,6 +22,7 @@ async def fill_slots():
                 continue
             # Required data
             user_id = account["userId"]
+            user_name = account["name"]
             token = account["token"]
             user_agent = account["user_agent"]
             proxy = account["proxy"]
@@ -33,8 +34,6 @@ async def fill_slots():
             switch_if_preserve_loyalty = account["switch_if_preserve_loyalty"]
             switch_on_idle = account["switch_on_idle"]
             minimum_idle_time = account["minimum_idle_time"]
-            unlimited_campaign = account["unlimited_campaign"]
-            unlimited_pvp = account["unlimited_pvp"]
             only_masterlist = account["only_masterlist"]
             masterlist = []
             if only_masterlist:
@@ -68,6 +67,7 @@ async def fill_slots():
                 fill_empty_slots(
                     activeRaids,
                     user_id,
+                    user_name,
                     token,
                     user_agent,
                     proxy,
@@ -101,6 +101,8 @@ async def fill_slots():
                     minimum_idle_time,
                 )
                 continue
+                place_units(user_id)
+                return
 
 
 def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password):
@@ -166,6 +168,7 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
 def fill_empty_slots(
     activeRaids,
     user_id,
+    user_name,
     token,
     user_agent,
     proxy,
@@ -286,7 +289,7 @@ def fill_empty_slots(
         if entry["userId"] not in active_captain_ids
     ]
 
-    # Remove live captains that are running special modes that active captains are also running to avoid.
+    # Remove live captains that are running special modes that active captains are also running to avoid conflict
     active_types = {entry["type"] for entry in activeRaids if "type" in entry}
     acceptable_captains = [
         entry
@@ -306,7 +309,7 @@ def fill_empty_slots(
         for entry in temporary_ignore
     ]
 
-    current_time = datetime.now()
+    current_time = datetime.utcnow()
     # Define the threshold for acceptable captains (30 minutes)
     threshold_time = timedelta(minutes=30)
     # Filter out captains younger than 30 minutes in temporary_ignore
@@ -339,6 +342,7 @@ def fill_empty_slots(
     if len(possible_slots) != 0:
         select_captain(
             user_id,
+            user_name,
             headers,
             proxies,
             version,
@@ -377,6 +381,7 @@ def fill_empty_slots(
 # Place captain on slot
 def select_captain(
     user_id,
+    user_name,
     headers,
     proxies,
     version,
@@ -434,8 +439,8 @@ def select_captain(
             requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
             print(
                 "Account:"
-                + user_id
-                + ". Added "
+                + user_name
+                + ": Added "
                 + captain_name
                 + " to slot number "
                 + slot
@@ -444,8 +449,8 @@ def select_captain(
             requests.get(url, proxies=proxies, headers=headers)
             print(
                 "Account:"
-                + user_id
-                + ". Added "
+                + user_name
+                + ": Added "
                 + captain_name
                 + " to slot number "
                 + slot
@@ -482,11 +487,12 @@ def clean_slots(
         user_id, token, user_agent, proxy, proxy_user, proxy_password
     )
 
-    # Remove idle captains from the slots.
+    # Remove idle captains from the slots as well as captain running codes.
     if switch_on_idle:
         for raid in activeRaids:
             time_str = raid["creationDate"]
-            current_time = datetime.now()
+            is_code_locked = raid["isCodeLocked"]
+            current_time = datetime.utcnow()
             idle_time = timedelta(minutes=30 + minimum_idle_time)
             creation_time = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
             if current_time > creation_time + idle_time:
@@ -504,7 +510,21 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print(captain_id + " is idling. Switching...")
+                print(captain_name + " is idling. Switching...")
+            elif is_code_locked:
+                captain_id = raid["captainId"]
+                captain_name = raid["twitchUserName"]
+                leave_captain(
+                    captain_id,
+                    captain_name,
+                    user_id,
+                    token,
+                    user_agent,
+                    proxy,
+                    proxy_user,
+                    proxy_password,
+                )
+                print(captain_name + " is using codes. Switching...")
 
     # Remove captains that are on loyalty switch
     if switch_if_preserve_loyalty and preserve_loyalty != 0:
@@ -537,7 +557,7 @@ def clean_slots(
                             proxy_password,
                         )
                         print(
-                            captain_id
+                            captain_name
                             + " is in a loyalty chest without loyalty. Switching..."
                         )
                     elif (
@@ -551,9 +571,60 @@ def clean_slots(
                 else:
                     print("Couldn't find chest infos")
 
+    return
     place_units(user_id)
 
 
 # place units based on the loyalty skip and unlimited states
 def place_units(user_id):
-    print("TODO place units for account " + user_id)
+    # This task is being handled by place_unit_in_battlefield().
+    # If needed this will be manually called and run synchronously.
+    pass
+
+
+# place units based on the loyalty skip and unlimited states
+async def place_unit_in_battlefield():
+    while True:
+        await asyncio.sleep(5)
+        print("TODO - Placing an unit")
+
+        # "captainId" - carries the captainId that may be required to place an unit.
+        # "raidId" - carries the id required to place an unit on an raid
+        # "battleground" - carries the data required to calculate placements.
+        # "nodeId" - carries the map loyalty type so it can be determined if the user wants to place there.
+
+        # "creationDate" is the time the raid was created.
+        # "lastUnitPlacedTime" time last unit was placed on the raid.
+        
+        #  "creationDate", "type" and "lastUnitPlacedTime" it can be used to determine placement times.
+
+        # "endTime" not null means the raid ended and a rewards or savage chest are available to be collected
+
+
+        # raid["type"] - Raids code IDs:
+        # type 1: campaign
+        # type 2: clash
+        # type 3: dungeon
+        # type 5: duels
+        
+        #Total duration (Time between creation up to until placement ends): 
+        # type 1: 30:10 minutes
+        # type 2: 
+        # type 3: 
+        # type 5: 7 minutes
+        
+        #PLACEMENT BUFFER TIMES. Once the battle starts there's a buffer time before units can be placed:
+        # type 1: 10 seconds.
+        # type 2:
+        # type 3: 
+        # type 5: 1 minute
+        
+        #PLACEMENT TIMES:
+        # campaign type 1 : Consistently every 5 minutes
+        # clash type 2:   
+        # type 3: 
+        # type 5:  6 minutes
+        #                   Max of 3 units before the game gives an error
+        #                   First unit 1 minute after creation
+        #                   Second unit 2 minutes after first unit (3 minutes after creation)
+        #                   Third unit 2 minutes after the second unit (5 minutes after creation)

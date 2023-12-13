@@ -2,12 +2,12 @@ import asyncio
 from utils.settings import write_file, open_file, setup_accounts, clean_temp_times
 from utils.game_requests import set_user_data, check_for_new_event
 from utils.behavior_emulator import start_up_requests, make_dummy_requests
-from utils.player import fill_slots
+from utils.player import fill_slots, place_unit_in_battlefield
 from utils import constants
 from utils.create_accounts import create_account
 
 
-async def main():
+async def run():
     # Check if accounts file exist, if not create one.
     data = open_file(constants.py_accounts)
     if data is None:
@@ -39,10 +39,12 @@ async def main():
     #Fill and clean slots
     asyncio.create_task(fill_slots())
     
+    # Place units on the battlefield
+    asyncio.create_task(place_unit_in_battlefield())
 
     while True:
         await asyncio.sleep(1)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run())
