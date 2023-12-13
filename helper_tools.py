@@ -1,9 +1,12 @@
 # This is a command line helper
 
 import sys
+import time
 from utils.game_requests import set_user_data
 from utils.settings import setup_accounts, write_file, open_file
 from utils import constants
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 def add_account():
     name = input("Enter an unique account name: ")
@@ -70,9 +73,30 @@ def change_priority():
 
 def load_browser():
     name = input("Enter the account name you want to open a browser for: ")
-
-    print("opening browser for " + name)
-
+    accounts = open_file(constants.py_accounts)
+    ACCESS_INFO = None
+    for account in accounts:
+        if account["name"] == name:
+            ACCESS_INFO = account["token"]
+            break
+        
+    if ACCESS_INFO is not None:
+        try:
+            chrome_options = Options()
+            driver = webdriver.Chrome(options=chrome_options)
+            driver.get("https://www.streamraiders.com")
+            driver.add_cookie({'name': 'ACCESS_INFO', 'value': ACCESS_INFO, 'domain': '.www.streamraiders.com', 'path': '/'})
+            driver.refresh()
+            print("Opening SR tab for " + name + "...\n Press CTRL+C to close browser.")
+            try:
+                while True:
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                    driver.quit()
+        except:
+            pass
+        
+        
 def main():
     
     if len(sys.argv) < 2:
