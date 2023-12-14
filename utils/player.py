@@ -1,5 +1,6 @@
 import asyncio, requests
 from datetime import datetime, timedelta
+from utils.response_handler import handle_error_response
 from utils.time_generator import get_four_quarters, get_quarter
 from utils.settings import open_file, write_file
 from utils.game_requests import (
@@ -123,6 +124,11 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
+    
+    has_error = handle_error_response(response)  
+    if has_error:
+        return
+    
     if response.status_code == 200:
         parsedResponse = response.json()
         raid_data = parsedResponse["data"]
@@ -211,7 +217,10 @@ def fill_empty_slots(
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
         live_captains_list.append(response.json())
-
+        has_error = handle_error_response(response)  
+        if has_error:
+            return
+        
     for i in range(3):
         url = (
             constants.gameDataURL
@@ -229,6 +238,11 @@ def fill_empty_slots(
             )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
+            
+        has_error = handle_error_response(response)  
+        if has_error:
+            return
+        
         live_captains_list.append(response.json())
 
     merged_data = []
@@ -441,7 +455,7 @@ def select_captain(
             + "&clientPlatform=WebGL"
         )
         if has_proxy:
-            requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
             print(
                 "Account "
                 + user_name
@@ -451,7 +465,7 @@ def select_captain(
                 + slot
             )
         else:
-            requests.get(url, proxies=proxies, headers=headers)
+            response = requests.get(url, proxies=proxies, headers=headers)
             print(
                 "Account "
                 + user_name
@@ -460,6 +474,9 @@ def select_captain(
                 + " to slot number "
                 + slot
             )
+        has_error = handle_error_response(response)  
+        if has_error:
+            return
 
     # get active raids again and count the occupied slots, that is the real amount of slots
     activeRaids = getActiveraids(
@@ -583,54 +600,6 @@ def clean_slots(
 
 # place units based on the loyalty skip and unlimited states
 def place_units(user_id):
-    # This task is being handled by place_unit_in_battlefield().
+    # This task is being handled by /utils/place_units.place_unit_in_battlefield().
     # If needed this will be manually called and run synchronously.
     pass
-
-
-# place units based on the loyalty skip and unlimited states
-async def place_unit_in_battlefield():
-    while True:
-        await asyncio.sleep(5)
-        print("TODO - Placing an unit")
-
-        # "captainId" - carries the captainId that may be required to place an unit.
-        # "raidId" - carries the id required to place an unit on an raid
-        # "battleground" - carries the data required to calculate placements.
-        # "nodeId" - carries the map loyalty type so it can be determined if the user wants to place there.
-
-        # "creationDate" is the time the raid was created.
-        # "lastUnitPlacedTime" time last unit was placed on the raid.
-        
-        #  "creationDate", "type" and "lastUnitPlacedTime" it can be used to determine placement times.
-
-        # "endTime" not null means the raid ended and a rewards or savage chest are available to be collected
-
-
-        # raid["type"] - Raids code IDs:
-        # type 1: campaign
-        # type 2: clash
-        # type 3: dungeon
-        # type 5: duels
-        
-        #Total duration (Time between creation up to until placement ends): 
-        # type 1: 30:10 minutes
-        # type 2: 
-        # type 3: 
-        # type 5: 7 minutes
-        
-        #PLACEMENT BUFFER TIMES. Once the battle starts there's a buffer time before units can be placed:
-        # type 1: 10 seconds.
-        # type 2:
-        # type 3: 
-        # type 5: 1 minute
-        
-        #PLACEMENT TIMES:
-        # campaign type 1 : Consistently every 5 minutes
-        # clash type 2:   
-        # type 3: 
-        # type 5:  6 minutes
-        #                   Max of 3 units before the game gives an error
-        #                   First unit 1 minute after creation
-        #                   Second unit 2 minutes after first unit (3 minutes after creation)
-        #                   Third unit 2 minutes after the second unit (5 minutes after creation)

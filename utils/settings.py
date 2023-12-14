@@ -85,10 +85,10 @@ def setup_accounts(data):
     return unique_accounts
 
 
-#Add temporary ignore captains
+# Add temporary ignore captains
 def add_temporary_ignore(user_id, captain_name):
     accounts = open_file(constants.py_accounts)
-    
+
     # Add captain to the temporary ignore list to avoid a loop switch
     for account in accounts:
         if account["userId"] == user_id or account["otherUserId"] == user_id:
@@ -98,7 +98,7 @@ def add_temporary_ignore(user_id, captain_name):
             new_entry = {"capNm": captain_name, "time": current_time}
             temporary_ignore.append(new_entry)
             account["temporary_ignore"] = temporary_ignore
-    
+
     write_file(constants.py_accounts, accounts)
 
 
@@ -106,9 +106,12 @@ def add_temporary_ignore(user_id, captain_name):
 def clean_temp_times(accounts):
     for account in accounts:
         temp_ignore_list = account["temporary_ignore"]
-        
+
         try:
-            temp_ignore_times = [datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S") for entry in temp_ignore_list]
+            temp_ignore_times = [
+                datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
+                for entry in temp_ignore_list
+            ]
         except:
             continue
         time = datetime.utcnow()
@@ -122,3 +125,31 @@ def clean_temp_times(accounts):
         account["temporary_ignore"] = temp_ignore_list
 
     return accounts
+
+#Remove accounts with duplicate user ids.
+def remove_duplicate_ids(accounts):
+    unique_ids = set()
+    unique_accounts = []
+
+    for account in accounts:
+        user_id = account["userId"]
+        alt_user_id = account["otherUserId"]
+        units = account["units"]
+        unit_ids = set()
+
+        if (user_id, alt_user_id) not in unique_ids and (user_id, alt_user_id) not in unique_ids:
+            unique_ids.add((user_id, alt_user_id))
+
+            has_duplicate_units = False
+            for unit in units:
+                unit_id = unit["unitId"]
+                if unit_id in unit_ids:
+                    has_duplicate_units = True
+                    break
+                else:
+                    unit_ids.add(unit_id)
+
+            if not has_duplicate_units:
+                unique_accounts.append(account)
+
+    return unique_accounts

@@ -1,6 +1,7 @@
 # This file handles requests that a legitimate browser session makes from time to time.
 
 import asyncio, requests
+from utils.response_handler import handle_error_response
 from utils.time_generator import get_twenty
 from utils import constants
 from utils.settings import open_file
@@ -17,15 +18,19 @@ async def requester(account_name, token, user_agent, proxy, _, __, list_of_urls,
             response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
         else:
             response = requests.get(url, proxies=proxies, headers=headers)  
-        #If needed, print the response to check the content
-        response = response.json()
-        if response["status"] == "success":
-            print(f"Random request successful for account {account_name}.")
-        else:
-            print(url)
-            print(f"Couldn't make request for account {account_name}.")
-            print(response)
-        
+            #If needed, print the response to check the content
+            parsedResponse = response.json()
+            """"""
+            if parsedResponse["status"] == "success":
+                #print(f"Random request successful for account {account_name}.")
+                pass
+            else:
+                print(url)
+                print(parsedResponse)
+                print(f"Couldn't make request for account {account_name}.")
+                _ = handle_error_response(response)
+                return
+            """"""
         
 #These are the requests made periodically by the game
 async def make_dummy_requests():
@@ -53,7 +58,7 @@ async def make_dummy_requests():
             version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
             list_of_periodic_requests = [
                 f"{constants.gameDataURL}?cn=getLiveAndPlayingCaptainCount&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getLiveAndPlayingCaptainCount&clientVersion={version}&clientPlatform=WebGL",
-                f"{constants.gameDataURL}?cn=getActiveRaidsByUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getActiveRaidsByUser",
+                #f"{constants.gameDataURL}?cn=getActiveRaidsByUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getActiveRaidsByUser",
                 f"{constants.gameDataURL}?cn=getUser&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUser&clientVersion={version}&clientPlatform=WebGL",
                 f"{constants.gameDataURL}?cn=getFactionInfo&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getFactionInfo&clientVersion={version}&clientPlatform=WebGL",
                 f"{constants.gameDataURL}?cn=getOpenCountTrackedChests&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getOpenCountTrackedChests&clientVersion={version}&clientPlatform=WebGL",
@@ -94,7 +99,7 @@ async def start_up_requests():
             f"{constants.gameDataURL}?cn=getUserSouls&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUserSouls&clientVersion={version}&clientPlatform=WebGL",
             f"{constants.gameDataURL}?cn=getCurrentStoreItems&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getCurrentStoreItems&clientVersion={version}&clientPlatform=WebGL",
             f"{constants.gameDataURL}?cn=getUserEventProgression&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUserEventProgression&clientVersion={version}&clientPlatform=WebGL",
-            f"{constants.gameDataURL}?cn=getActiveAmbassadors&userId={user_id}&isCaptain=0&gameDataVersion=9f44db04a",
+            f"{constants.gameDataURL}?cn=getActiveAmbassadors&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getActiveAmbassadors&clientVersion={version}&clientPlatform=WebGL",
             f"{constants.gameDataURL}?cn=getUserItems&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUserItems&clientVersion={version}&clientPlatform=WebGL",
             f"{constants.gameDataURL}?cn=getUserQuests&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUserQuests&clientVersion={version}&clientPlatform=WebGL",
             f"{constants.gameDataURL}?cn=getAvailableCurrencies&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getAvailableCurrencies&clientVersion={version}&clientPlatform=WebGL",
