@@ -1,17 +1,17 @@
 # This is a command line helper
 
-import sys
-import time
+import sys, time
 from utils.game_requests import set_user_data
 from utils.settings import setup_accounts, write_file, open_file
 from utils import constants
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+
 usage = "Usage: python3 helper_tools.py <command>\nCommands:\nadd_account or a\nchange_priority or c\nload_browser or l"
-def add_account():
-    name = input("Enter an unique account name: ")
-    token = input("Enter account token: ")
+
+
+def perform_account_addition(name, token):
     print("This may take a few seconds...")
     if name != None and token != None:
         new_account = constants.default_entry
@@ -30,6 +30,12 @@ def add_account():
 
         write_file(constants.py_accounts, existing_data)
         print("Account added.")
+
+
+def add_account():
+    name = input("Enter an unique account name: ")
+    token = input("Enter account token: ")
+    perform_account_addition(name, token)
 
 
 def change_priority():
@@ -86,11 +92,15 @@ def load_browser():
     name = input("Enter the account name you want to open a browser for: ")
     accounts = open_file(constants.py_accounts)
     ACCESS_INFO = None
+    found = False
     for account in accounts:
         if account["name"] == name:
             ACCESS_INFO = account["token"]
+            found = True
             break
-
+    if not found:
+        print("Type an account you would like to access")
+        
     if ACCESS_INFO is not None:
         try:
             chrome_options = Options()
