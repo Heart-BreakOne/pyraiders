@@ -20,10 +20,11 @@ async def run():
     if data is None:
         create_account()
         return
-
+    print("Starting up.")
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
     
+    print("Checking configuration file.")
     # Load unitIds and units.
     data = set_user_data(data)
     
@@ -36,21 +37,27 @@ async def run():
     # Write changes to storage
     write_file(constants.py_accounts, data)
 
+    print("Checking current event.")
     # Check if there's a new event and get new map nodes
     check_for_new_event()
 
+    print("Running start up tasks.")
     # Start up dummy requests here
     asyncio.create_task(start_up_requests())
 
+    print("Periodic tasks have started.")
     # Periodic requests here
     asyncio.create_task(make_dummy_requests())
 
+    print("Slot manager has started.")
     # Fill and clean slots
     asyncio.create_task(fill_slots())
 
+    print("Unit placement manager has started.")
     # Place units on the battlefield
     asyncio.create_task(place_unit_in_battlefield())
     
+    print("Unit cooldown management has started.")
     # Update unit cooldown time every 5 minutes
     asyncio.create_task(update_unit_cooldown())
 

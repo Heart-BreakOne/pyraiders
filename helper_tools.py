@@ -89,6 +89,15 @@ def change_priority():
 
 
 def load_browser():
+    print("Please read the information below before procedding")
+    time.sleep(3)
+    
+    print("Due to the way the server handles session auths, this may not be a reliable way to log into your account.")
+    print("If this doesn't log in, the token might be expired, I'm trying to figure out if that is the actual cause.")
+    print("Logging in again and generating a new token fixes the issue.")
+    print("It's possible that new log ins outside this tool invalited the previous tokens.")
+    print("DISCLAIMER: THE REST OF THE TOOL WORKS PERFECTLY FINE, it's just this browser session that can't use old tokens.")
+    
     name = input("Enter the account name you want to open a browser for: ")
     accounts = open_file(constants.py_accounts)
     ACCESS_INFO = None
@@ -111,7 +120,7 @@ def load_browser():
                     "name": "ACCESS_INFO",
                     "value": ACCESS_INFO,
                     "domain": ".www.streamraiders.com",
-                    "path": "/",
+                    "path": "/"
                 }
             )
             driver.refresh()
@@ -120,9 +129,11 @@ def load_browser():
                 while True:
                     time.sleep(1)
             except KeyboardInterrupt:
-                driver.quit()
-        except:
-            pass
+                pass
+        except Exception as e:
+            print(e)
+        finally:
+            driver.quit()
 
 
 def main():
