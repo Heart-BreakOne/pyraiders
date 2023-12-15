@@ -5,7 +5,6 @@ import sys, time
 from utils.game_requests import set_user_data
 from utils.settings import setup_accounts, write_file, open_file
 from utils import constants
-import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -120,8 +119,6 @@ def load_browser():
         "DISCLAIMER: THE REST OF THE TOOL WORKS PERFECTLY FINE, it's just this browser session that can't use old tokens."
     )
     """
-    print("Checking and installing the chromedriver...")
-    chromedriver_autoinstaller.install()
     name = input("Enter the account name you want to open a browser for: ")
     accounts = open_file(constants.py_accounts)
     ACCESS_INFO = None

@@ -4,7 +4,8 @@
 
 ## Install Python3 and pip3 in order to use this tool.
 ## Double click or execute python3 setup.py to install the requirements.
-It requires a Chromium based browser, PyQt, QtWebEngine, chromedriver_autoinstaller, chromedriver and selenium.
+PyQt, QtWebEngine and selenium.
+## It also requires a Chrome based browser and chromedriver which is highly dependent on your OS, so you need to install them manually.
 ## Run python3 helper_tools.py to help set up your account.
 ## Double click or execute python3 run.py to run the assistant after setting up your account.
 ## helper_tools can be ran to add accounts and make changes while assistant is running.
