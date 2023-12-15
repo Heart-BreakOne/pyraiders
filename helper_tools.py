@@ -11,13 +11,15 @@ from selenium.webdriver.chrome.options import Options
 usage = "Usage: python3 helper_tools.py <command>\nCommands:\nadd_account or a\nchange_priority or c\nload_browser or l"
 
 
-def perform_account_addition(name, token):
+def perform_account_addition(name, token, scapmpid, scsession):
     print("This may take a few seconds...")
     if name != None and token != None:
         new_account = constants.default_entry
         entry = new_account[0]
         entry["name"] = name
         entry["token"] = token
+        entry["scapmpid"] = scapmpid
+        entry["scsession"] = scsession
 
         existing_data = open_file(constants.py_accounts)
         if existing_data != None:
@@ -33,9 +35,14 @@ def perform_account_addition(name, token):
 
 
 def add_account():
+    input(
+        "Before continuining go to your browser and get the access_info, the scapmpid and the scsession from the cookies\nPress ENTER when you are ready."
+    )
     name = input("Enter an unique account name: ")
     token = input("Enter account token: ")
-    perform_account_addition(name, token)
+    scapmpid = input("Enter account scapmpid: ")
+    scsession = input("Enter the scsession: ")
+    perform_account_addition(name, token, scapmpid, scsession)
 
 
 def change_priority():
@@ -89,15 +96,25 @@ def change_priority():
 
 
 def load_browser():
+    """
     print("Please read the information below before procedding")
     time.sleep(3)
-    
-    print("Due to the way the server handles session auths, this may not be a reliable way to log into your account.")
-    print("If this doesn't log in, the token might be expired, I'm trying to figure out if that is the actual cause.")
+
+    print(
+        "Due to the way the server handles session auths, this may not be a reliable way to log into your account."
+    )
+    print(
+        "If this doesn't log in, the token might be expired, I'm trying to figure out if that is the actual cause."
+    )
     print("Logging in again and generating a new token fixes the issue.")
-    print("It's possible that new log ins outside this tool invalited the previous tokens.")
-    print("DISCLAIMER: THE REST OF THE TOOL WORKS PERFECTLY FINE, it's just this browser session that can't use old tokens.")
-    
+    print(
+        "It's possible that new log ins outside this tool invalited the previous tokens."
+    )
+    print(
+        "DISCLAIMER: THE REST OF THE TOOL WORKS PERFECTLY FINE, it's just this browser session that can't use old tokens."
+    )
+    """
+
     name = input("Enter the account name you want to open a browser for: ")
     accounts = open_file(constants.py_accounts)
     ACCESS_INFO = None
@@ -105,11 +122,13 @@ def load_browser():
     for account in accounts:
         if account["name"] == name:
             ACCESS_INFO = account["token"]
+            scapmpid = account["scapmpid"]
+            scsession = account["scsession"]
             found = True
             break
     if not found:
         print("Type an account you would like to access")
-        
+
     if ACCESS_INFO is not None:
         try:
             chrome_options = Options()
@@ -120,15 +139,34 @@ def load_browser():
                     "name": "ACCESS_INFO",
                     "value": ACCESS_INFO,
                     "domain": ".www.streamraiders.com",
-                    "path": "/"
+                    "path": "/",
                 }
             )
+            driver.add_cookie(
+                {
+                    "name": "scapmpid",
+                    "value": scapmpid,
+                    "domain": "www.streamraiders.com",
+                    "path": "/",
+                }
+            )
+            driver.add_cookie(
+                {
+                    "name": "scsession",
+                    "value": scsession,
+                    "domain": "www.streamraiders.com",
+                    "path": "/",
+                }
+            )
+
             driver.refresh()
             print("Opening SR tab for " + name + "...\n Press CTRL+C to close browser.")
             try:
                 while True:
                     time.sleep(1)
             except KeyboardInterrupt:
+                driver.quit()
+                sys.exit()
                 pass
         except Exception as e:
             print(e)

@@ -1,4 +1,5 @@
 import asyncio, requests
+import random
 from datetime import datetime, timedelta
 from utils.response_handler import handle_error_response
 from utils.time_generator import get_four_quarters, get_quarter
@@ -39,10 +40,10 @@ async def fill_slots():
             masterlist = []
             if only_masterlist:
                 masterlist = account["masterlist"]
-            ignore_blacklist = account["ignore_blacklist"]
-            blacklist = []
-            if ignore_blacklist:
-                blacklist = account["blacklist"]
+            ignore_blocklist = account["ignore_blocklist"]
+            blocklist = []
+            if ignore_blocklist:
+                blocklist = account["blocklist"]
             favorites_only = account["favorites_only"]
             favoriteCaptainIds = []
             if favorites_only:
@@ -77,7 +78,7 @@ async def fill_slots():
                     temporary_ignore,
                     masterlist,
                     favoriteCaptainIds,
-                    blacklist,
+                    blocklist,
                     any_captain,
                     has_pass,
                     slots_quantity,
@@ -85,6 +86,8 @@ async def fill_slots():
                     switch_if_preserve_loyalty,
                     switch_on_idle,
                     minimum_idle_time,
+                    favorites_only,
+                    only_masterlist
                 )
                 continue
             else:
@@ -183,7 +186,7 @@ def fill_empty_slots(
     temporary_ignore,
     masterlist,
     favoriteCaptainIds,
-    blacklist,
+    blocklist,
     any_captain,
     has_pass,
     slots_quantity,
@@ -191,8 +194,10 @@ def fill_empty_slots(
     switch_if_preserve_loyalty,
     switch_on_idle,
     minimum_idle_time,
+    favorites_only,
+    only_masterlist
 ):
-    # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blacklist
+    # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blocklist
     live_captains_list = []
     headers, proxies = get_request_strings(token, user_agent, proxy)
     version, data_version = get_game_data(
@@ -282,10 +287,10 @@ def fill_empty_slots(
             if captain in favoriteCaptainIds:
                 acceptable_captains.append(entry)
 
-    if len(acceptable_captains) == 0 and len(blacklist) != 0 and any_captain:
+    if len(acceptable_captains) == 0 and len(blocklist) != 0 and any_captain:
         for entry in unique_data:
             captain = entry["twitchUserName"].upper()
-            if captain in map(str.upper, blacklist):
+            if captain in map(str.upper, blocklist):
                 pass
             else:
                 acceptable_captains.append(entry)
@@ -380,6 +385,8 @@ def fill_empty_slots(
             switch_if_preserve_loyalty,
             switch_on_idle,
             minimum_idle_time,
+            favorites_only,
+            only_masterlist
         )
     else:
         clean_slots(
@@ -419,12 +426,20 @@ def select_captain(
     switch_if_preserve_loyalty,
     switch_on_idle,
     minimum_idle_time,
+    favorites_only,
+    only_masterlist
 ):
     for i, slot in enumerate(possible_slots):
         slot_integer = int(slot)
         if i < len(acceptable_captains) and slot_integer < slots_quantity:
-            captain_id = acceptable_captains[i]["userId"]
-            captain_name = acceptable_captains[i]["twitchUserName"]
+            #RANDOMIZE THE INDEX SO DEFAULT ACCOUNTS ARE SPREAD THROUGHOUT THE CAPTAINS
+            if favorites_only or only_masterlist:
+                captain_id = acceptable_captains[i]["userId"]
+                captain_name = acceptable_captains[i]["twitchUserName"]
+            else:
+                random_captain = random.choice(acceptable_captains)
+                captain_id = random_captain["userId"]
+                captain_name = random_captain["twitchUserName"]
         else:
             clean_slots(
                 user_id,
@@ -454,6 +469,7 @@ def select_captain(
             + version
             + "&clientPlatform=WebGL"
         )
+        
         if has_proxy:
             response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
             print(
@@ -462,7 +478,7 @@ def select_captain(
                 + ": Added "
                 + captain_name
                 + " to slot number "
-                + slot
+                + str(int(slot) + 1)
             )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
@@ -472,7 +488,7 @@ def select_captain(
                 + ": Added "
                 + captain_name
                 + " to slot number "
-                + slot
+                + str(int(slot) + 1)
             )
         has_error = handle_error_response(response)  
         if has_error:

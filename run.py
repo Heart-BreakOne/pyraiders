@@ -1,4 +1,5 @@
 import asyncio, sys
+import threading
 from utils.settings import write_file, open_file, setup_accounts, clean_temp_times, remove_duplicate_ids
 from utils.game_requests import set_user_data, check_for_new_event, update_unit_cooldown
 from utils.behavior_emulator import start_up_requests, make_dummy_requests
@@ -24,7 +25,7 @@ async def run():
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
     
-    print("Checking configuration file.")
+    print("Checking configuration file...")
     # Load unitIds and units.
     data = set_user_data(data)
     
@@ -37,30 +38,31 @@ async def run():
     # Write changes to storage
     write_file(constants.py_accounts, data)
 
-    print("Checking current event.")
+    print("Checking current event...")
     # Check if there's a new event and get new map nodes
     check_for_new_event()
 
-    print("Running start up tasks.")
+    print("Running start up tasks...")
     # Start up dummy requests here
     asyncio.create_task(start_up_requests())
 
-    print("Periodic tasks have started.")
     # Periodic requests here
     asyncio.create_task(make_dummy_requests())
+    print("Periodic tasks have started.")
 
-    print("Slot manager has started.")
+    
     # Fill and clean slots
     asyncio.create_task(fill_slots())
+    print("Slot manager has started.")
 
-    print("Unit placement manager has started.")
-    # Place units on the battlefield
-    asyncio.create_task(place_unit_in_battlefield())
+    update_unit_cooldown()
+    print("Units cooldown updated.")
     
-    print("Unit cooldown management has started.")
-    # Update unit cooldown time every 5 minutes
-    asyncio.create_task(update_unit_cooldown())
-
+    # Place units on the battlefield
+    asyncio_thread = threading.Thread(target=lambda: asyncio.run(place_unit_in_battlefield()))
+    asyncio_thread.start()
+    print("Unit placement manager has started.")
+    
     while True:
         await asyncio.sleep(1)
 

@@ -334,12 +334,7 @@ def leave_captain(
 
 
 #Update unit cooldown timer.
-async def update_unit_cooldown():
-    while True:
-        await asyncio.sleep(10)
-        request_update_unit_cooldown
-        
-def request_update_unit_cooldown():
+def update_unit_cooldown():
         accounts = open_file(constants.py_accounts)
         
         for account in accounts:

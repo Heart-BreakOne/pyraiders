@@ -10,9 +10,9 @@ from utils.settings import open_file
 
 
 # Receive user input before creating the qapp
-print("This has not been implemented yet.")
-sys.exit()
-print("READ THIS BEFORE PROCEEDING WHILE YOU WAIT 10 SECONDS")
+print("This has not been implemented yet, at the moment the user agent can not be spoofed and thus the account origin can be easily detected.")
+#sys.exit()
+print("READ THIS WHILE YOU WAIT 10 SECONDS BEFORE PROCEEDING")
 print("""The user agent of this login helper can not be spoofed, your login will be identified as:
 Mozilla/5.0 (Macintosh; Intel Mac OS X 14_2_0) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.11 Chrome/87.0.4280.144 Safari/537.36
 More specifically as QtWebEngine/5.15.11, this is enough to trace the unusual origin of the login, aiding on tracking bot accounts.
@@ -32,17 +32,25 @@ for account in accounts:
 
 # Start qapp
 app = QApplication([])
-
+ACCESS_INFO = None
+scapmpid = None
+scsession = None
 # Captures cookie of interest and save to storage.
 def on_cookie_added(cookie):
     cookie_name = cookie.name().data().decode()
     cookie_value = cookie.value().data().decode()
     if cookie_name == "ACCESS_INFO":
+        ACCESS_INFO = cookie_value
+    elif cookie_name == "scapmpid":
+           scapmpid = cookie_value
+    elif cookie_name == "scsession":
+        scsession = cookie_value
+    if cookie_name != None and scapmpid != None and scsession != None:
         print("Adding account...")
-        perform_account_addition(name, cookie_value)
-        print("Added account for token: " + cookie_value)
+        perform_account_addition(name, ACCESS_INFO, scapmpid, scsession)
+        print("Account added.")
         store.deleteAllCookies()
-        view.close()
+        view.close()   
 
 
 view = QWebEngineView()
@@ -54,6 +62,7 @@ store = page.profile().cookieStore()
 # Clear existing cookies
 store.deleteAllCookies()
 
+#User agent spoofer that doesn't work
 #view.page().profile().setHttpUserAgent(random.choice(constants.user_agents))
 
 # Connect a slot to the cookieAdded signal
