@@ -18,14 +18,12 @@ print("READ THIS WHILE YOU WAIT 10 SECONDS BEFORE PROCEEDING")
 print("""The user agent of this login helper can not be spoofed, your login will be identified as:
 Mozilla/5.0 (Macintosh; Intel Mac OS X 14_2_0) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.11 Chrome/87.0.4280.144 Safari/537.36
 More specifically as QtWebEngine/5.15.11, this is enough to trace the unusual origin of the login, aiding on tracking bot accounts.
-Therefore it is not advisable to use this login helper, if you know how to effectively spoof the QTWebEngine user agent please let me know.  
-""")
-#time.sleep(10)
-#name = input("""Type an unique account name and SR will open for you to log in.
-#*WARNING* This "browser" doesn't support openGL so it may crash *WARNING*
-#Enter the unique account name you want to add: """
-#)
-name = "testestestestestste"
+Therefore it is not advisable to use this login helper, if you know how to effectively spoof the QTWebEngine user agent please let me know.""")
+time.sleep(10)
+name = input("""Type an unique account name and SR will open for you to log in.
+*WARNING* This "browser" doesn't support openGL so it may crash *WARNING*
+Enter the unique account name you want to add: """
+)
 accounts = open_file(constants.py_accounts)
 for account in accounts:
     if account["name"] == name or name == "" or name is None:
