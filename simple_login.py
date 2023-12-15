@@ -12,8 +12,6 @@ scapmpid = None
 scsession = None
 
 # Receive user input before creating the qapp
-print("This has not been implemented yet, at the moment the user agent can not be spoofed and thus the account origin can be easily detected.")
-#sys.exit()
 print("READ THIS WHILE YOU WAIT 10 SECONDS BEFORE PROCEEDING")
 print("""The user agent of this login helper can not be spoofed, your login will be identified as:
 Mozilla/5.0 (Macintosh; Intel Mac OS X 14_2_0) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.11 Chrome/87.0.4280.144 Safari/537.36

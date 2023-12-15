@@ -1,3 +1,4 @@
 PyQtWebEngine
 PyQt5
 selenium
+chromedriver_autoinstaller
