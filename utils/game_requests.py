@@ -27,6 +27,8 @@ def check_for_new_event():
     accounts = open_file(constants.py_accounts)
     userId = accounts[0]["userId"]
     token = accounts[0]["token"]
+    scapmpid = accounts[0]["scapmpid"]
+    scsession = accounts[0]["scsession"]
     user_agent = accounts[0]["user_agent"]
     proxy = accounts[0]["proxy"]
     proxy_user = accounts[0]["proxy_user"]
@@ -50,7 +52,6 @@ def check_for_new_event():
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     if has_proxy:
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
-
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
     
@@ -65,20 +66,33 @@ def check_for_new_event():
             return
 
         eventUid = data["eventUid"]
+        current_url = parsedResponse["info"]["dataPath"]
         if eventUid != current_event.current_event:
             with open("utils/current_event.py", "w") as file:
                 file.write('current_event = "' + eventUid + '"')
-            get_new_event_map()
+            print("New event has started. Checking map nodes, this may take a few seconds...")
+            get_new_event_map(current_url)
+        else:
+            get_new_event_map(current_url)
 
     else:
         print(f"Error: {response.status_code}")
 
 
-def get_new_event_map():
+def get_new_event_map(current_url):
     # Update mapIds
-    print("Getting map nodes for the new event, this may take a few seconds...")
-    print("Make sure your map node URL is up to date. They can change during mid-patches as well.")
-    response = requests.get(constants.map_nodes_url)
+    
+    config_json = open_file("variables.json")
+    old_url = config_json["map_node_url"]
+    if old_url == current_url:
+        print("Map nodes are already up to date")
+        return
+    else:
+        config_json["map_node_url"] = current_url
+        write_file("variables.json", config_json)
+        print("Map nodes have changed, fetching new map nodes...")
+    
+    response = requests.get(current_url)
     
     if response.status_code == 200:
         data_json = response.json()["sheets"]["MapNodes"]

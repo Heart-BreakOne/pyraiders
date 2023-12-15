@@ -17,15 +17,16 @@ from utils.create_accounts import create_account
 
 # Error interceptor
 def custom_exception_handler(exc_type, exc_value, exc_traceback):
-    # return
     print(
         f"Intercepted error: {exc_type.__name__}: {exc_value}\nTraceback: {exc_traceback}"
     )
 
 
 async def run():
+    
     # Cheap error handling
     sys.excepthook = custom_exception_handler
+    
     # Check if accounts file exist, if not create one.
     data = open_file(constants.py_accounts)
     if data is None:

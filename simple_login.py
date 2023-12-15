@@ -7,7 +7,9 @@ from PyQt5.QtWidgets import QApplication
 from helper_tools import perform_account_addition
 from utils import constants
 from utils.settings import open_file
-
+ACCESS_INFO = None
+scapmpid = None
+scsession = None
 
 # Receive user input before creating the qapp
 print("This has not been implemented yet, at the moment the user agent can not be spoofed and thus the account origin can be easily detected.")
@@ -32,11 +34,10 @@ for account in accounts:
 
 # Start qapp
 app = QApplication([])
-ACCESS_INFO = None
-scapmpid = None
-scsession = None
+
 # Captures cookie of interest and save to storage.
 def on_cookie_added(cookie):
+    global ACCESS_INFO, scapmpid, scsession
     cookie_name = cookie.name().data().decode()
     cookie_value = cookie.value().data().decode()
     if cookie_name == "ACCESS_INFO":
@@ -45,12 +46,11 @@ def on_cookie_added(cookie):
            scapmpid = cookie_value
     elif cookie_name == "scsession":
         scsession = cookie_value
-    if cookie_name != None and scapmpid != None and scsession != None:
+    if ACCESS_INFO != None and scapmpid != None and scsession != None:
         print("Adding account...")
         perform_account_addition(name, ACCESS_INFO, scapmpid, scsession)
-        print("Account added.")
         store.deleteAllCookies()
-        view.close()   
+        view.close()
 
 
 view = QWebEngineView()

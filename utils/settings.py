@@ -127,11 +127,12 @@ def clean_temp_times(accounts):
             ]
 
             account["temporary_ignore"] = temp_ignore_list
-            return accounts
 
         except Exception as e:
             print(e)
             sys.exit()
+            
+    return accounts
         
 
 #Remove accounts with duplicate user ids.

@@ -1,5 +1,6 @@
 # This is a command line helper
 
+import subprocess
 import sys, time
 from utils.game_requests import set_user_data
 from utils.settings import setup_accounts, write_file, open_file
@@ -46,24 +47,28 @@ def add_account():
 
 
 def change_priority():
-    # todo load list of units, print unit and unit id to the user.
     user_account = input(
         "Enter the account name or the account Id you want to change the unit priority for: "
     )
     accounts = open_file(constants.py_accounts)
-
+    account_found = False
     for account in accounts:
         if (
             account["name"] == user_account
             or account["userId"] == user_account
             or account["otherUserId"] == user_account
         ):
+            account_found = True
             for unit in account["units"]:
                 print(
                     f'UNIT ID: {unit["unitId"]}   Current priority: {unit["priority"]}.    Unit: {unit["unitType"]}. Level: {unit["level"]}. Specialization: {unit["specializationUid"]}'
                 )
+                
             break
-
+    if not account_found:
+        print("Please insert the name of the account you would like to change unit priority for.")
+        return
+        
     unit_id = input("Enter the unit id you want to change the priority for: ")
     priority = input("Enter the new unit priority: ")
 
@@ -187,6 +192,11 @@ def main():
         change_priority()
     elif command == "load_browser" or command == "l":
         load_browser()
+    elif command == "simple_login" or command == "s":
+        try:
+            subprocess.run([sys.executable, "simple_login.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error: {e}")
     else:
         print(f"Unknown command: {command} \n{usage}")
 

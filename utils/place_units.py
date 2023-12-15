@@ -23,6 +23,8 @@ async def place_unit_in_battlefield():
             if accs_quantity == 0:
                 return
             group_size = len(accounts) // 4
+            if group_size == 0:
+                group_size = 1
             groups = [
                 accounts[i : i + group_size]
                 for i in range(0, len(accounts), group_size)

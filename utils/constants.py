@@ -51,7 +51,6 @@ keys_to_remove = [
 
 regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
-map_nodes_url = "https://streamcap-prod1.s3.amazonaws.com/data/data.c3c17f3d17f7.json"
 
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -692,7 +691,8 @@ welcome_message = """
 *Once the file is set up, run main.py again.
 """
 
-welcome_banner = """    _________         _________
+welcome_banner = """ Did you know that the python isn't venomous? It just gives you a hug that is to die for...
+    _________         _________
    /         \       /         \\
   /  /~~~~~\  \\     /  /~~~~~\\  \\
   |  |     |  |     |  |     |  |
