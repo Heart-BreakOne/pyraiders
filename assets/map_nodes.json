@@ -19040,7 +19040,7 @@
     "Uid": "overworldmap25node_bot_3b"
   },
   "overworldmap25node_bot_4a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap25",
     "NodeConnections": "overworldmap25node_bot_5",
     "NodeType": "snowfallicefall05",
@@ -19061,7 +19061,7 @@
     "Uid": "overworldmap25node_bot_5"
   },
   "overworldmap25node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap25",
     "NodeConnections": "overworldmap25node_bot_extra,overworldmap25node_bot_boss",
     "NodeType": "snowfallicefall07",
@@ -19145,7 +19145,7 @@
     "Uid": "overworldmap25node_top_5"
   },
   "overworldmap25node_top_6a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap25",
     "NodeConnections": "overworldmap25node_top_7a",
     "NodeType": "snowfallicefall07",
@@ -19159,7 +19159,7 @@
     "Uid": "overworldmap25node_top_6b"
   },
   "overworldmap25node_top_7a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap25",
     "NodeConnections": "overworldmap25node_top_8",
     "NodeType": "snowfallicefall05",
@@ -19229,7 +19229,7 @@
     "Uid": "overworldmap26node_bot_3b"
   },
   "overworldmap26node_bot_4a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap26",
     "NodeConnections": "overworldmap26node_bot_5",
     "NodeType": "snowfallicecave03",
@@ -19250,7 +19250,7 @@
     "Uid": "overworldmap26node_bot_5"
   },
   "overworldmap26node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap26",
     "NodeConnections": "overworldmap26node_bot_boss,overworldmap26node_bot_extra",
     "NodeType": "snowfallicecave04",
@@ -19348,7 +19348,7 @@
     "Uid": "overworldmap26node_top_6b"
   },
   "overworldmap26node_top_7a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap26",
     "NodeConnections": "overworldmap26node_top_8",
     "NodeType": "snowfallicecave03",
@@ -19369,7 +19369,7 @@
     "Uid": "overworldmap26node_top_8"
   },
   "overworldmap26node_top_9a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap26",
     "NodeConnections": "overworldmap26node_top_boss",
     "NodeType": "snowfallicecave04",
@@ -19439,7 +19439,7 @@
     "Uid": "overworldmap27node_bot_5"
   },
   "overworldmap27node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap27",
     "NodeConnections": "overworldmap27node_bot_boss,overworldmap27node_bot_extra2",
     "NodeType": "snowfallicecave01",
@@ -19530,7 +19530,7 @@
     "Uid": "overworldmap27node_top_5"
   },
   "overworldmap27node_top_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap27",
     "NodeConnections": "overworldmap27node_top_7a",
     "NodeType": "snowfallicecave07",
@@ -19621,7 +19621,7 @@
     "Uid": "overworldmap28node_bot_3b"
   },
   "overworldmap28node_bot_4a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap28",
     "NodeConnections": "overworldmap28node_bot_5",
     "NodeType": "snowfallicecave04",
@@ -19642,7 +19642,7 @@
     "Uid": "overworldmap28node_bot_5"
   },
   "overworldmap28node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap28",
     "NodeConnections": "overworldmap28node_bot_extra,overworldmap28node_bot_boss",
     "NodeType": "snowfallicecave07",
@@ -19705,7 +19705,7 @@
     "Uid": "overworldmap28node_top_3"
   },
   "overworldmap28node_top_4a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap28",
     "NodeConnections": "overworldmap28node_top_5",
     "NodeType": "snowfallicecave05",
@@ -19740,7 +19740,7 @@
     "Uid": "overworldmap28node_top_6b"
   },
   "overworldmap28node_top_7a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap28",
     "NodeConnections": "overworldmap28node_top_8",
     "NodeType": "snowfallicecave07",
@@ -19803,7 +19803,7 @@
     "Uid": "overworldmap29node_bot_3a"
   },
   "overworldmap29node_bot_3b": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap29",
     "NodeConnections": "overworldmap29node_bot_4b",
     "NodeType": "snowfall01",
@@ -19831,7 +19831,7 @@
     "Uid": "overworldmap29node_bot_5"
   },
   "overworldmap29node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap29",
     "NodeConnections": "overworldmap29node_bot_boss,overworldmap29node_bot_extra",
     "NodeType": "snowfall04",
@@ -19929,7 +19929,7 @@
     "Uid": "overworldmap29node_top_6b"
   },
   "overworldmap29node_top_7a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap29",
     "NodeConnections": "overworldmap29node_top_8",
     "NodeType": "snowfall01",
@@ -19950,7 +19950,7 @@
     "Uid": "overworldmap29node_top_8"
   },
   "overworldmap29node_top_9a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap29",
     "NodeConnections": "overworldmap29node_top_boss",
     "NodeType": "snowfall03",
@@ -19999,7 +19999,7 @@
     "Uid": "overworldmap30node_bot_3b"
   },
   "overworldmap30node_bot_4a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap30",
     "NodeConnections": "overworldmap30node_bot_5",
     "NodeType": "snowfall04",
@@ -20020,7 +20020,7 @@
     "Uid": "overworldmap30node_bot_5"
   },
   "overworldmap30node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap30",
     "NodeConnections": "overworldmap30node_bot_boss,overworldmap30node_bot_extra",
     "NodeType": "snowfall09",
@@ -20104,7 +20104,7 @@
     "Uid": "overworldmap30node_top_5"
   },
   "overworldmap30node_top_6a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap30",
     "NodeConnections": "overworldmap30node_top_7a,overworldmap30node_top_extra",
     "NodeType": "snowfall04",
@@ -20139,7 +20139,7 @@
     "Uid": "overworldmap30node_top_8"
   },
   "overworldmap30node_top_9a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap30",
     "NodeConnections": "overworldmap30node_top_boss",
     "NodeType": "snowfall06",
@@ -20195,7 +20195,7 @@
     "Uid": "overworldmap31node_bot_3b"
   },
   "overworldmap31node_bot_4a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap31",
     "NodeConnections": "overworldmap31node_bot_5",
     "NodeType": "snowfall10",
@@ -20216,7 +20216,7 @@
     "Uid": "overworldmap31node_bot_5"
   },
   "overworldmap31node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap31",
     "NodeConnections": "overworldmap31node_bot_extra,overworldmap31node_bot_boss",
     "NodeType": "snowfall11",
@@ -20314,7 +20314,7 @@
     "Uid": "overworldmap31node_top_6b"
   },
   "overworldmap31node_top_7a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap31",
     "NodeConnections": "overworldmap31node_top_8",
     "NodeType": "snowfall09",
@@ -20335,7 +20335,7 @@
     "Uid": "overworldmap31node_top_8"
   },
   "overworldmap31node_top_9a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap31",
     "NodeConnections": "overworldmap31node_top_boss",
     "NodeType": "snowfall10",
@@ -20384,7 +20384,7 @@
     "Uid": "overworldmap32node_bot_3b"
   },
   "overworldmap32node_bot_4a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap32",
     "NodeConnections": "overworldmap32node_bot_5",
     "NodeType": "snowfall14",
@@ -20405,7 +20405,7 @@
     "Uid": "overworldmap32node_bot_5"
   },
   "overworldmap32node_bot_6a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap32",
     "NodeConnections": "overworldmap32node_bot_boss,overworldmap32node_bot_extra",
     "NodeType": "snowfall12",
@@ -20503,7 +20503,7 @@
     "Uid": "overworldmap32node_top_6b"
   },
   "overworldmap32node_top_7a": {
-    "ChestType": "chestboostedgold",
+    "ChestType": "chestgold",
     "MapId": "overworldmap32",
     "NodeConnections": "overworldmap32node_top_8",
     "NodeType": "snowfall12",
@@ -20524,7 +20524,7 @@
     "Uid": "overworldmap32node_top_8"
   },
   "overworldmap32node_top_9a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap32",
     "NodeConnections": "overworldmap32node_top_boss",
     "NodeType": "snowfall13",
@@ -20580,7 +20580,7 @@
     "Uid": "overworldmap33node_bot_3b"
   },
   "overworldmap33node_bot_4a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap33",
     "NodeConnections": "overworldmap33node_bot_5",
     "NodeType": "snowfall13",
@@ -20601,7 +20601,7 @@
     "Uid": "overworldmap33node_bot_5"
   },
   "overworldmap33node_bot_6a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap33",
     "NodeConnections": "overworldmap33node_bot_boss,overworldmap33node_bot_extra",
     "NodeType": "snowfallboss2end",
@@ -20664,7 +20664,7 @@
     "Uid": "overworldmap33node_top_3"
   },
   "overworldmap33node_top_4a": {
-    "ChestType": "chestboostedtoken",
+    "ChestType": "chestgold",
     "MapId": "overworldmap33",
     "NodeConnections": "overworldmap33node_top_5",
     "NodeType": "snowfall10",
@@ -20699,7 +20699,7 @@
     "Uid": "overworldmap33node_top_6b"
   },
   "overworldmap33node_top_7a": {
-    "ChestType": "chestboostedskin_maps23to33",
+    "ChestType": "chestgold",
     "MapId": "overworldmap33",
     "NodeConnections": "overworldmap33node_top_8",
     "NodeType": "snowfall08",

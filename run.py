@@ -21,7 +21,7 @@ async def run():
     if data is None:
         create_account()
         return
-    print("Starting up.")
+    print("Starting up...")
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
     
@@ -37,12 +37,12 @@ async def run():
     
     # Write changes to storage
     write_file(constants.py_accounts, data)
-
+    
     print("Checking current event...")
     # Check if there's a new event and get new map nodes
     check_for_new_event()
 
-    print("Running start up tasks...")
+    print("Running start up tasks once...")
     # Start up dummy requests here
     asyncio.create_task(start_up_requests())
 
@@ -62,6 +62,8 @@ async def run():
     asyncio_thread = threading.Thread(target=lambda: asyncio.run(place_unit_in_battlefield()))
     asyncio_thread.start()
     print("Unit placement manager has started.")
+    
+    print("All tasks performed.")
     
     while True:
         await asyncio.sleep(1)

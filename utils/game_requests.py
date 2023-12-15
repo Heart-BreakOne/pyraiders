@@ -77,10 +77,8 @@ def check_for_new_event():
 def get_new_event_map():
     # Update mapIds
     print("Getting map nodes for the new event, this may take a few seconds...")
+    print("Make sure your map node URL is up to date. They can change during mid-patches as well.")
     response = requests.get(constants.map_nodes_url)
-    has_error = handle_error_response(response)  
-    if has_error:
-        return
     
     if response.status_code == 200:
         data_json = response.json()["sheets"]["MapNodes"]

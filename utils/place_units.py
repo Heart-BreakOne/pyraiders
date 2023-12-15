@@ -1,5 +1,4 @@
 import asyncio
-import threading
 import time
 from datetime import datetime
 from utils import constants
@@ -35,9 +34,9 @@ async def place_unit_in_battlefield():
             print(f"An error occurred: {e}")
         finally:
             await asyncio.get_event_loop().run_in_executor(None, time.sleep, 10)
-            print(datetime.now())
             is_running = False
             print("Placed all possible units")
+            print(datetime.now())
 
 
 # Split the groups into tasks so they can be run simultaneously
@@ -52,8 +51,7 @@ async def process_groups(groups):
 
 # Process the accounts in groups. The task handler ensure they run simultaneously
 async def process_group(group):
-    print(f"Processing group")
-
+    
     for account in group:
         user_id = account["userId"]
         token = account["token"]
@@ -65,5 +63,14 @@ async def process_group(group):
         raids = getActiveraids(
             user_id, token, user_agent, proxy, proxy_user, proxy_password
         )
+        #Check that raid response was received
+        if raid == None:
+            continue
+        
         for raid in raids:
+            #Check if raid captain is on blocklist and skip
+            
+            #Check loyalty preservation
+            
+            #Check raid type and check if user wants to keep place one or more or not.
             print(raid)
