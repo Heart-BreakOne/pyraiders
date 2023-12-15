@@ -1,5 +1,6 @@
 import json, random
 from datetime import datetime, timedelta
+import sys
 from utils import constants
 
 
@@ -106,25 +107,32 @@ def add_temporary_ignore(user_id, captain_name):
 def clean_temp_times(accounts):
     for account in accounts:
         temp_ignore_list = account["temporary_ignore"]
-
+        
+        #Remove missing and empty values.
         try:
+            temp_ignore_list = [entry for entry in temp_ignore_list if entry.get("time")]
             temp_ignore_times = [
                 datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
                 for entry in temp_ignore_list
             ]
-        except:
-            continue
-        time = datetime.utcnow()
-        current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-        threshold_time = timedelta(minutes=30)
-        temp_ignore_list = [
-            entry
-            for entry, time_entry in zip(temp_ignore_list, temp_ignore_times)
-            if current_time - time_entry < threshold_time
-        ]
-        account["temporary_ignore"] = temp_ignore_list
+    
+            time = datetime.utcnow()
+            current_time = datetime.strptime(time.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")
 
-    return accounts
+            threshold_time = timedelta(minutes=30)
+            temp_ignore_list = [
+                entry
+                for entry, time_entry in zip(temp_ignore_list, temp_ignore_times)
+                if current_time - time_entry < threshold_time
+            ]
+
+            account["temporary_ignore"] = temp_ignore_list
+            return accounts
+
+        except Exception as e:
+            print(e)
+            sys.exit()
+        
 
 #Remove accounts with duplicate user ids.
 def remove_duplicate_ids(accounts):

@@ -33,7 +33,7 @@ async def place_unit_in_battlefield():
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
-            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 10)
+            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 5)
             is_running = False
             print("Placed all possible units")
             print(datetime.now())
@@ -51,7 +51,6 @@ async def process_groups(groups):
 
 # Process the accounts in groups. The task handler ensure they run simultaneously
 async def process_group(group):
-    
     for account in group:
         user_id = account["userId"]
         token = account["token"]
@@ -63,14 +62,49 @@ async def process_group(group):
         raids = getActiveraids(
             user_id, token, user_agent, proxy, proxy_user, proxy_password
         )
-        #Check that raid response was received
-        if raid == None:
+
+        # Check if raid response was properly received
+        if raids == None:
             continue
-        
+        """
         for raid in raids:
-            #Check if raid captain is on blocklist and skip
             
-            #Check loyalty preservation
+            # Check if raid is over to collect rewards
             
-            #Check raid type and check if user wants to keep place one or more or not.
-            print(raid)
+            
+            # Check if there are any raids in active placement as everything from this point on would be a waste of resources.
+            
+            
+            #check if account is on active mode
+            "powered_on": true,
+            
+            
+            # Check if raid captain is on blocklist and skip (Redudancy check since the slot script is supposed to skip blocklisted captains)
+            
+            
+            # Check loyalty preservation
+            "preserve_loyalty": 0,
+            "switch_if_preserve_loyalty": false,
+            
+            # Check raid type, check if an unit was placed, check if the user wants more units.
+            "unlimited_campaign": false,
+            "unlimited_clash": false,
+            "unlimited_duels": false,
+            "unlimited_dungeons": false,
+            
+            # Check if it is time and if there is time to place an unit
+            
+            
+            # update units cooldown
+            
+            
+            #cry and calculate placement using magic
+            
+            
+            #get available unit that is highest on the list
+            
+            
+            #Place the unit
+            #print(raid)
+            pass
+        """

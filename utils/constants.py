@@ -13,8 +13,9 @@ default_entry = [
         "switch_if_preserve_loyalty": False,
         "switch_on_idle": True,
         "minimum_idle_time": 15,
-        "unlimited_campaign": True,
-        "unlimited_pvp": True,
+        "unlimited_campaign": False,
+        "unlimited_clash": False,
+        "unlimited_duels": False,
         "unlimited_dungeons": False,
         "any_captain": True,
         "only_masterlist": False,
@@ -690,3 +691,21 @@ welcome_message = """
 *Duplicate user agents and proxies will be automatically replaced, you can manually edit if you have issues with faulty ones, but make sure they are not duplicates.
 *Once the file is set up, run main.py again.
 """
+
+welcome_banner = """    _________         _________
+   /         \       /         \\
+  /  /~~~~~\  \\     /  /~~~~~\\  \\
+  |  |     |  |     |  |     |  |
+  |  |     |  |     |  |     |  |         /
+  |  |     |  |     |  |     |  |       //
+ (o  o)    \\  \\_____/  /     \\  \\_____/
+  \\__/      \\         /       \\        /
+   |         ~~~~~~~~~         ~~~~~~~~
+   ^
+  ######        ######
+  #     #       #     #                                
+  #     # #   # #     #  # #   # #####  ###### #####   ####
+  ######   # #  ######  #   #  # #    # #      #    # #
+  #         #   #   #   #####  # #    # #####  #####   ####    
+  #         #   #    #  #   #  # #    # #      #   #       #
+  #         #   #     # #   #  # #####  ###### #    #  ####"""
