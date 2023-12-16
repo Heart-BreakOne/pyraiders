@@ -154,6 +154,13 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
             nodeId = raid["nodeId"]
             type = raid["type"]
             battleground = raid["battleground"]
+            hasViewedResults = raid["hasViewedResults"]
+            chestAwarded = raid["chestAwarded"]
+            battleResult = raid["battleResult"]
+            rewards = raid["rewards"]
+            postBattleComplete = raid["postBattleComplete"]
+            hasRecievedRewards = raid["hasRecievedRewards"]
+            
 
             activeRaids.append(
                 {
@@ -169,6 +176,12 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
                     "nodeId": nodeId,
                     "type": type,
                     "battleground": battleground,
+                    "hasViewedResults": hasViewedResults,
+                    "chestAwarded": chestAwarded,
+                    "battleResult": battleResult,
+                    "rewards": rewards,
+                    "postBattleComplete": postBattleComplete,
+                    "hasRecievedRewards": hasRecievedRewards
                 }
             )
         return activeRaids

@@ -49,6 +49,13 @@ keys_to_remove = [
     "OnWinDialog",
 ]
 
+type_dict = {
+    "1": "unlimited_campaign",
+    "2": "unlimited_clash",
+    "5": "unlimited_duels",
+    "3": "unlimited_dungeons",
+}
+
 regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
 

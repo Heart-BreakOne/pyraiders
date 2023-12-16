@@ -1,4 +1,5 @@
 import asyncio
+import time
 import requests
 from utils import constants, current_event
 from requests.auth import HTTPProxyAuth
@@ -375,3 +376,22 @@ def update_unit_cooldown():
                         break
                 
         write_file(constants.py_accounts, accounts)
+        
+        
+def collect_raid_rewards(name, cap_nm, user_id, raid_id, token, user_agent, proxy, proxy_user, proxy_password, version, data_version):
+    url = (
+        constants.gameDataURL + "?cn=getRaidStatsByUser&userId=" + user_id + "&isCaptain=0&gameDataVersion=" + data_version + "&command=getRaidStatsByUser&raidId=" + raid_id + "&clientVersion=" + version + "&clientPlatform=WebGL"
+    )
+
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    if has_proxy:
+        response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+    else:
+        response = requests.get(url, proxies=proxies, headers=headers)
+    
+    has_error = handle_error_response(response)  
+    if not has_error:
+
+        print(f"Account: {name}: Chest/savage collected on captain: {cap_nm}")
+        time.sleep(5)
