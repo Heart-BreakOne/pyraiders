@@ -2,7 +2,7 @@ import asyncio, requests
 import random
 from datetime import datetime, timedelta
 from utils.response_handler import handle_error_response
-from utils.time_generator import get_four_quarters, get_quarter
+from utils.time_generator import get_quarter
 from utils.settings import open_file, write_file
 from utils.game_requests import (
     get_request_strings,

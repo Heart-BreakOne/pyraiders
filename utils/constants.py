@@ -36,9 +36,9 @@ default_entry = [
         "units": "",
     }
 ]
-
+#"https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
 mapPlacements = (
-    "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
+    "https://d1vngzyege2qd5.cloudfront.net/prod1/"
 )
 py_accounts = "pyraiders_accounts.json"
 keys_to_remove = [

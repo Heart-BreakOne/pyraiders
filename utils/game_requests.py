@@ -1,4 +1,3 @@
-import asyncio
 import time
 import requests
 from utils import constants, current_event
@@ -28,8 +27,6 @@ def check_for_new_event():
     accounts = open_file(constants.py_accounts)
     userId = accounts[0]["userId"]
     token = accounts[0]["token"]
-    scapmpid = accounts[0]["scapmpid"]
-    scsession = accounts[0]["scsession"]
     user_agent = accounts[0]["user_agent"]
     proxy = accounts[0]["proxy"]
     proxy_user = accounts[0]["proxy_user"]

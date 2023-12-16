@@ -3,9 +3,9 @@ import time
 from datetime import datetime, timedelta
 from utils import constants
 from utils.game_requests import collect_raid_rewards, get_game_data, leave_captain, update_unit_cooldown
+from utils.placement_handler import calculate_placement
 from utils.settings import open_file
 from utils.player import getActiveraids
-from utils.time_generator import placement_minimum
 
 
 async def place_unit_in_battlefield():
@@ -36,7 +36,7 @@ async def place_unit_in_battlefield():
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
-            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 5)
+            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 3)
             is_running = False
             print("Placed all possible units")
             print(datetime.now())
@@ -182,7 +182,8 @@ async def process_group(group):
             update_unit_cooldown()
             
             #cry and calculate placement using magic
-            print("Green light to finally place units")
+            url = constants.mapPlacements + raid["battleground"] + ".txt"
+            calculate_placement(url)
             
             #get available unit that is highest on the list
             
