@@ -136,7 +136,7 @@ def load_browser():
     if ACCESS_INFO is not None:
         try:
             chrome_options = Options()
-            driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome(executable_path=constants.chrome_driver_path, options=chrome_options)
             driver.get("https://www.streamraiders.com")
             driver.add_cookie(
                 {
@@ -171,7 +171,6 @@ def load_browser():
             except KeyboardInterrupt:
                 driver.quit()
                 sys.exit()
-                pass
         except Exception as e:
             print(e)
         finally:

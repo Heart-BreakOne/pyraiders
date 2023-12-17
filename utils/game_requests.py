@@ -98,6 +98,8 @@ def get_new_event_map(current_url):
             for key in constants.keys_to_remove:
                 entry.pop(key, None)
         write_file(constants.map_nodes_path, data_json)
+        
+        #Grab other assets in here
         print("\nMap nodes updated successfully.\n")
     else:
         print(f"\nError: {response.status_code}")
