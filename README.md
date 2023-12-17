@@ -36,6 +36,7 @@ PyQt, QtWebEngine and selenium.
         "proxy": "",
         "proxy_user": "",
         "proxy_password": "",
+        "use_potions": false,
         "has_pass": false,
         "userId": "",
         "otherUserId": "",

@@ -27,6 +27,7 @@ default_entry = [
         "proxy": "",
         "proxy_user": "",
         "proxy_password": "",
+        "user_potions": False,
         "has_pass": False,
         "userId": "",
         "otherUserId": "",
@@ -40,6 +41,7 @@ default_entry = [
 mapPlacements = (
     "https://d1vngzyege2qd5.cloudfront.net/prod1/"
 )
+
 py_accounts = "pyraiders_accounts.json"
 keys_to_remove = [
     "NodeDifficulty",

@@ -2,7 +2,12 @@ import asyncio
 import time
 from datetime import datetime, timedelta
 from utils import constants
-from utils.game_requests import collect_raid_rewards, get_game_data, leave_captain, update_unit_cooldown
+from utils.game_requests import (
+    collect_raid_rewards,
+    get_game_data,
+    leave_captain,
+    update_unit_cooldown,
+)
 from utils.placement_handler import calculate_placement
 from utils.settings import open_file
 from utils.player import getActiveraids
@@ -36,7 +41,7 @@ async def place_unit_in_battlefield():
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
-            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 3)
+            await asyncio.get_event_loop().run_in_executor(None, time.sleep, 10)
             is_running = False
             print("Placed all possible units")
             print(datetime.now())
@@ -54,12 +59,12 @@ async def process_groups(groups):
 
 # Process the accounts in groups. The task handler ensure they run simultaneously
 async def process_group(group):
-    
     for account in group:
-        #Check if account is enabled
+        
+        # Check if account is enabled
         if not account["powered_on"]:
             continue
-        name = account["name"]    
+        name = account["name"]
         user_id = account["userId"]
         token = account["token"]
         user_agent = account["user_agent"]
@@ -83,9 +88,25 @@ async def process_group(group):
             cap_nm = raid["twitchUserName"]
             cap_id = raid["captainId"]
             # Check if raid is over to collect rewards #also check rewards was not collected already
-            if raid["hasRecievedRewards"] == "0" and raid["postBattleComplete"] == "1" and raid["hasViewedResults"] == "0":
+            if (
+                raid["hasRecievedRewards"] == "0"
+                and raid["postBattleComplete"] == "1"
+                and raid["hasViewedResults"] == "0"
+            ):
                 # Raid is complete, collect rewards and return so the battle is checked on the next loop
-                collect_raid_rewards(name, cap_nm, user_id, raid_id, token, user_agent, proxy, proxy_user, proxy_password, version, data_version)
+                collect_raid_rewards(
+                    name,
+                    cap_nm,
+                    user_id,
+                    raid_id,
+                    token,
+                    user_agent,
+                    proxy,
+                    proxy_user,
+                    proxy_password,
+                    version,
+                    data_version,
+                )
                 continue
 
             # Check if raid is in active placement as everything from this point on would be a waste of resources.
@@ -108,17 +129,16 @@ async def process_group(group):
                 if time_difference > timedelta(minutes=5, seconds=55):
                     continue
 
-
             # Check if raid captain is on blocklist and skip (Redudancy check since the slot script is supposed to skip blocklisted captains)
             blocklist = account["blocklist"]
             if raid["twitchUserName"].upper() in map(str.upper, blocklist):
                 continue
-            
-            #Check if it's campaign and if user wants to preserver loyalty.
+
+            # Check if it's campaign and if user wants to preserver loyalty.
             if account["preserve_loyalty"] != 0 and raid_type == "1":
                 mapLoyalty = raid["pveLoyaltyLevel"]
                 loyal = account["preserve_loyalty"]
-                #Check if map loyalty is bigger than the.
+                # Check if map loyalty is bigger than the.
                 if loyal < mapLoyalty:
                     current_map_node = raid["nodeId"]
                     map_nodes = open_file("assets/map_nodes")
@@ -128,11 +148,20 @@ async def process_group(group):
                         chests = constants.regular_chests
                         if chest_type not in chests:
                             if account["switch_if_preserve_loyalty"]:
-                                leave_captain(cap_id, cap_nm, user_id, token, user_agent, proxy, proxy_user, proxy_password)
+                                leave_captain(
+                                    cap_id,
+                                    cap_nm,
+                                    user_id,
+                                    token,
+                                    user_agent,
+                                    proxy,
+                                    proxy_user,
+                                    proxy_password,
+                                )
                                 continue
                             else:
                                 continue
-            
+
             # Check if it is time and if there is time to place an unit
             now = datetime.utcnow()
             last = raid["lastUnitPlacedTime"]
@@ -140,54 +169,112 @@ async def process_group(group):
                 datetime.strptime(last, "%Y-%m-%d %H:%M:%S")
                 if raid["lastUnitPlacedTime"]
                 else None
-                )
-            
+            )
+
             if raid_type == "1":
                 # Campaign
-                time_since_creation = now - creation_time if creation_time else timedelta(0)
-                time_since_previous_placement = now - previous_placement if previous_placement else timedelta(minutes=6)
+                time_since_creation = (
+                    now - creation_time if creation_time else timedelta(0)
+                )
+                time_since_previous_placement = (
+                    now - previous_placement
+                    if previous_placement
+                    else timedelta(minutes=6)
+                )
                 if (
-                    time_since_creation <= timedelta(minutes=1, seconds=30) or
-                    time_since_creation > timedelta(minutes=29, seconds=55) or
-                    time_since_previous_placement < timedelta(minutes=5)
+                    time_since_creation <= timedelta(minutes=1, seconds=30)
+                    or time_since_creation > timedelta(minutes=29, seconds=55)
+                    or time_since_previous_placement < timedelta(minutes=5)
                 ):
                     continue
             elif raid_type == "2" or raid_type == "5":
-                time_since_creation = now - creation_time if creation_time else timedelta(0)
-                time_since_previous_placement = now - previous_placement if previous_placement else timedelta(minutes=2)
+                time_since_creation = (
+                    now - creation_time if creation_time else timedelta(0)
+                )
+                time_since_previous_placement = (
+                    now - previous_placement
+                    if previous_placement
+                    else timedelta(minutes=2)
+                )
                 if (
-                    time_since_creation <= timedelta(minutes=1, seconds=5) or
-                    time_since_creation > timedelta(minutes=6, seconds=55) or
-                    time_since_previous_placement < timedelta(minutes=2, seconds=00)
+                    time_since_creation <= timedelta(minutes=1, seconds=5)
+                    or time_since_creation > timedelta(minutes=6, seconds=55)
+                    or time_since_previous_placement < timedelta(minutes=2, seconds=00)
                 ):
                     continue
             elif raid_type == "3":
                 # Dungeons
-                time_since_creation = now - creation_time if creation_time else timedelta(0)
-                time_since_previous_placement = now - previous_placement if previous_placement else timedelta(minutes=2)
+                time_since_creation = (
+                    now - creation_time if creation_time else timedelta(0)
+                )
+                time_since_previous_placement = (
+                    now - previous_placement
+                    if previous_placement
+                    else timedelta(minutes=2)
+                )
                 if (
-                    time_since_creation <= timedelta(minutes=1, seconds=5) or
-                    time_since_creation > timedelta(minutes=5, seconds=55) or
-                    time_since_previous_placement < timedelta(minutes=1, seconds=40)
+                    time_since_creation <= timedelta(minutes=1, seconds=5)
+                    or time_since_creation > timedelta(minutes=5, seconds=55)
+                    or time_since_previous_placement < timedelta(minutes=1, seconds=40)
                 ):
                     continue
-            
-            
+
             # Check raid type, check if an unit was placed, check if the user wants more units.
             un_key = constants.type_dict.get(raid_type)
             if last is not None and un_key is not None and account[un_key]:
                 continue
-            
+
             # update units cooldown
             update_unit_cooldown()
-            
-            #cry and calculate placement using magic
-            url = constants.mapPlacements + raid["battleground"] + ".txt"
-            calculate_placement(url)
-            
-            #get available unit that is highest on the list
-            
-            
-            #Place the unit
-            #print(raid)
+
+            # Check if there are units available in order to save resources
+            units = check_unit_availability(name)
+            if not units:
+                continue
+
+            # cry and calculate placement using magic
+            calculate_placement(
+                raid,
+                raid_id,
+                name,
+                user_id,
+                token,
+                user_agent,
+                proxy,
+                proxy_user,
+                proxy_password,
+                version,
+                data_version,
+            )
+
+            # Place the unit
+            # print(raid)
             pass
+
+
+# Check if unit has priority and if it's out of cooldown.
+def check_unit_availability(name):
+    units = []
+    accounts = open_file(constants.py_accounts)
+    for account in accounts:
+        if account["name"] == name:
+            user_units = account["units"]
+            break
+    for unit in user_units:
+        if unit["priority"] == 0:
+            continue
+        now = datetime.utcnow()
+        cooldown_str = unit["cooldownTime"]
+        if cooldown_str == None:
+            cooldown = now - timedelta(minutes=5)
+        else:
+            cooldown = datetime.strptime(cooldown_str, "%Y-%m-%d %H:%M:%S")
+        if cooldown > now:
+            continue
+        else:
+            units.append(unit)
+
+    # Sort units based on their "priority" value in ascending order
+    units.sort(key=lambda x: x["priority"])
+
+    return units
