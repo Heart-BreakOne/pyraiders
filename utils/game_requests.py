@@ -100,6 +100,9 @@ def get_new_event_map(current_url):
         write_file(constants.map_nodes_path, data_json)
         
         #Grab other assets in here
+        units_json = response.json()["sheets"]["Units"]
+        write_file(constants.map_units_path, units_json)
+        
         print("\nMap nodes updated successfully.\n")
     else:
         print(f"\nError: {response.status_code}")

@@ -7,6 +7,7 @@ from utils.settings import setup_accounts, write_file, open_file
 from utils import constants
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 
 usage = "Usage: python3 helper_tools.py <command>\nCommands:\nadd_account or a\nchange_priority or c\nload_browser or l"
@@ -135,8 +136,10 @@ def load_browser():
 
     if ACCESS_INFO is not None:
         try:
+            service = Service(constants.chrome_driver_path)
             chrome_options = Options()
-            driver = webdriver.Chrome(executable_path=constants.chrome_driver_path, options=chrome_options)
+            
+            driver = webdriver.Chrome(options=chrome_options, service=service)
             driver.get("https://www.streamraiders.com")
             driver.add_cookie(
                 {

@@ -62,7 +62,7 @@ type_dict = {
 
 regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
-map_objects_path = "assets/map_objects.json"
+map_units_path = "assets/map_units.json"
 
 
 user_agents = [
