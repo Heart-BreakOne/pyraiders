@@ -1,3 +1,5 @@
+from datetime import datetime
+import time
 import requests
 
 import matplotlib
@@ -104,7 +106,7 @@ def calculate_placement(
     all_units = h_units + ai_units
     map_units = open_file(constants.map_units_path)
     cap_coors = []
-    
+
     for unit in all_units:
         
         unit_name = unit["CharacterType"]
@@ -115,7 +117,8 @@ def calculate_placement(
                 cube_dimension = units["Size"]
                 unit["IsEpic"] = is_epic
                 if is_epic:
-                    cube_dimension = cube_dimension * 2
+                    pass
+                    #cube_dimension = cube_dimension * 2
                     
                 unit["width"] = cube_dimension
                 unit["height"] = cube_dimension
@@ -125,16 +128,26 @@ def calculate_placement(
             # Modify keys in ai_unit
         unit["x"] = unit.pop("X")
         unit["y"] = unit.pop("Y")
-                    
+       
     # Draw imaginary map
     # Map tiles
-    
+
     viewer_zones = MapData["PlayerPlacementRects"]
     purple_zones = MapData["HoldingZoneRects"]
     ally_zones = MapData["AllyPlacementRects"]
     enemy_zones = MapData["EnemyPlacementRects"]
     neutral_zones = MapData["NeutralPlacementRects"]
+
     
+    # all_unit + purple_zones + ally_zones + enemy_zones + neutral_zones
+    f_viewer = filter_zones(viewer_zones, all_units + purple_zones + ally_zones + enemy_zones + neutral_zones)
+    f_ally = filter_zones(all_units, ally_zones + purple_zones + viewer_zones + enemy_zones + neutral_zones)
+    print(f_viewer)
+    
+    print(f_ally)
+    output_plot(cap_nm, f_viewer)
+    output_plot(cap_nm, f_ally)
+    time.sleep(120)
     pass
 
 
@@ -207,7 +220,7 @@ def output_plot(cap_nm, rf_viewer_zones):
     # Set axis labels
     ax.set_xlabel("Longitude")
     ax.set_ylabel("Latitude")
-
+    now = datetime.utcnow()
     # Save the plot to a file instead of showing it
-    plt.savefig(f"{cap_nm}_output_plot.png")
+    plt.savefig(f"{cap_nm}_output_plot_{now}.png")
     plt.close()
