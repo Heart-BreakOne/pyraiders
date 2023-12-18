@@ -1,8 +1,19 @@
 # Constants file
 
+# The path is where the chromedriver.exe is, but without the .exe at the end.
+# Example: chrome_driver_path = "C:\\Users\\user_name\\Desktop\\pyraiders-main\\chromedriver"
 chrome_driver_path = ""
 
 gameDataURL = "https://www.streamraiders.com/api/game/"
+
+# "https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
+mapPlacements = "https://d1vngzyege2qd5.cloudfront.net/prod1/"
+
+regular_chests = ["chestbronze", "chestsilver", "chestgold"]
+map_nodes_path = "assets/map_nodes.json"
+map_units_path = "assets/map_units.json"
+obstacles_path = "assets/obstacles.json"
+
 
 default_entry = [
     {
@@ -39,10 +50,6 @@ default_entry = [
         "units": "",
     }
 ]
-#"https://d1vngzyege2qd5.cloudfront.net/prod1/od/${captainId}-${battleGroundId}.txt"
-mapPlacements = (
-    "https://d1vngzyege2qd5.cloudfront.net/prod1/"
-)
 
 py_accounts = "pyraiders_accounts.json"
 keys_to_remove = [
@@ -53,17 +60,77 @@ keys_to_remove = [
     "OnWinDialog",
 ]
 
+units_keys_rm = [
+    "raidPlacementsId",
+    "userId",
+    "skin",
+    "unitId",
+    "specializationUid",
+    "onPlanIcon",
+    "isSpell",
+    "stackRaidPlacementsId",
+]
+unit_values_rm = [
+    "AttackRate",
+    "AttackType",
+    "BaseAction",
+    "BaseActionSelfVfxUid",
+    "Damage",
+    "DamageDelay",
+    "Description",
+    "DisplayName",
+    "EffectiveCircleDataUid",
+    "ExtraHitSize",
+    "HP",
+    "Heal",
+    "IsFlying",
+    "Level",
+    "OnDeathAction",
+    "OnDeathActionSelfVfxUid",
+    "OnDefeatAction",
+    "OnKillAction",
+    "PassThroughList",
+    "PlacementVFX",
+    "Level",
+    "OnDeathAction",
+    "OnDeathActionSelfVfxUid",
+    "OnDefeatAction",
+    "OnKillAction",
+    "PassThroughList",
+    "PlacementVFX",
+    "Power",
+    "ProjectileUid",
+    "Range",
+    "Rarity",
+    "RemainsAsset",
+    "Role",
+    "ShowTeamIndicator",
+    "SpecialAbilityActionUid",
+    "SpecialAbilityDescription",
+    "SpecialAbilityRate",
+    "SpecialAbilitySelfVfxUid",
+    "Speed",
+    "StartBuffsList",
+    "StrongAgainstTagsList",
+    "TagsList",
+    "TargetPriorityTagsList",
+    "TargetTeam",
+    "TargetingPriorityRange",
+    "Triggers",
+    "Uid",
+    "UnitTargetingType",
+    "UnitType",
+    "UpgradeCurrencyType",
+    "WeakAgainstTagsList",
+]
+
+
 type_dict = {
     "1": "unlimited_campaign",
     "2": "unlimited_clash",
     "5": "unlimited_duels",
     "3": "unlimited_dungeons",
 }
-
-regular_chests = ["chestbronze", "chestsilver", "chestgold"]
-map_nodes_path = "assets/map_nodes.json"
-map_units_path = "assets/map_units.json"
-
 
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",

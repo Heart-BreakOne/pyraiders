@@ -9,6 +9,7 @@ pyraiders_accounts.json
 .DS_Store
 *.tm_build_errors
 build/*
+*.png
 *.tm_build_errors
 **/xcshareddata/WorkspaceSettings.xcsettings
 xcschememanagement.plist

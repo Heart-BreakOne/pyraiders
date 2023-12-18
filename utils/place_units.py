@@ -234,8 +234,10 @@ async def process_group(group):
 
             # cry and calculate placement using magic
             calculate_placement(
+                cap_id,
                 raid,
                 raid_id,
+                cap_nm,
                 name,
                 user_id,
                 token,

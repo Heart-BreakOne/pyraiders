@@ -1,17 +1,21 @@
 import requests
-from shapely.geometry import box, Polygon
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from shapely.geometry import box, Polygon
 from shapely.geometry.collection import GeometryCollection
+
 from utils import constants
+from utils.settings import open_file
 from utils.game_requests import get_proxy_auth, get_request_strings
 
 
 def calculate_placement(
+    cap_id,
     raid,
     raid_id,
+    cap_nm,
     name,
     user_id,
     token,
@@ -91,40 +95,57 @@ def calculate_placement(
     # print("\n")
 
     ## Logic based on projectbots
+    # Have no clue how to get the dimensions of some of the sprites.
+    # obstacles_coors = MapData["ObstaclePlacementData"]
+
+    # Units, allies, neutrals across the map
+    h_units = getRaid["data"]["placements"]
+    ai_units = MapData["PlacementData"]
+    all_units = h_units + ai_units
+    map_units = open_file(constants.map_units_path)
+    cap_coors = []
+    
+    for unit in all_units:
+        
+        unit_name = unit["CharacterType"]
+    
+        for key, units in map_units.items():
+            if key == unit_name:
+                is_epic = units["IsEpic"]
+                cube_dimension = units["Size"]
+                unit["IsEpic"] = is_epic
+                if is_epic:
+                    cube_dimension = cube_dimension * 2
+                    
+                unit["width"] = cube_dimension
+                unit["height"] = cube_dimension
+                if unit["userId"] == cap_id:
+                    cap_coors = [unit["X"], unit["Y"]]
+                break
+            # Modify keys in ai_unit
+        unit["x"] = unit.pop("X")
+        unit["y"] = unit.pop("Y")
+                    
     # Draw imaginary map
     # Map tiles
+    
     viewer_zones = MapData["PlayerPlacementRects"]
     purple_zones = MapData["HoldingZoneRects"]
     ally_zones = MapData["AllyPlacementRects"]
     enemy_zones = MapData["EnemyPlacementRects"]
     neutral_zones = MapData["NeutralPlacementRects"]
-
-    intersecting_zones = ally_zones + enemy_zones + neutral_zones
-
-    f_viewer_zones = filter_zones(viewer_zones, intersecting_zones)
-    f_purple_zones = filter_zones(purple_zones, intersecting_zones)
-
-    rf_viewer_zones = filter_zones(viewer_zones, purple_zones) or (
-        f_viewer_zones + f_purple_zones
-    )
-    #Output the map for testing
-    #output_plot(rf_viewer_zones)
     
-    
-    #Units, allies, neutrals and obstacles across the map
-    units_coors = MapData["PlacementData"]
-    obstacles_coors = MapData["ObstaclePlacementData"]
-
     pass
 
 
 def split_zone(zone, intersecting_zones):
-
-    
     zone_polygon = box(
-        float(zone["x"]), float(zone["y"]), float(zone["x"]) + float(zone["width"]), float(zone["y"]) + float(zone["height"])
+        float(zone["x"]),
+        float(zone["y"]),
+        float(zone["x"]) + float(zone["width"]),
+        float(zone["y"]) + float(zone["height"]),
     )
-    
+
     for intersecting_zone in intersecting_zones:
         intersecting_polygon = box(
             float(intersecting_zone["x"]),
@@ -147,8 +168,34 @@ def filter_zones(viewer_zones, intersecting_zones):
         for part in split_zone(viewer_zone, intersecting_zones)
     ]
 
-#Generate a png with the map plot
-def output_plot(rf_viewer_zones):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Output the map picture for testing
+#output_plot(cap_nm, rf_viewer_zones)
+# Generate a png with the map plot
+def output_plot(cap_nm, rf_viewer_zones):
     # Create a plot
     fig, ax = plt.subplots()
 
@@ -158,9 +205,9 @@ def output_plot(rf_viewer_zones):
         ax.fill(x, y, alpha=0.5)
 
     # Set axis labels
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
 
     # Save the plot to a file instead of showing it
-    plt.savefig('output_plot.png')
+    plt.savefig(f"{cap_nm}_output_plot.png")
     plt.close()

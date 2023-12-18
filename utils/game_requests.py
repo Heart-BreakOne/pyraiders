@@ -99,8 +99,11 @@ def get_new_event_map(current_url):
                 entry.pop(key, None)
         write_file(constants.map_nodes_path, data_json)
         
-        #Grab other assets in here
+        #Grab units in here
         units_json = response.json()["sheets"]["Units"]
+        for unit_data in units_json.values():
+            for key_to_remove in constants.unit_values_rm:
+                unit_data.pop(key_to_remove, None)
         write_file(constants.map_units_path, units_json)
         
         print("\nMap nodes updated successfully.\n")
