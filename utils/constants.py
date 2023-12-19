@@ -1,8 +1,11 @@
 # Constants file
 
 # The path is where the chromedriver.exe is, but without the .exe at the end.
-# Example: chrome_driver_path = "C:\\Users\\user_name\\Desktop\\pyraiders-main\\chromedriver"
-chrome_driver_path = ""
+
+#That's is not the location of the chromedriver folder, it's the executable file itself, \\chromedriver.exe but without the .exe
+# Example for Windows users: chrome_driver_path = "C:\\Program Files (x86)\\chromedriver folder\\chromedriver"
+
+chrome_driver_path = "/Users/leonardoluiz/.wdm/drivers/chromedriver/mac64/120.0.6099.71/chromedriver-mac-arm64/chromedriver"
 
 gameDataURL = "https://www.streamraiders.com/api/game/"
 
@@ -13,7 +16,6 @@ regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
 map_units_path = "assets/map_units.json"
 obstacles_path = "assets/obstacles.json"
-
 
 default_entry = [
     {
