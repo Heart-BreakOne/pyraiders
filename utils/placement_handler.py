@@ -111,30 +111,34 @@ def calculate_placement(
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
     all_units = h_units + ai_units
     map_units = open_file(constants.map_units_path)
-
+    cap_coors = {}
     # Get units dimensions based on a list. Find captain coordinates
     for unit in all_units:
         unit_name = unit["CharacterType"]
 
         for key, units in map_units.items():
-            if key == unit_name:
-                is_epic = units["IsEpic"]
-                cube_dimension = units["Size"]
-                unit["IsEpic"] = is_epic
-                if is_epic:
-                    pass
-                    # cube_dimension = cube_dimension * 2
-
-                unit["width"] = cube_dimension
-                unit["height"] = cube_dimension
+            if key == unit_name:  
+                try:
+                    #General units across the map
+                    if units["IsEpic"]:
+                        unit["width"] = units["Size"] * 2
+                        unit["height"] = units["Size"] * 2
+                    # Epic viewer units (default is always 0.8 so there's no need to get the value from units["Size"])
+                    if unit["IsEpic"] and unit["userId"] != "":
+                        unit["width"] = 1.6
+                        unit["height"] = 1.6
+                except Exception as e:
+                    unit["width"] = units["Size"]
+                    unit["height"] = units["Size"]
+                #Grabbing captain to user later    
                 if unit["userId"] == cap_id:
                     cap_coors = {
                         "x": unit["X"],
                         "y": unit["Y"],
-                        "width": 1.1,
-                        "height": 1.1,
+                        "width": 1.6,
+                        "height": 1.6,
                     }
-                break
+                continue
 
         # Modify keys in all_units
         unit["x"] = unit.pop("X")
@@ -175,6 +179,8 @@ def calculate_placement(
     if cap_nm == "thecaptainscaptain":
         print(cap_nm)
         print(dict_of_coors)
+        
+    
 
 
 

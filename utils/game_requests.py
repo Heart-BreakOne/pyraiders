@@ -52,11 +52,11 @@ def check_for_new_event():
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-    
-    has_error = handle_error_response(response)  
+
+    has_error = handle_error_response(response)
     if has_error:
         return
-    
+
     if response.status_code == 200:
         parsedResponse = response.json()
         data = parsedResponse["data"]
@@ -68,7 +68,9 @@ def check_for_new_event():
         if eventUid != current_event.current_event:
             with open("utils/current_event.py", "w") as file:
                 file.write('current_event = "' + eventUid + '"')
-            print("New event has started. Checking map nodes, this may take a few seconds...")
+            print(
+                "New event has started. Checking map nodes, this may take a few seconds..."
+            )
             get_new_event_map(current_url)
         else:
             get_new_event_map(current_url)
@@ -79,7 +81,7 @@ def check_for_new_event():
 
 def get_new_event_map(current_url):
     # Update mapIds
-    
+
     config_json = open_file("variables.json")
     old_url = config_json["map_node_url"]
     if old_url == current_url:
@@ -89,64 +91,26 @@ def get_new_event_map(current_url):
         config_json["map_node_url"] = current_url
         write_file("variables.json", config_json)
         print("Map nodes have changed, fetching new map nodes...")
-    
+
     response = requests.get(current_url)
-    
+
     if response.status_code == 200:
         data_json = response.json()["sheets"]["MapNodes"]
         for entry in data_json.values():
             for key in constants.keys_to_remove:
                 entry.pop(key, None)
         write_file(constants.map_nodes_path, data_json)
-        
-        #Grab units in here
+
+        # Grab units in here
         units_json = response.json()["sheets"]["Units"]
         for unit_data in units_json.values():
             for key_to_remove in constants.unit_values_rm:
                 unit_data.pop(key_to_remove, None)
         write_file(constants.map_units_path, units_json)
-        
+
         print("\nMap nodes updated successfully.\n")
     else:
         print(f"\nError: {response.status_code}")
-
-
-# Get each user's units, append priority and levelup permissions to each unit
-def get_units_data(
-    userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
-):
-    url = (
-        constants.gameDataURL
-        + "?cn=getUserUnits&userId="
-        + userId
-        + "&isCaptain=0&gameDataVersion="
-        + data_version
-        + "&command=getUserUnits&clientVersion="
-        + version
-        + "&clientPlatform=WebGL"
-    )
-
-    headers, proxies = get_request_strings(token, user_agent, proxy)
-    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
-    if has_proxy:
-        response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
-    else:
-        response = requests.get(url, proxies=proxies, headers=headers)
-        
-    has_error = handle_error_response(response)  
-    if has_error:
-        return
-    
-    if response.status_code == 200:
-        units = response.json().get("data", [])
-        for each_unit in units:
-            if each_unit["unitType"] == "alliesballoonbuster":
-                each_unit["priority"] = 0
-            else:
-                each_unit["priority"] = 1
-            each_unit["level_up"] = False
-            # add an integer key called priority to each item before saving
-    return units
 
 
 # Get the game version and data_version for the api calls
@@ -163,11 +127,11 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
         gameDataResponse = requests.get(
             constants.gameDataURL, proxies=proxies, headers=headers
         )
-        
-    has_error = handle_error_response(gameDataResponse)  
+
+    has_error = handle_error_response(gameDataResponse)
     if has_error:
         return
-    
+
     # Check if the request was successful (status code 200)
     if gameDataResponse.status_code == 200:
         response_json = gameDataResponse.json()
@@ -201,11 +165,11 @@ def get_user_id(
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-    
-    has_error = handle_error_response(response)  
+
+    has_error = handle_error_response(response)
     if has_error:
         return
-    
+
     if response.status_code == 200:
         parsedResponse = response.json()
         userId = parsedResponse["data"]["userId"]
@@ -293,11 +257,11 @@ def get_battlepass(
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-        
-    has_error = handle_error_response(response)  
+
+    has_error = handle_error_response(response)
     if has_error:
         return
-    
+
     if response.status_code == 200:
         parsedResponse = response.json()
         data = parsedResponse["data"]
@@ -343,49 +307,27 @@ def leave_captain(
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-    
+
     add_temporary_ignore(user_id, captain_name)
-    
-    has_error = handle_error_response(response)  
+
+    has_error = handle_error_response(response)
     if has_error:
         return
 
 
-#Update unit cooldown timer.
-def update_unit_cooldown():
-        accounts = open_file(constants.py_accounts)
-        
-        for account in accounts:
-            user_id = account["userId"]
-            token = account["token"]
-            user_agent = account["user_agent"]
-            proxy = account["proxy"]
-            proxy_user = account["proxy_user"]
-            proxy_password = account["proxy_password"]
-            local_units = account["units"]
-            version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
-            fetched_units = get_units_data(user_id, token, user_agent, proxy, version, data_version, proxy_user, proxy_password)
-            for local_unit in local_units:
-                for fetched_unit in fetched_units:
-                    if local_unit["unitId"] == fetched_unit["unitId"]:
-                        local_unit.update({
-                            "userId": fetched_unit["userId"],
-                            "unitType": fetched_unit["unitType"],
-                            "level": fetched_unit["level"],
-                            "skin": fetched_unit["skin"],
-                            "cooldownTime": fetched_unit["cooldownTime"],
-                            "specializationUid": fetched_unit["specializationUid"],
-                            "soulType": fetched_unit["soulType"],
-                            "soulId": fetched_unit["soulId"]
-                        })
-                        break
-                
-        write_file(constants.py_accounts, accounts)
-        
-        
-def collect_raid_rewards(name, cap_nm, user_id, raid_id, token, user_agent, proxy, proxy_user, proxy_password, version, data_version):
+# Get each user's units, append priority and levelup permissions to each unit
+def get_units_data(
+    userId, token, user_agent, proxy, version, data_version, proxy_user, proxy_password
+):
     url = (
-        constants.gameDataURL + "?cn=getRaidStatsByUser&userId=" + user_id + "&isCaptain=0&gameDataVersion=" + data_version + "&command=getRaidStatsByUser&raidId=" + raid_id + "&clientVersion=" + version + "&clientPlatform=WebGL"
+        constants.gameDataURL
+        + "?cn=getUserUnits&userId="
+        + userId
+        + "&isCaptain=0&gameDataVersion="
+        + data_version
+        + "&command=getUserUnits&clientVersion="
+        + version
+        + "&clientPlatform=WebGL"
     )
 
     headers, proxies = get_request_strings(token, user_agent, proxy)
@@ -394,9 +336,118 @@ def collect_raid_rewards(name, cap_nm, user_id, raid_id, token, user_agent, prox
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-    
-    has_error = handle_error_response(response)  
-    if not has_error:
 
+    has_error = handle_error_response(response)
+    if has_error:
+        return
+
+    if response.status_code == 200:
+        units = response.json().get("data", [])
+        for each_unit in units:
+            if each_unit["unitType"] == "alliesballoonbuster":
+                each_unit["priority"] = 0
+            else:
+                each_unit["priority"] = 1
+            each_unit["level_up"] = False
+            # add an integer key called priority to each item before saving
+    return units
+
+
+# Update unit cooldown timer.
+def update_unit_cooldown():
+    accounts = open_file(constants.py_accounts)
+
+    for account in accounts:
+        user_id = account["userId"]
+        token = account["token"]
+        user_agent = account["user_agent"]
+        proxy = account["proxy"]
+        proxy_user = account["proxy_user"]
+        proxy_password = account["proxy_password"]
+        local_units = account["units"]
+        version, data_version = get_game_data(
+            token, user_agent, proxy, proxy_user, proxy_password
+        )
+        fetched_units = get_units_data(
+            user_id,
+            token,
+            user_agent,
+            proxy,
+            version,
+            data_version,
+            proxy_user,
+            proxy_password,
+        )
+        for fetched_unit in fetched_units:
+            found = False
+            for local_unit in local_units:
+                if local_unit["unitId"] == fetched_unit["unitId"]:
+                    local_unit.update({
+                            "userId": fetched_unit["userId"],
+                            "unitType": fetched_unit["unitType"],
+                            "level": fetched_unit["level"],
+                            "skin": fetched_unit["skin"],
+                            "cooldownTime": fetched_unit["cooldownTime"],
+                            "specializationUid": fetched_unit["specializationUid"],
+                            "soulType": fetched_unit["soulType"],
+                            "soulId": fetched_unit["soulId"],
+                        })
+                    found = True
+                    break
+            if not found:
+                local_units.append({
+                        "userId": fetched_unit["userId"],
+                        "unitType": fetched_unit["unitType"],
+                        "level": fetched_unit["level"],
+                        "skin": fetched_unit["skin"],
+                        "cooldownTime": fetched_unit["cooldownTime"],
+                        "unitId": fetched_unit["unitId"],
+                        "specializationUid": fetched_unit["specializationUid"],
+                        "soulType": fetched_unit["soulType"],
+                        "soulId": fetched_unit["soulId"],
+                        "priority": 0
+                        if fetched_unit["unitType"] == "alliesballoonbuster"
+                        else 1,
+                        "level_up": False,
+                    })
+
+    write_file(constants.py_accounts, accounts)
+
+
+def collect_raid_rewards(
+    name,
+    cap_nm,
+    user_id,
+    raid_id,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+    version,
+    data_version,
+):
+    url = (
+        constants.gameDataURL
+        + "?cn=getRaidStatsByUser&userId="
+        + user_id
+        + "&isCaptain=0&gameDataVersion="
+        + data_version
+        + "&command=getRaidStatsByUser&raidId="
+        + raid_id
+        + "&clientVersion="
+        + version
+        + "&clientPlatform=WebGL"
+    )
+
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    if has_proxy:
+        response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+    else:
+        response = requests.get(url, proxies=proxies, headers=headers)
+
+    has_error = handle_error_response(response)
+    if not has_error:
         print(f"Account: {name}: Chest/savage collected on captain: {cap_nm}")
         time.sleep(5)
