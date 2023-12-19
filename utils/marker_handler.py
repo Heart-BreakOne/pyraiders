@@ -195,8 +195,6 @@ def calculate_placement(
         
    
     markers = shuffle_markers(markers, cap_coors, all_units)
-    if cap_id == "733676827c":
-        print(markers)
     return markers
 
 #Get markers that are closest to an unit of interest or shuffle everything.
