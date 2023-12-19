@@ -124,7 +124,7 @@ def calculate_placement(
                         unit["width"] = units["Size"] * 2
                         unit["height"] = units["Size"] * 2
                     # Epic viewer units (default is always 0.8 so there's no need to get the value from units["Size"])
-                    if unit["IsEpic"] and unit["userId"] != "":
+                    if "epic" in unit_name and unit["userId"] != "":
                         unit["width"] = 1.6
                         unit["height"] = 1.6
                 except Exception as e:
