@@ -2,7 +2,7 @@
 
 # The path is where the chromedriver.exe is, but without the .exe at the end.
 
-#That's is not the location of the chromedriver folder, it's the executable file itself, \\chromedriver.exe but without the .exe
+# That's is not the location of the chromedriver folder, it's the executable file itself, \\chromedriver.exe but without the .exe
 # Example for Windows users: chrome_driver_path = "C:\\Program Files (x86)\\chromedriver folder\\chromedriver"
 
 chrome_driver_path = "/Users/leonardoluiz/.wdm/drivers/chromedriver/mac64/120.0.6099.71/chromedriver-mac-arm64/chromedriver"
@@ -773,7 +773,7 @@ welcome_message = """
 *Once the file is set up, run main.py again.
 """
 
-welcome_banner = """ Did you know that the python isn't venomous? It just gives you a hug that is to die for...
+welcome_banner = """Did you know that the python isn't venomous? It just gives you a hug that is to die for...
     _________         _________
    /         \       /         \\
   /  /~~~~~\  \\     /  /~~~~~\\  \\
@@ -790,4 +790,25 @@ welcome_banner = """ Did you know that the python isn't venomous? It just gives 
   ######   # #  ######  #   #  # #    # #      #    # #
   #         #   #   #   #####  # #    # #####  #####   ####    
   #         #   #    #  #   #  # #    # #      #   #       #
-  #         #   #     # #   #  # #####  ###### #    #  ####"""
+  #         #   #     # #   #  # #####  ###### #    #  ####
+  By HeartBreakOne"""
+
+heartbreak = [
+    r"  ♥",
+    r"   ♥",
+    r"    ♥",
+    r"     ♥",
+    r"      ♥",
+    r"       ♥",
+    r"        ♥",
+    r"         ♥",
+    r"          ♥",
+    r"           ♥",
+    r"            ♥",
+    r"             ♥",
+    r"              ♥",
+    r"               ♥",
+    r"                ♥",
+    r"                 ♥",
+    r"  ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥",
+]

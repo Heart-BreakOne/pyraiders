@@ -1,5 +1,6 @@
 import asyncio, sys
 import threading
+import time
 from utils.settings import (
     write_file,
     open_file,
@@ -34,8 +35,10 @@ async def run():
         return
 
     print(constants.welcome_banner)
-
-    print("Starting up...")
+    for frame in constants.heartbreak:
+        print(f"\r{frame}", end="", flush=True)
+        time.sleep(0.1)
+    print("\nStarting up...")
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
 
