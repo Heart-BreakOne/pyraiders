@@ -8,7 +8,8 @@ from utils.game_requests import (
     leave_captain,
     update_unit_cooldown,
 )
-from utils.placement_handler import calculate_placement
+from utils.marker_handler import calculate_placement
+from utils.placement_handler import place_the_unit
 from utils.settings import open_file
 from utils.player import getActiveraids
 
@@ -60,7 +61,6 @@ async def process_groups(groups):
 # Process the accounts in groups. The task handler ensure they run simultaneously
 async def process_group(group):
     for account in group:
-        
         # Check if account is enabled
         if not account["powered_on"]:
             continue
@@ -232,12 +232,28 @@ async def process_group(group):
             if not units:
                 continue
 
-            # cry and calculate placement using magic
-            calculate_placement(
+            # Calculate the markers
+            usable_markers = calculate_placement(
                 cap_id,
                 raid,
                 raid_id,
-                cap_nm,
+                name,
+                user_id,
+                token,
+                user_agent,
+                proxy,
+                proxy_user,
+                proxy_password,
+                version,
+                data_version,
+            )
+            
+            #Place the unit
+            place_the_unit(
+                usable_markers,
+                cap_id,
+                raid,
+                raid_id,
                 name,
                 user_id,
                 token,

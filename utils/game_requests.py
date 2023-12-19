@@ -85,7 +85,7 @@ def get_new_event_map(current_url):
     config_json = open_file("variables.json")
     old_url = config_json["map_node_url"]
     if old_url == current_url:
-        print("Map nodes are already up to date")
+        print("Map nodes are up to date")
         return
     else:
         config_json["map_node_url"] = current_url
