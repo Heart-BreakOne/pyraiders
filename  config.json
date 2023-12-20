@@ -1,5 +1,5 @@
 {
-    "version": "0.16.0-alpha",
+    "version": "0.17.0-alpha",
     "name": "PyRaiders",
     "author": "HeartBreak-One",
     "description": "SR assistant for viewers and captains written in Python",
@@ -11,7 +11,10 @@
         "Python",
         "CLI",
         "SR assistant",
-        "Twitch"
+        "Twitch",
+        "Asynco",
+        "PyQt",
+        "Selenium"
     ],
     "license": "MIT"
 }

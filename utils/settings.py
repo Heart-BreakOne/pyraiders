@@ -162,3 +162,73 @@ def remove_duplicate_ids(accounts):
                 unique_accounts.append(account)
 
     return unique_accounts
+
+
+def validate_raid(previous_placement, now, raid_type, creation_time):
+    if raid_type == "1":
+        # Campaign
+        time_since_creation = (
+            now - creation_time if creation_time else timedelta(0)
+            )
+        time_since_previous_placement = (
+            now - previous_placement
+            if previous_placement
+            else timedelta(minutes=6)
+        )
+        if (
+            time_since_creation <= timedelta(minutes=1, seconds=30)
+            or time_since_creation > timedelta(minutes=29, seconds=55)
+            or time_since_previous_placement < timedelta(minutes=5)
+        ):
+            return False
+    elif raid_type == "2" or raid_type == "5":
+        time_since_creation = (
+            now - creation_time if creation_time else timedelta(0)
+        )
+        time_since_previous_placement = (
+            now - previous_placement
+            if previous_placement
+            else timedelta(minutes=2)
+        )
+        if (
+            time_since_creation <= timedelta(minutes=1, seconds=5)
+            or time_since_creation > timedelta(minutes=6, seconds=55)
+            or time_since_previous_placement < timedelta(minutes=2, seconds=00)
+        ):
+            return False
+    elif raid_type == "3":
+        # Dungeons
+        time_since_creation = (
+            now - creation_time if creation_time else timedelta(0)
+        )
+        time_since_previous_placement = (
+            now - previous_placement
+        if previous_placement
+        else timedelta(minutes=2)
+        )
+        if (
+            time_since_creation <= timedelta(minutes=1, seconds=5)
+            or time_since_creation > timedelta(minutes=5, seconds=55)
+            or time_since_previous_placement < timedelta(minutes=1, seconds=40)
+        ):
+            return False
+    return True
+
+
+
+def check_raid_type(raid_type, time_difference):
+    if raid_type == "1":
+        # Campaign
+        if time_difference > timedelta(minutes=29, seconds=50):
+            return False
+    elif raid_type == "2" or raid_type == "5":
+        # Duels and clash
+        if time_difference > timedelta(minutes=6, seconds=55):
+            return False
+    elif raid_type == "3":
+        # Dungeons
+        if time_difference > timedelta(minutes=5, seconds=55):
+            return False
+    
+    
+    return True

@@ -808,26 +808,6 @@ welcome_message = """
 *Once the file is set up, run main.py again.
 """
 
-welcome_banner = """Did you know that the python isn't venomous? It just gives you a hug that is to die for...
-    _________         _________
-   /         \       /         \\
-  /  /~~~~~\  \\     /  /~~~~~\\  \\
-  |  |     |  |     |  |     |  |
-  |  |     |  |     |  |     |  |         /
-  |  |     |  |     |  |     |  |       //
- (o  o)    \\  \\_____/  /     \\  \\_____/
-  \\__/      \\         /       \\        /
-   |         ~~~~~~~~~         ~~~~~~~~
-   ^
-  ######        ######
-  #     #       #     #                                
-  #     # #   # #     #  # #   # #####  ###### #####   ####
-  ######   # #  ######  #   #  # #    # #      #    # #
-  #         #   #   #   #####  # #    # #####  #####   ####    
-  #         #   #    #  #   #  # #    # #      #   #       #
-  #         #   #     # #   #  # #####  ###### #    #  ####
-  By HeartBreakOne"""
-
 heartbreak = [
     r"  ♥",
     r"   ♥",

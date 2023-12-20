@@ -24,20 +24,25 @@ def custom_exception_handler(exc_type, exc_value, exc_traceback):
 
 
 async def run():
-    
     # Cheap error handling
-    sys.excepthook = custom_exception_handler
-    
+    #sys.excepthook = custom_exception_handler
+
     # Check if accounts file exist, if not create one.
     data = open_file(constants.py_accounts)
     if data is None:
         create_account()
         return
 
-    print(constants.welcome_banner)
+    #The debugger doesn't like the symbols, so it has to be a txt file
+    with open("assets/startup_banner.txt", 'r') as file:
+        content = file.read()
+        print(content)
+        
+    #Print silly heart (breaks)
     for frame in constants.heartbreak:
         print(f"\r{frame}", end="", flush=True)
         time.sleep(0.1)
+        
     print("\nStarting up...")
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
@@ -70,19 +75,21 @@ async def run():
     asyncio.create_task(make_dummy_requests())
     print("Periodic tasks have started.")
 
-    # Fill and clean slots
-    asyncio.create_task(fill_slots())
-    print("Slot manager has started.")
-
+    #Update units cooldown
     update_unit_cooldown()
     print("Units cooldown updated.")
 
+    # Fill and clean slots
+    slot_thread = threading.Thread(target=lambda: asyncio.run(fill_slots()))
     # Place units on the battlefield
-    asyncio_thread = threading.Thread(
+    placement_thread = threading.Thread(
         target=lambda: asyncio.run(place_unit_in_battlefield())
     )
-    asyncio_thread.start()
+    placement_thread.start()
     print("Unit placement manager has started.")
+    slot_thread.start()
+    print("Slot manager has started.")
+    
 
     print("All start up tasks performed!")
 

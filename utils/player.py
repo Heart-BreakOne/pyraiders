@@ -341,8 +341,7 @@ def fill_empty_slots(
         datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
             for entry in temporary_ignore
         ]
-        time = datetime.utcnow()
-        current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+        current_time = datetime.utcnow()
         # Define the threshold for acceptable captains (30 minutes)
         threshold_time = timedelta(minutes=30)
         # Filter out captains younger than 30 minutes in temporary_ignore

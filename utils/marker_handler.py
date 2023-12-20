@@ -125,14 +125,14 @@ def calculate_placement(
                     if units["IsEpic"]:
                         unit["width"] = units["Size"] * 2
                         unit["height"] = units["Size"] * 2
-                        unit["X"] = unit["X"] - 0.4
-                        unit["Y"] = unit["Y"] - 0.4
+                        unit["X"] = float(unit["X"]) - 0.4
+                        unit["Y"] = float(unit["Y"]) - 0.4
                     # Epic viewer units (default is always 0.8 so there's no need to get the value from units["Size"])
                     if "epic" in unit_name and unit["userId"] != "":
                         unit["width"] = 1.6
                         unit["height"] = 1.6
-                        unit["X"] = unit["X"] - 0.4
-                        unit["Y"] = unit["Y"] - 0.4
+                        unit["X"] = float(unit["X"]) - 0.4
+                        unit["Y"] = float(unit["Y"]) - 0.4
                     else:
                         unit["width"] = 0.8
                         unit["height"] = 0.8
@@ -142,8 +142,8 @@ def calculate_placement(
                 # Grabbing captain to user later
                 if unit["userId"] == cap_id:
                     cap_coors = {
-                        "x": unit["X"],
-                        "y": unit["Y"],
+                        "x": float(unit["X"]),
+                        "y": float(unit["Y"]),
                         "width": 1.6,
                         "height": 1.6,
                     }
@@ -156,22 +156,23 @@ def calculate_placement(
     # Draw imaginary map
     # Map tiles
     # enemy_zones = MapData["EnemyPlacementRects"]
-
     viewer_squares = make_imaginary_mkrs(MapData["PlayerPlacementRects"])
     purple_squares = make_imaginary_mkrs(MapData["HoldingZoneRects"])
     ally_squares = make_imaginary_mkrs(MapData["AllyPlacementRects"])
     neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
 
-    f_viewer_squares = remove_overlap(
-        viewer_squares, all_units + purple_squares + ally_squares + neutral_squares
-    )
-    f_purple_squares = remove_overlap(
-        purple_squares, all_units + viewer_squares + ally_squares + neutral_squares
-    )
-    f_neutral_squares = remove_overlap(
-        neutral_squares, all_units + viewer_squares + ally_squares + purple_squares
-    )
 
+    m_list = []
+    m_list.extend(all_units)
+    m_list.extend(purple_squares)
+    m_list.extend(ally_squares)
+    m_list.extend(neutral_squares)
+    
+    f_viewer_squares = remove_overlap(viewer_squares, m_list)
+    f_purple_squares = remove_overlap(purple_squares, m_list)
+    f_neutral_squares = remove_overlap(neutral_squares, m_list)
+
+    
     markers = []
     if available_markers is not None or available_markers is not {}:
         for marker_name, marker_data in available_markers.items():
@@ -189,46 +190,46 @@ def calculate_placement(
             elif isinstance(marker_data, dict):
                 marker_data.update({"type": marker_name})
                 markers.append(marker_data)
+        markers = remove_overlap(markers, all_units)
 
     if markers == None or markers == []:
         markers = f_viewer_squares
     if markers == None or markers == []:
         markers = f_purple_squares + f_neutral_squares
     if markers == None or markers == []:
-        print("Something went wrong while trying to an area to place.")
-        
-   
+        print("Something went wrong while trying to find an area to place.")
+
     markers = shuffle_markers(markers, cap_coors, all_units)
+
     return markers[:100]
 
-#Get markers that are closest to an unit of interest or shuffle everything.
+
+# Get markers that are closest to an unit of interest or shuffle everything.
 def shuffle_markers(markers, cap_coors, all_units):
-    #Shuffle or get coordinates of interest.
+    # Shuffle or get coordinates of interest.
     if cap_coors == {} and all_units == []:
         return random.shuffle(markers)
     if len(cap_coors) == 0:
-        f_l = [item for item in all_units if item['userId'] != ""]
+        f_l = [item for item in all_units if item["userId"] != ""]
         ref_unit = random.choice(f_l)
     else:
         ref_unit = cap_coors
 
-    #Sort markers based on how close they are to the reference unit
+    # Sort markers based on how close they are to the reference unit
     def euclidean_distance(p1, p2):
-        x1, y1 = float(p1['x']), float(p1['y'])
-        x2, y2 = float(p2['x']), float(p2['y'])
-    
-        return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+        x1, y1 = float(p1["x"]), float(p1["y"])
+        x2, y2 = float(p2["x"]), float(p2["y"])
+
+        return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
     for marker in markers:
-        marker['distance_to_ref'] = euclidean_distance(marker, ref_unit)
-    
-    sorted_markers = sorted(markers, key=lambda x: x['distance_to_ref'])
-    for marker in sorted_markers:
-        del marker['distance_to_ref']
-    
-    return sorted_markers
+        marker["distance_to_ref"] = euclidean_distance(marker, ref_unit)
 
-        
+    sorted_markers = sorted(markers, key=lambda x: x["distance_to_ref"])
+    for marker in sorted_markers:
+        del marker["distance_to_ref"]
+
+    return sorted_markers
 
 
 # Remove occupied markers since they can't be used
@@ -256,8 +257,9 @@ def remove_overlap(squares_of_interest, overlapping_squares):
         x1, y1, w1, h1 = map(
             float, [square1["x"], square1["y"], square1["width"], square1["height"]]
         )
+        #TODO REVIEW TO MAKE SURE EPIC UNITS ARE GETTING THE CORRECT VALUE AS THEY MIGHT BE CAUSING THE OVER_UNIT ERROR
         x2, y2, w2, h2 = map(
-            float, [square2["x"], square2["y"], square2["width"], square2["height"]]
+            float, [square2["x"], square2["y"], square2.get("width", 0.8), square2.get("height", 0.8)]
         )
 
         x_overlap = (x1 < x2 + w2) and (x2 < x1 + w1)
