@@ -171,7 +171,7 @@ def remove_duplicate_ids(accounts):
     return unique_accounts
 
 
-def validate_raid(previous_placement, now, raid_type, creation_time):
+def validate_raid(raid, previous_placement, now, raid_type, creation_time):
     if raid_type == "1":
         # Campaign
         time_since_creation = now - creation_time if creation_time else timedelta(0)
@@ -180,8 +180,8 @@ def validate_raid(previous_placement, now, raid_type, creation_time):
         )
         if (
             time_since_creation <= timedelta(minutes=1, seconds=30)
-            or time_since_creation > timedelta(minutes=29, seconds=55)
-            or time_since_previous_placement < timedelta(minutes=5)
+            or time_since_creation > timedelta(minutes=29, seconds=00)
+            or time_since_previous_placement < timedelta(minutes=5, seconds=20)
         ):
             return False
     elif raid_type == "2" or raid_type == "5":

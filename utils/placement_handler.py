@@ -7,6 +7,7 @@ from utils.settings import check_raid_type, validate_raid
 
 # OFFSET AN EPIC UNIT BEFORE PLACING IT BY ADDING +0.4
 def place_the_unit(
+    raid, 
     units,
     usable_markers,
     cap_nm,
@@ -80,7 +81,7 @@ def place_the_unit(
         )
         # Check if raid is in valid placement
         now = datetime.utcnow()
-        if not validate_raid(previous_placement, now, raid_type, creation_time):
+        if not validate_raid(raid, previous_placement, now, raid_type, creation_time):
             return
         
         time_difference = now - creation_time

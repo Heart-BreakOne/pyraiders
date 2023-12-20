@@ -178,7 +178,7 @@ async def process_group(group):
                 else None
             )
 
-            if not validate_raid(previous_placement, now, raid_type, creation_time):
+            if not validate_raid(raid, previous_placement, now, raid_type, creation_time):
                 continue
 
             # Check raid type, check if an unit was placed, check if the user wants more units.
@@ -197,6 +197,7 @@ async def process_group(group):
 
             #Place the unit
             place_the_unit(
+                raid,
                 units,
                 usable_markers,
                 cap_nm,
