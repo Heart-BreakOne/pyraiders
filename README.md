@@ -7,6 +7,10 @@ Python3.
 ### Non-mandatory requirements:
 PyQt, QtWebEngine, selenium, chromedriver and a chromium based browser
 
+### Quickly open the terminal on windows
+On PyRaiders folder, click the address bar, type ```cmd``` and press ENTER. Use the shortcut CTRL+L to quickly focus the address bar.
+Another quick way to open the terminal is to press CTRL+R, type cmd and press ENTER. However this requires navigating to the PyRaiders folder.
+
 Double click or execute ```python3 setup.py``` to install the Python dependencies.
 Chromedriver and the browser must be installed manually. Ensure that they are compatible. Example: Chromedriver 120.0 == Chromium browser 120.0
 
@@ -14,6 +18,7 @@ Chromedriver and the browser must be installed manually. Ensure that they are co
 Your account name is not necessarily the Twitch name, it's just a random unique name used to identify your account within PyRaiders.
 
 To obtain the token, scapmpid and scsession open a browser, login to SR, right-click, Inspect elements, open dev tool -> Application -> Cookies -> SR website and get the values.
+You can also use a browser extension such as Cookie Quick Manager or alternatives to help you quickly find your cookies.
 
 ### Manual: 
 Run ```python3 run.py``` once for the first time. It will create a py_accounts.json file with a template, use the template at the end of the page to add other new accounts.

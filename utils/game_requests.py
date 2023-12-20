@@ -347,7 +347,7 @@ def get_units_data(
             if each_unit["unitType"] == "alliesballoonbuster":
                 each_unit["priority"] = 0
             else:
-                each_unit["priority"] = 1
+                each_unit["priority"] = 10
             each_unit["level_up"] = False
             # add an integer key called priority to each item before saving
     return units
@@ -405,7 +405,7 @@ def update_unit_cooldown():
                         "specializationUid": fetched_unit["specializationUid"],
                         "soulType": fetched_unit["soulType"],
                         "soulId": fetched_unit["soulId"],
-                        "priority": 0
+                        "priority": 10
                         if fetched_unit["unitType"] == "alliesballoonbuster"
                         else 1,
                         "level_up": False,

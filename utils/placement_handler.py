@@ -102,8 +102,8 @@ def place_the_unit(
                 )
                 return True
             else:
-                if errorMsg == "OVER_UNIT":
-                    time.sleep(5)
+                time.sleep(5)
+                if errorMsg == "OVER_UNIT": 
                     return 
                 print("Placement failed due to " + errorMsg)
                 print(url)
