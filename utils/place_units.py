@@ -102,7 +102,8 @@ async def process_group(group):
                 version,
                 data_version,
             )
-            
+            if usable_markers == []:
+                return
             # Check if raid is over to collect rewards #also check rewards was not collected already
             if (
                 raid["hasRecievedRewards"] == "0"

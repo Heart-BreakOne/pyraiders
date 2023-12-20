@@ -108,8 +108,14 @@ def calculate_placement(
         available_markers = process_markers(raidPlan, map_width, map_height)
 
     # Units, allies, neutrals across the map
-    h_units = getRaid["data"]["placements"]
-    ai_units = MapData["PlacementData"]
+    h_units = []
+    try:
+        h_units = getRaid["data"]["placements"]
+        ai_units = MapData["PlacementData"]
+    except:
+        return []
+    
+    
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
     all_units = h_units + ai_units
     map_units = open_file(constants.map_units_path)

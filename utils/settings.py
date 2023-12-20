@@ -107,17 +107,21 @@ def add_temporary_ignore(user_id, captain_name):
 def clean_temp_times(accounts):
     for account in accounts:
         temp_ignore_list = account["temporary_ignore"]
-        
-        #Remove missing and empty values.
+
+        # Remove missing and empty values.
         try:
-            temp_ignore_list = [entry for entry in temp_ignore_list if entry.get("time")]
+            temp_ignore_list = [
+                entry for entry in temp_ignore_list if entry.get("time")
+            ]
             temp_ignore_times = [
                 datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
                 for entry in temp_ignore_list
             ]
-    
+
             time = datetime.utcnow()
-            current_time = datetime.strptime(time.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")
+            current_time = datetime.strptime(
+                time.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S"
+            )
 
             threshold_time = timedelta(minutes=30)
             temp_ignore_list = [
@@ -131,11 +135,11 @@ def clean_temp_times(accounts):
         except Exception as e:
             print(e)
             sys.exit()
-            
-    return accounts
-        
 
-#Remove accounts with duplicate user ids.
+    return accounts
+
+
+# Remove accounts with duplicate user ids.
 def remove_duplicate_ids(accounts):
     unique_ids = set()
     unique_accounts = []
@@ -146,7 +150,10 @@ def remove_duplicate_ids(accounts):
         units = account["units"]
         unit_ids = set()
 
-        if (user_id, alt_user_id) not in unique_ids and (user_id, alt_user_id) not in unique_ids:
+        if (user_id, alt_user_id) not in unique_ids and (
+            user_id,
+            alt_user_id,
+        ) not in unique_ids:
             unique_ids.add((user_id, alt_user_id))
 
             has_duplicate_units = False
@@ -167,13 +174,9 @@ def remove_duplicate_ids(accounts):
 def validate_raid(previous_placement, now, raid_type, creation_time):
     if raid_type == "1":
         # Campaign
-        time_since_creation = (
-            now - creation_time if creation_time else timedelta(0)
-            )
+        time_since_creation = now - creation_time if creation_time else timedelta(0)
         time_since_previous_placement = (
-            now - previous_placement
-            if previous_placement
-            else timedelta(minutes=6)
+            now - previous_placement if previous_placement else timedelta(minutes=6)
         )
         if (
             time_since_creation <= timedelta(minutes=1, seconds=30)
@@ -182,13 +185,9 @@ def validate_raid(previous_placement, now, raid_type, creation_time):
         ):
             return False
     elif raid_type == "2" or raid_type == "5":
-        time_since_creation = (
-            now - creation_time if creation_time else timedelta(0)
-        )
+        time_since_creation = now - creation_time if creation_time else timedelta(0)
         time_since_previous_placement = (
-            now - previous_placement
-            if previous_placement
-            else timedelta(minutes=2)
+            now - previous_placement if previous_placement else timedelta(minutes=2)
         )
         if (
             time_since_creation <= timedelta(minutes=1, seconds=5)
@@ -198,13 +197,9 @@ def validate_raid(previous_placement, now, raid_type, creation_time):
             return False
     elif raid_type == "3":
         # Dungeons
-        time_since_creation = (
-            now - creation_time if creation_time else timedelta(0)
-        )
+        time_since_creation = now - creation_time if creation_time else timedelta(0)
         time_since_previous_placement = (
-            now - previous_placement
-        if previous_placement
-        else timedelta(minutes=2)
+            now - previous_placement if previous_placement else timedelta(minutes=2)
         )
         if (
             time_since_creation <= timedelta(minutes=1, seconds=5)
@@ -213,7 +208,6 @@ def validate_raid(previous_placement, now, raid_type, creation_time):
         ):
             return False
     return True
-
 
 
 def check_raid_type(raid_type, time_difference):
@@ -229,6 +223,5 @@ def check_raid_type(raid_type, time_difference):
         # Dungeons
         if time_difference > timedelta(minutes=5, seconds=55):
             return False
-    
-    
+
     return True
