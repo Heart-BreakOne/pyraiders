@@ -111,23 +111,23 @@ def place_the_unit(
                     + " at "
                     + now
                 )
-                return True
+                return 0
             else:
                 time.sleep(5)
-                if errorMsg == "OVER_UNIT":
+                if errorMsg == "OVER_UNIT" or errorMsg == "INVALID_RAID_STATE:2" or errorMsg == "PERIOD_ENDED":
                     print("Placement failed due to " + errorMsg)
-                    return False
+                    return 3
                 print("Placement failed due to " + errorMsg)
                 print(url)
                 print(marker)
                 print(unitName)
-                return False
+                return 2
         else:
             print(f"Placement request failed with status code: {response.status_code}")
             print(url)
             print(marker)
             print(unitName)
-            return False
+            return 1
 
     # The markers work for the unit, not the units for the marker.
     attempt = 0
@@ -139,7 +139,9 @@ def place_the_unit(
             if marker_type == "vibe":
                 # Marker fits anything, place the unit
                 has_placed = place(unit, marker)
-                if has_placed:
+                if has_placed == 0:
+                    break
+                elif has_placed == 3:
                     attempt = 10
                     break
                 else:
@@ -159,8 +161,9 @@ def place_the_unit(
                         unit_name = d_unit["name"]
                         unit_type = d_unit["type"]
                     if marker_type == unit_name or marker_type == unit_type:
-                        has_placed = place(unit, marker)
-                        if has_placed:
+                        if has_placed == 0:
+                            break
+                        elif has_placed == 3:
                             attempt = 10
                             break
                         else:
