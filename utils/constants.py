@@ -53,6 +53,41 @@ default_entry = [
     }
 ]
 
+units_dict =  [
+    { "type": "melee", "name": "amazon", "alt": "" },
+    { "type": "ranged", "name": "archer", "alt": "" },
+    { "type": "ranged", "name": "artillery", "alt": "" },
+    { "type": "assassin", "name": "balloonbuster", "alt": "alliesballoonbuster" },
+    { "type": "melee", "name": "barbarian", "alt": "" },
+    { "type": "melee", "name": "berserker", "alt": "" },
+    { "type": "armored", "name": "blob", "alt": "" },
+    { "type": "ranged", "name": "bomber", "alt": "" },
+    { "type": "assassin", "name": "buster", "alt": "" },
+    { "type": "armored", "name": "centurion", "alt": "" },
+    { "type": "support", "name": "fairy", "alt": "" },
+    { "type": "support", "name": "flagbearer", "alt": "" },
+    { "type": "assassin", "name": "flyingrogue", "alt": "flyingarcher" },
+    { "type": "melee", "name": "gladiator", "alt": "" },
+    { "type": "support", "name": "healer", "alt": "" },
+    { "type": "melee", "name": "lancer", "alt": "" },
+    { "type": "ranged", "name": "mage", "alt": "" },
+    { "type": "support", "name": "monk", "alt": "" },
+    { "type": "ranged", "name": "musketeer", "alt": "" },
+    { "type": "support", "name": "necromancer", "alt": "" },
+    { "type": "armored", "name": "orcslayer", "alt": "" },
+    { "type": "armored", "name": "paladin", "alt": "alliespaladin" },
+    { "type": "assassin", "name": "rogue", "alt": "" },
+    { "type": "support", "name": "saint", "alt": "" },
+    { "type": "assassin", "name": "shinobi", "alt": "" },
+    { "type": "assassin", "name": "spy", "alt": "" },
+    { "type": "armored", "name": "tank", "alt": "" },
+    { "type": "support", "name": "templar", "alt": "" },
+    { "type": "armored", "name": "vampire", "alt": "" },
+    { "type": "melee", "name": "warbeast", "alt": "" },
+    { "type": "melee", "name": "warrior", "alt": "" },
+]
+
+
 py_accounts = "pyraiders_accounts.json"
 keys_to_remove = [
     "NodeDifficulty",

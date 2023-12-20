@@ -121,14 +121,18 @@ def calculate_placement(
         for key, units in map_units.items():
             if key == unit_name:
                 try:
-                    # General units across the map
+                    # General units across the map   #Offset epic units by minus 0.4
                     if units["IsEpic"]:
                         unit["width"] = units["Size"] * 2
                         unit["height"] = units["Size"] * 2
+                        unit["X"] = unit["X"] - 0.4
+                        unit["Y"] = unit["Y"] - 0.4
                     # Epic viewer units (default is always 0.8 so there's no need to get the value from units["Size"])
                     if "epic" in unit_name and unit["userId"] != "":
                         unit["width"] = 1.6
                         unit["height"] = 1.6
+                        unit["X"] = unit["X"] - 0.4
+                        unit["Y"] = unit["Y"] - 0.4
                     else:
                         unit["width"] = 0.8
                         unit["height"] = 0.8
@@ -195,7 +199,7 @@ def calculate_placement(
         
    
     markers = shuffle_markers(markers, cap_coors, all_units)
-    return markers
+    return markers[:100]
 
 #Get markers that are closest to an unit of interest or shuffle everything.
 def shuffle_markers(markers, cap_coors, all_units):

@@ -42,10 +42,9 @@ async def place_unit_in_battlefield():
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
+            print("Placement system cycled.")
             await asyncio.get_event_loop().run_in_executor(None, time.sleep, 10)
             is_running = False
-            print("Placed all possible units")
-            print(datetime.now())
 
 
 # Split the groups into tasks so they can be run simultaneously
@@ -221,7 +220,7 @@ async def process_group(group):
 
             # Check raid type, check if an unit was placed, check if the user wants more units.
             un_key = constants.type_dict.get(raid_type)
-            if last is not None and un_key is not None and account[un_key]:
+            if last is not None and un_key is not None and not account[un_key]:
                 continue
 
             # update units cooldown
@@ -250,9 +249,9 @@ async def process_group(group):
             
             #Place the unit
             place_the_unit(
+                units,
                 usable_markers,
-                cap_id,
-                raid,
+                cap_nm,
                 raid_id,
                 name,
                 user_id,
@@ -264,10 +263,8 @@ async def process_group(group):
                 version,
                 data_version,
             )
-
-            # Place the unit
-            # print(raid)
-            pass
+            
+            return
 
 
 # Check if unit has priority and if it's out of cooldown.

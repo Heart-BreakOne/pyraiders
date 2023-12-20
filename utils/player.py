@@ -486,9 +486,9 @@ def select_captain(
         if has_proxy:
             response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
             print(
-                "Account "
+                "Account: "
                 + user_name
-                + ": Added "
+                + ". Added "
                 + captain_name
                 + " to slot number "
                 + str(int(slot) + 1)
@@ -496,9 +496,9 @@ def select_captain(
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
             print(
-                "Account "
+                "Account: "
                 + user_name
-                + ": Added "
+                + ". Added "
                 + captain_name
                 + " to slot number "
                 + str(int(slot) + 1)
