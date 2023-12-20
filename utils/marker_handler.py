@@ -109,6 +109,7 @@ def calculate_placement(
 
     # Units, allies, neutrals across the map
     h_units = []
+    ai_units = []
     try:
         h_units = getRaid["data"]["placements"]
         ai_units = MapData["PlacementData"]
