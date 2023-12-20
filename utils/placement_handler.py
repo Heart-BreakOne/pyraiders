@@ -114,16 +114,17 @@ def place_the_unit(
                 return 0
             else:
                 time.sleep(5)
+                #INVALID_RAID_STATE:5 = Battle ready soon. View Battlefield
                 if errorMsg == "OVER_UNIT" or errorMsg == "INVALID_RAID_STATE:2" or errorMsg == "PERIOD_ENDED":
-                    print("Placement failed due to " + errorMsg)
+                    print("Placement failed due to " + errorMsg + " on captain " + cap_nm)
                     return 3
-                print("Placement failed due to " + errorMsg)
+                print("Placement failed due to " + errorMsg + " on captain " + cap_nm)
                 print(url)
                 print(marker)
                 print(unitName)
                 return 2
         else:
-            print(f"Placement request failed with status code: {response.status_code}")
+            print(f"Placement request failed with status code: {response.status_code}" + " on captain " + cap_nm)
             print(url)
             print(marker)
             print(unitName)
@@ -161,6 +162,7 @@ def place_the_unit(
                         unit_name = d_unit["name"]
                         unit_type = d_unit["type"]
                     if marker_type == unit_name or marker_type == unit_type:
+                        has_placed = place(unit, marker)
                         if has_placed == 0:
                             break
                         elif has_placed == 3:
