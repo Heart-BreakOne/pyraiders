@@ -1,13 +1,14 @@
 import time, requests
 from datetime import datetime
 from utils import constants
-from utils.game_requests import get_proxy_auth, get_request_strings
+from utils.game_requests import check_potions, get_proxy_auth, get_request_strings
 from utils.settings import check_raid_type, validate_raid
 
 
 # OFFSET AN EPIC UNIT BEFORE PLACING IT BY ADDING +0.4
 def place_the_unit(
-    raid, 
+    can_epic,
+    raid,
     units,
     usable_markers,
     cap_nm,
@@ -25,7 +26,10 @@ def place_the_unit(
     raid_type,
     creation_time,
 ):
-    def place(unit, marker):
+    can_epic = False
+    is_epic = False
+
+    def place(unit, marker, is_epic):
         for d_unit in constants.units_dict:
             if (
                 unit["unitType"].lower() == d_unit["name"].lower()
@@ -37,7 +41,11 @@ def place_the_unit(
 
         x = str(marker["x"])
         y = str(marker["y"])
-        epic = ""
+        if is_epic:
+            print("Epic placement")
+            epic = "epic"
+        else:
+            epic = ""
         unitLevel = unit["level"]
         unitId = unit["unitId"]
 
@@ -79,15 +87,17 @@ def place_the_unit(
             + data_version
             + "&command=addToRaid&isCaptain=0"
         )
+
+        # Get new raid and recalculate
         # Check if raid is in valid placement
         now = datetime.utcnow()
-        if not validate_raid(raid, previous_placement, now, raid_type, creation_time):
-            return
-        
+        if not validate_raid(raid):
+            return 3
+
         time_difference = now - creation_time
         if not check_raid_type(raid_type, time_difference):
-            return
-        
+            return 3
+
         headers, proxies = get_request_strings(token, user_agent, proxy)
         has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
         if has_proxy:
@@ -103,9 +113,9 @@ def place_the_unit(
             if status == "success" and errorMsg == None:
                 now = datetime.now().strftime("%H:%M:%S")
                 print(
-                    "Account: "
+                    "Account "
                     + name
-                    + " "
+                    + ": "
                     + unitName
                     + " placed successfully at "
                     + cap_nm
@@ -115,17 +125,44 @@ def place_the_unit(
                 return 0
             else:
                 time.sleep(5)
-                #INVALID_RAID_STATE:5 = Battle ready soon. View Battlefield
-                if errorMsg == "OVER_UNIT" or errorMsg == "INVALID_RAID_STATE:2" or errorMsg == "PERIOD_ENDED":
-                    print("Account " + name + ": Placement failed due to " + errorMsg + " on captain " + cap_nm)
+                # INVALID_RAID_STATE:5 = Battle ready soon. View Battlefield
+                if (
+                    errorMsg == "INVALID_RAID_STATE:2"
+                    or errorMsg == "INVALID_RAID_STATE:5"
+                    or errorMsg == "PERIOD_ENDED"
+                ):
+                    print(
+                        "Account "
+                        + name
+                        + ": Placement failed due to "
+                        + errorMsg
+                        + " on captain "
+                        + cap_nm
+                    )
                     return 3
-                print("Accoun " + name + ": Placement failed due to " + errorMsg + " on captain " + cap_nm)
-                print(url)
-                print(marker)
-                print(unitName)
-                return 2
+                elif errorMsg == "OVER_UNIT":
+                    return 2
+                else:
+                    print(
+                        "Account "
+                        + name
+                        + ": Placement failed due to "
+                        + errorMsg
+                        + " on captain "
+                        + cap_nm
+                    )
+                    print(url)
+                    print(marker)
+                    print(unitName)
+                    return 2
         else:
-            print(f"Account " + name + ": Placement request failed with status code: {response.status_code}" + " on captain " + cap_nm)
+            print(
+                f"Account "
+                + name
+                + ": Placement request failed with status code: {response.status_code}"
+                + " on captain "
+                + cap_nm
+            )
             print(url)
             print(marker)
             print(unitName)
@@ -135,16 +172,34 @@ def place_the_unit(
     attempt = 0
 
     for unit in units:
+        if attempt == 20:
+            break
         for marker in usable_markers:
+            if attempt == 20:
+                break
             marker_type = marker["type"].lower()
             # Find marker that matches the unit
             if marker_type == "vibe":
+                if can_epic:
+                    is_epic, marker = calculate_epic_marker(
+                        marker,
+                        usable_markers,
+                        user_id,
+                        data_version,
+                        version,
+                        token,
+                        user_agent,
+                        proxy,
+                        proxy_user,
+                        proxy_password,
+                    )
                 # Marker fits anything, place the unit
-                has_placed = place(unit, marker)
+                has_placed = place(unit, marker, is_epic)
                 if has_placed == 0:
+                    attempt = 20
                     break
                 elif has_placed == 3:
-                    attempt = 10
+                    attempt = 20
                     break
                 else:
                     attempt += 1
@@ -163,13 +218,89 @@ def place_the_unit(
                         unit_name = d_unit["name"]
                         unit_type = d_unit["type"]
                     if marker_type == unit_name or marker_type == unit_type:
-                        has_placed = place(unit, marker)
+                        if can_epic:
+                            is_epic, marker = calculate_epic_marker(
+                                marker,
+                                usable_markers,
+                                user_id,
+                                data_version,
+                                version,
+                                token,
+                                user_agent,
+                                proxy,
+                                proxy_user,
+                                proxy_password,
+                            )
+                        has_placed = place(unit, marker, is_epic)
                         if has_placed == 0:
+                            attempt = 20
                             break
                         elif has_placed == 3:
-                            attempt = 10
+                            attempt = 20
                             break
                         else:
                             attempt += 1
-        if attempt == 10:
-            break
+
+
+def calculate_epic_marker(
+    marker,
+    usable_markers,
+    user_id,
+    data_version,
+    version,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+):
+    return False, marker
+
+    # Check if user has enough potions to use
+    has_potions = check_potions(
+        user_id,
+        data_version,
+        version,
+        token,
+        user_agent,
+        proxy,
+        proxy_user,
+        proxy_password,
+    )
+
+    if not has_potions:
+        return False, marker
+
+    backup_marker = marker
+
+    # User has potions, find 3 other markers that are in a square formation to my current marker
+    def quadrant(coord):
+        if coord["x"] >= 0 and coord["y"] >= 0:
+            return 1
+        elif coord["x"] < 0 and coord["y"] >= 0:
+            return 2
+        elif coord["x"] < 0 and coord["y"] < 0:
+            return 3
+        else:
+            return 4
+
+    def filter_markers(markers, quad):
+        return [m for m in markers if quadrant(m) == quad]
+
+    marker_quad = quadrant(marker)
+
+    quadrants_234_markers = (
+        filter_markers(usable_markers, 2)
+        + filter_markers(usable_markers, 3)
+        + filter_markers(usable_markers, 4)
+    )
+
+    if marker_quad == 1:
+        marker["x"] = marker["x"] - 0.4
+        marker["y"] = marker["y"] - 0.4
+        return True, marker
+
+    if not quadrants_234_markers:
+        return False, backup_marker
+
+    return False, backup_marker
