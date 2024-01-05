@@ -3,6 +3,8 @@
 import inspect
 import time
 
+from utils.game_requests import check_for_new_event
+
 # Check if server responded with an error.
 def handle_error_response(response):
    
@@ -17,7 +19,8 @@ def handle_error_response(response):
         
         print("An error occurred while performing request.")
         if response["errorMessage"] == "Client lower." or response["errorMessage"] == "Game data mismatch.":
-            print("Game version changed, you may need to restart the tool. Will wait 60 seconds before trying again.")
+            print("Game version changed, you may need to restart the tool. Will try to hot update the event data.")
+            check_for_new_event()
             time.sleep(60)
             return True
         else:
