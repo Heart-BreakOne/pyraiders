@@ -8,6 +8,7 @@ from utils.game_requests import get_proxy_auth, get_request_strings
 
 base_dimensions = 0.8
 
+
 # "x" "y" "width" "height"
 def calculate_placement(
     cap_id,
@@ -116,8 +117,7 @@ def calculate_placement(
         ai_units = MapData["PlacementData"]
     except:
         return []
-    
-    
+
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
     all_units = h_units + ai_units
     map_units = open_file(constants.map_units_path)
@@ -168,18 +168,18 @@ def calculate_placement(
     purple_squares = make_imaginary_mkrs(MapData["HoldingZoneRects"])
     ally_squares = make_imaginary_mkrs(MapData["AllyPlacementRects"])
     # No longer to be found on the MapData file
-    #neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
-    #m_list.extend(neutral_squares)
-    #f_neutral_squares = remove_overlap(neutral_squares, m_list)
+    # neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
+    # m_list.extend(neutral_squares)
+    # f_neutral_squares = remove_overlap(neutral_squares, m_list)
 
     m_list = []
     m_list.extend(all_units)
     m_list.extend(purple_squares)
     m_list.extend(ally_squares)
-    
+
     f_viewer_squares = remove_overlap(viewer_squares, m_list)
     f_purple_squares = remove_overlap(purple_squares, m_list)
-    
+
     markers = []
     if available_markers is not None or available_markers is not {}:
         for marker_name, marker_data in available_markers.items():
@@ -204,7 +204,9 @@ def calculate_placement(
     if markers == None or markers == []:
         markers = f_purple_squares
     if markers == None or markers == []:
-        print("Account: {name}: Something went wrong while trying to find an area to place at {cap_nm}.")
+        print(
+            f"Account: {name}: Something went wrong while trying to find an area to place at {cap_nm}."
+        )
 
     markers = shuffle_markers(markers, cap_coors, all_units)
 
@@ -264,9 +266,15 @@ def remove_overlap(squares_of_interest, overlapping_squares):
         x1, y1, w1, h1 = map(
             float, [square1["x"], square1["y"], square1["width"], square1["height"]]
         )
-        #TODO REVIEW TO MAKE SURE EPIC UNITS ARE GETTING THE CORRECT VALUE AS THEY MIGHT BE CAUSING THE OVER_UNIT ERROR
+        # TODO REVIEW TO MAKE SURE EPIC UNITS ARE GETTING THE CORRECT VALUE AS THEY MIGHT BE CAUSING THE OVER_UNIT ERROR
         x2, y2, w2, h2 = map(
-            float, [square2["x"], square2["y"], square2.get("width", 0.8), square2.get("height", 0.8)]
+            float,
+            [
+                square2["x"],
+                square2["y"],
+                square2.get("width", 0.8),
+                square2.get("height", 0.8),
+            ],
         )
 
         x_overlap = (x1 < x2 + w2) and (x2 < x1 + w1)
