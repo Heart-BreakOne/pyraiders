@@ -17,11 +17,11 @@ def handle_error_response(response):
         
         print("An error occurred while performing request.")
         if response["errorMessage"] == "Client lower." or response["errorMessage"] == "Game data mismatch.":
-            print("Game version changed, you may need to restart the tool. We will wait 60 seconds before trying again.")
+            print("Game version changed, you may need to restart the tool. Will wait 60 seconds before trying again.")
             time.sleep(60)
             return True
         else:
-            print("Server responded with an error, we will wait 60 seconds before trying again.")
+            print("Server responded with an error. Will wait 60 seconds before trying again.")
             time.sleep(60)
             return True
     else:
