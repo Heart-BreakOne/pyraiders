@@ -70,6 +70,7 @@ async def process_group(group):
         proxy = account["proxy"]
         proxy_user = account["proxy_user"]
         proxy_password = account["proxy_password"]
+        can_epic = account["use_potions"] 
         # Get active raids to determine placements
         raids = getActiveraids(
             user_id, token, user_agent, proxy, proxy_user, proxy_password
@@ -178,7 +179,7 @@ async def process_group(group):
                 else None
             )
 
-            if not validate_raid(raid, previous_placement, now, raid_type, creation_time):
+            if not validate_raid(raid):
                 continue
 
             # Check raid type, check if an unit was placed, check if the user wants more units.
@@ -197,6 +198,7 @@ async def process_group(group):
 
             #Place the unit
             place_the_unit(
+                can_epic,
                 raid,
                 units,
                 usable_markers,
@@ -215,8 +217,7 @@ async def process_group(group):
                 raid_type,
                 creation_time
             )
-            
-            return
+
 
 
 # Check if unit has priority and if it's out of cooldown.

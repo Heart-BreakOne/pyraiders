@@ -171,7 +171,18 @@ def remove_duplicate_ids(accounts):
     return unique_accounts
 
 
-def validate_raid(raid, previous_placement, now, raid_type, creation_time):
+def validate_raid(raid):
+    # Perform a new request for the raid and recalculate
+    # previous_placement, now, raid_type, creation_time
+    raid_type = raid["type"]
+    creation_time = datetime.strptime(raid["creationDate"], "%Y-%m-%d %H:%M:%S")
+    now = datetime.utcnow()
+    pp = raid["lastUnitPlacedTime"]
+    if pp == None:
+        previous_placement = False
+    else:
+        previous_placement = datetime.strptime(pp, "%Y-%m-%d %H:%M:%S")
+
     if raid_type == "1":
         # Campaign
         time_since_creation = now - creation_time if creation_time else timedelta(0)
@@ -213,15 +224,15 @@ def validate_raid(raid, previous_placement, now, raid_type, creation_time):
 def check_raid_type(raid_type, time_difference):
     if raid_type == "1":
         # Campaign
-        if time_difference > timedelta(minutes=29, seconds=50):
+        if time_difference > timedelta(minutes=29, seconds=45):
             return False
     elif raid_type == "2" or raid_type == "5":
         # Duels and clash
-        if time_difference > timedelta(minutes=6, seconds=55):
+        if time_difference > timedelta(minutes=6, seconds=45):
             return False
     elif raid_type == "3":
         # Dungeons
-        if time_difference > timedelta(minutes=5, seconds=55):
+        if time_difference > timedelta(minutes=5, seconds=45):
             return False
 
     return True
