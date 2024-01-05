@@ -94,6 +94,7 @@ async def process_group(group):
                 raid,
                 raid_id,
                 name,
+                cap_nm,
                 user_id,
                 token,
                 user_agent,
