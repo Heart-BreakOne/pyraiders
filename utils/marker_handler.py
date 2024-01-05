@@ -174,11 +174,12 @@ def calculate_placement(
 
     m_list = []
     m_list.extend(all_units)
-    m_list.extend(purple_squares)
     m_list.extend(ally_squares)
+    m_list_no_purple = m_list
+    m_list.extend(purple_squares)
 
     f_viewer_squares = remove_overlap(viewer_squares, m_list)
-    f_purple_squares = remove_overlap(purple_squares, m_list)
+    f_purple_squares = remove_overlap(purple_squares, m_list_no_purple)
 
     markers = []
     if available_markers is not None or available_markers is not {}:
