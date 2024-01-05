@@ -16481,266 +16481,266 @@
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_3a,overworldmap12node_bot_3b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap12node_bot_2"
   },
   "overworldmap12node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_4a",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap12node_bot_3a"
   },
   "overworldmap12node_bot_3b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_4b",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap12node_bot_3b"
   },
   "overworldmap12node_bot_4a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_5",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_bot_4a"
   },
   "overworldmap12node_bot_4b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap12node_bot_4b"
   },
   "overworldmap12node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_6a,overworldmap12node_bot_6b,overworldmap12node_mid_2,overworldmap12node_bot_extra1",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap12node_bot_5"
   },
   "overworldmap12node_bot_6a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_boss,overworldmap12node_bot_extra2",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap12node_bot_6a"
   },
   "overworldmap12node_bot_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_boss,overworldmap12node_bot_extra2",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_bot_6b"
   },
   "overworldmap12node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap12",
     "NodeConnections": "",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap12node_bot_boss"
   },
   "overworldmap12node_bot_extra1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_6a,overworldmap12node_bot_6b",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap12node_bot_extra1"
   },
   "overworldmap12node_bot_extra2": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_boss",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap12node_bot_extra2"
   },
   "overworldmap12node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_bot_2,overworldmap12node_mid_1",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_bot_start"
   },
   "overworldmap12node_mid_1": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_3,overworldmap12node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap12node_mid_1"
   },
   "overworldmap12node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap12node_mid_2"
   },
   "overworldmap12node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_3",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap12node_top_2"
   },
   "overworldmap12node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_4a,overworldmap12node_top_4b",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_top_3"
   },
   "overworldmap12node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_5",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap12node_top_4a"
   },
   "overworldmap12node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap12node_top_4b"
   },
   "overworldmap12node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_6a,overworldmap12node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap12node_top_5"
   },
   "overworldmap12node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_7a",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap12node_top_6a"
   },
   "overworldmap12node_top_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_7b",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_top_6b"
   },
   "overworldmap12node_top_7a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_8,overworldmap12node_top_extra",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_top_7a"
   },
   "overworldmap12node_top_7b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_8,overworldmap12node_top_extra",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap12node_top_7b"
   },
   "overworldmap12node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_9a,overworldmap12node_top_9b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap12node_top_8"
   },
   "overworldmap12node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_boss",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap12node_top_9a"
   },
   "overworldmap12node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap12node_top_9b"
   },
   "overworldmap12node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap12",
     "NodeConnections": "",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap12node_top_boss"
   },
   "overworldmap12node_top_extra": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_8",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap12node_top_extra"
   },
   "overworldmap12node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap12",
     "NodeConnections": "overworldmap12node_top_2,overworldmap12node_mid_1",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap12node_top_start"
   },
   "overworldmap13node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_3a,overworldmap13node_bot_3b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap13node_bot_2"
   },
   "overworldmap13node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_4a",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap13node_bot_3a"
   },
   "overworldmap13node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_4b",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap13node_bot_3b"
   },
   "overworldmap13node_bot_4a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_5",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_bot_4a"
   },
   "overworldmap13node_bot_4b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap13node_bot_4b"
   },
   "overworldmap13node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_mid_2,overworldmap13node_bot_6a,overworldmap13node_bot_6b,overworldmap13node_bot_extra1",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap13node_bot_5"
   },
   "overworldmap13node_bot_6a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_boss,overworldmap13node_bot_extra2",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap13node_bot_6a"
   },
   "overworldmap13node_bot_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_boss,overworldmap13node_bot_extra2",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_bot_6b"
   },
   "overworldmap13node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap13",
     "NodeConnections": "",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap13node_bot_boss"
   },
   "overworldmap13node_bot_extra1": {
@@ -16754,119 +16754,119 @@
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_bot_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap13node_bot_extra2"
   },
   "overworldmap13node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_mid_1,overworldmap13node_bot_2",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_bot_start"
   },
   "overworldmap13node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_3,overworldmap13node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap13node_mid_1"
   },
   "overworldmap13node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap13node_mid_2"
   },
   "overworldmap13node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_3",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap13node_top_2"
   },
   "overworldmap13node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_4a,overworldmap13node_top_4b",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_top_3"
   },
   "overworldmap13node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_5",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap13node_top_4a"
   },
   "overworldmap13node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_5",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap13node_top_4b"
   },
   "overworldmap13node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_6a,overworldmap13node_top_6b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap13node_top_5"
   },
   "overworldmap13node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_7a",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap13node_top_6a"
   },
   "overworldmap13node_top_6b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_7b",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap13node_top_6b"
   },
   "overworldmap13node_top_7a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_8,overworldmap13node_top_extra",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap13node_top_7a"
   },
   "overworldmap13node_top_7b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_8,overworldmap13node_top_extra",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_top_7b"
   },
   "overworldmap13node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_9a,overworldmap13node_top_9b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap13node_top_8"
   },
   "overworldmap13node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_boss",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap13node_top_9a"
   },
   "overworldmap13node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_boss",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap13node_top_9b"
   },
   "overworldmap13node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap13",
     "NodeConnections": "",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap13node_top_boss"
   },
   "overworldmap13node_top_extra": {
@@ -16880,448 +16880,448 @@
     "ChestType": "chestbronze",
     "MapId": "overworldmap13",
     "NodeConnections": "overworldmap13node_top_2,overworldmap13node_mid_1",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap13node_top_start"
   },
   "overworldmap14node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_3a,overworldmap14node_bot_3b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap14node_bot_2"
   },
   "overworldmap14node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_4a",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap14node_bot_3a"
   },
   "overworldmap14node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_4b",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_bot_3b"
   },
   "overworldmap14node_bot_4a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_5",
-    "NodeType": "polterheistmansion",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap14node_bot_4a"
   },
   "overworldmap14node_bot_4b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_5",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap14node_bot_4b"
   },
   "overworldmap14node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_6a,overworldmap14node_bot_6b,overworldmap14node_mid_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap14node_bot_5"
   },
   "overworldmap14node_bot_6a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_extra,overworldmap14node_bot_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_bot_6a"
   },
   "overworldmap14node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_extra,overworldmap14node_bot_boss",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap14node_bot_6b"
   },
   "overworldmap14node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap14",
     "NodeConnections": "",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap14node_bot_boss"
   },
   "overworldmap14node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_bot_boss",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap14node_bot_extra"
   },
   "overworldmap14node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_mid_1,overworldmap14node_bot_2",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_bot_start"
   },
   "overworldmap14node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_3,overworldmap14node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap14node_mid_1"
   },
   "overworldmap14node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap14node_mid_2"
   },
   "overworldmap14node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_3",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap14node_top_2"
   },
   "overworldmap14node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_4a,overworldmap14node_top_4b",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_top_3"
   },
   "overworldmap14node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_5",
-    "NodeType": "polterheistmansion",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap14node_top_4a"
   },
   "overworldmap14node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_5",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap14node_top_4b"
   },
   "overworldmap14node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_6a,overworldmap14node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap14node_top_5"
   },
   "overworldmap14node_top_6a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_7a",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_top_6a"
   },
   "overworldmap14node_top_6b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_7b",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap14node_top_6b"
   },
   "overworldmap14node_top_7a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_8",
-    "NodeType": "polterheistmansion",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap14node_top_7a"
   },
   "overworldmap14node_top_7b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_8",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_top_7b"
   },
   "overworldmap14node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_9a,overworldmap14node_top_9b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap14node_top_8"
   },
   "overworldmap14node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_boss",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap14node_top_9a"
   },
   "overworldmap14node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_boss",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap14node_top_9b"
   },
   "overworldmap14node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap14",
     "NodeConnections": "",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap14node_top_boss"
   },
   "overworldmap14node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap14",
     "NodeConnections": "overworldmap14node_top_2,overworldmap14node_mid_1",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap14node_top_start"
   },
   "overworldmap15node_bot_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_3a,overworldmap15node_bot_3b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap15node_bot_2"
   },
   "overworldmap15node_bot_3a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_4a",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_bot_3a"
   },
   "overworldmap15node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_4b",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_bot_3b"
   },
   "overworldmap15node_bot_4a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_5",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap15node_bot_4a"
   },
   "overworldmap15node_bot_4b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_bot_4b"
   },
   "overworldmap15node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_6a,overworldmap15node_bot_6b,overworldmap15node_mid_2",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_bot_5"
   },
   "overworldmap15node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_boss,overworldmap15node_bot_extra",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap15node_bot_6a"
   },
   "overworldmap15node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_boss,overworldmap15node_bot_extra",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_bot_6b"
   },
   "overworldmap15node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap15",
     "NodeConnections": "",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap15node_bot_boss"
   },
   "overworldmap15node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_boss",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap15node_bot_extra"
   },
   "overworldmap15node_bot_start": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_bot_2,overworldmap15node_mid_1",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_bot_start"
   },
   "overworldmap15node_mid_1": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_3,overworldmap15node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap15node_mid_1"
   },
   "overworldmap15node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap15node_mid_2"
   },
   "overworldmap15node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_3",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_top_2"
   },
   "overworldmap15node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_4a,overworldmap15node_top_4b",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_top_3"
   },
   "overworldmap15node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_5",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap15node_top_4a"
   },
   "overworldmap15node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_5",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap15node_top_4b"
   },
   "overworldmap15node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_6a,overworldmap15node_top_6b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap15node_top_5"
   },
   "overworldmap15node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_7a",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_top_6a"
   },
   "overworldmap15node_top_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_7b",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_top_6b"
   },
   "overworldmap15node_top_7a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_8",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap15node_top_7a"
   },
   "overworldmap15node_top_7b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_8",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_top_7b"
   },
   "overworldmap15node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_9a,overworldmap15node_top_9b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_top_8"
   },
   "overworldmap15node_top_9a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap15node_top_9a"
   },
   "overworldmap15node_top_9b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_boss",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap15node_top_9b"
   },
   "overworldmap15node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap15",
     "NodeConnections": "",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap15node_top_boss"
   },
   "overworldmap15node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap15",
     "NodeConnections": "overworldmap15node_top_2,overworldmap15node_mid_1",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap15node_top_start"
   },
   "overworldmap16node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_3a,overworldmap16node_bot_3b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_bot_2"
   },
   "overworldmap16node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_4a",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_bot_3a"
   },
   "overworldmap16node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_4b",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_bot_3b"
   },
   "overworldmap16node_bot_4a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_5,overworldmap16node_bot_extra1",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_bot_4a"
   },
   "overworldmap16node_bot_4b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_5,overworldmap16node_bot_extra1",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap16node_bot_4b"
   },
   "overworldmap16node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_mid_2,overworldmap16node_bot_6a,overworldmap16node_bot_6b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap16node_bot_5"
   },
   "overworldmap16node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_boss,overworldmap16node_bot_extra2",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap16node_bot_6a"
   },
   "overworldmap16node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_boss,overworldmap16node_bot_extra2",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_bot_6b"
   },
   "overworldmap16node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap16",
     "NodeConnections": "",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap16node_bot_boss"
   },
   "overworldmap16node_bot_extra1": {
@@ -17335,119 +17335,119 @@
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_bot_boss",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap16node_bot_extra2"
   },
   "overworldmap16node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_mid_1,overworldmap16node_bot_2",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_bot_start"
   },
   "overworldmap16node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_3,overworldmap16node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap16node_mid_1"
   },
   "overworldmap16node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap16node_mid_2"
   },
   "overworldmap16node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_3",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_top_2"
   },
   "overworldmap16node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_4a,overworldmap16node_top_4b",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_top_3"
   },
   "overworldmap16node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_5,overworldmap16node_top_extra1",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap16node_top_4a"
   },
   "overworldmap16node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_5,overworldmap16node_top_extra1",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap16node_top_4b"
   },
   "overworldmap16node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_6a,overworldmap16node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_top_5"
   },
   "overworldmap16node_top_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_7a",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_top_6a"
   },
   "overworldmap16node_top_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_7b",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_top_6b"
   },
   "overworldmap16node_top_7a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_8",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_top_7a"
   },
   "overworldmap16node_top_7b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_8",
-    "NodeType": "polterheistplaza",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap16node_top_7b"
   },
   "overworldmap16node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_9a,overworldmap16node_top_9b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "betaraidersmystery",
     "Uid": "overworldmap16node_top_8"
   },
   "overworldmap16node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap16node_top_9a"
   },
   "overworldmap16node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_boss",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap16node_top_9b"
   },
   "overworldmap16node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap16",
     "NodeConnections": "",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap16node_top_boss"
   },
   "overworldmap16node_top_extra1": {
@@ -17461,448 +17461,448 @@
     "ChestType": "chestbronze",
     "MapId": "overworldmap16",
     "NodeConnections": "overworldmap16node_top_2,overworldmap16node_mid_1",
-    "NodeType": "polterheistmansion",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap16node_top_start"
   },
   "overworldmap17node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_3a,overworldmap17node_bot_3b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap17node_bot_2"
   },
   "overworldmap17node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_4a",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "glitchedoasissands",
     "Uid": "overworldmap17node_bot_3a"
   },
   "overworldmap17node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_4b",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "glitchedboardlandiahold",
     "Uid": "overworldmap17node_bot_3b"
   },
   "overworldmap17node_bot_4a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "glitchedtabletoptowers",
     "Uid": "overworldmap17node_bot_4a"
   },
   "overworldmap17node_bot_4b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_5",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_bot_4b"
   },
   "overworldmap17node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_6a,overworldmap17node_bot_6b,overworldmap17node_mid_2",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap17node_bot_5"
   },
   "overworldmap17node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_extra,overworldmap17node_bot_boss",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_bot_6a"
   },
   "overworldmap17node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_extra,overworldmap17node_bot_boss",
-    "NodeType": "polterheistmansion",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap17node_bot_6b"
   },
   "overworldmap17node_bot_boss": {
     "ChestType": "chestbosssuper",
     "MapId": "overworldmap17",
     "NodeConnections": "",
-    "NodeType": "polterheisttownboss",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap17node_bot_boss"
   },
   "overworldmap17node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_bot_boss",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_bot_extra"
   },
   "overworldmap17node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_mid_1,overworldmap17node_bot_2",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_bot_start"
   },
   "overworldmap17node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_3,overworldmap17node_bot_2",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap17node_mid_1"
   },
   "overworldmap17node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_8",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap17node_mid_2"
   },
   "overworldmap17node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_3",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "glitchedoasissands",
     "Uid": "overworldmap17node_top_2"
   },
   "overworldmap17node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_4a,overworldmap17node_top_4b",
-    "NodeType": "polterheistplaza",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap17node_top_3"
   },
   "overworldmap17node_top_4a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_5",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "glitchedboardlandiahold",
     "Uid": "overworldmap17node_top_4a"
   },
   "overworldmap17node_top_4b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_5",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "glitchedtabletoptowers",
     "Uid": "overworldmap17node_top_4b"
   },
   "overworldmap17node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_6a,overworldmap17node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap17node_top_5"
   },
   "overworldmap17node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_7a",
-    "NodeType": "polterheistmansion",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap17node_top_6a"
   },
   "overworldmap17node_top_6b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_7b",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_top_6b"
   },
   "overworldmap17node_top_7a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_8",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_top_7a"
   },
   "overworldmap17node_top_7b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_8",
-    "NodeType": "polterheistpanicroom",
+    "NodeType": "glitchedtabletoptowers",
     "Uid": "overworldmap17node_top_7b"
   },
   "overworldmap17node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_9a,overworldmap17node_top_9b",
-    "NodeType": "polterheisttownmystery",
+    "NodeType": "alpharaidersmystery",
     "Uid": "overworldmap17node_top_8"
   },
   "overworldmap17node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_boss",
-    "NodeType": "polterheisttownsquare",
+    "NodeType": "glitchedboardlandiahold",
     "Uid": "overworldmap17node_top_9a"
   },
   "overworldmap17node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_boss",
-    "NodeType": "polterheistbreaking",
+    "NodeType": "glitchedoasissands",
     "Uid": "overworldmap17node_top_9b"
   },
   "overworldmap17node_top_boss": {
     "ChestType": "chestbosssuper",
     "MapId": "overworldmap17",
     "NodeConnections": "",
-    "NodeType": "polterheisttownboss",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap17node_top_boss"
   },
   "overworldmap17node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap17",
     "NodeConnections": "overworldmap17node_top_2,overworldmap17node_mid_1",
-    "NodeType": "polterheistplaza",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap17node_top_start"
   },
   "overworldmap18node_bot_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_3a,overworldmap18node_bot_3b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedmothershiparmory",
     "Uid": "overworldmap18node_bot_2"
   },
   "overworldmap18node_bot_3a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_4a",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap18node_bot_3a"
   },
   "overworldmap18node_bot_3b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_4b",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_bot_3b"
   },
   "overworldmap18node_bot_4a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_5",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_bot_4a"
   },
   "overworldmap18node_bot_4b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedthehiveconveyor",
     "Uid": "overworldmap18node_bot_4b"
   },
   "overworldmap18node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_6a,overworldmap18node_bot_6b,overworldmap18node_mid_2",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap18node_bot_5"
   },
   "overworldmap18node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_boss,overworldmap18node_bot_extra",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap18node_bot_6a"
   },
   "overworldmap18node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_boss,overworldmap18node_bot_extra",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap18node_bot_6b"
   },
   "overworldmap18node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap18",
     "NodeConnections": "",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap18node_bot_boss"
   },
   "overworldmap18node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_boss",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap18node_bot_extra"
   },
   "overworldmap18node_bot_start": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_bot_2,overworldmap18node_mid_1",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_bot_start"
   },
   "overworldmap18node_mid_1": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_3,overworldmap18node_bot_2",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedmothershiparmory",
     "Uid": "overworldmap18node_mid_1"
   },
   "overworldmap18node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_8",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap18node_mid_2"
   },
   "overworldmap18node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_3",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap18node_top_2"
   },
   "overworldmap18node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_4a,overworldmap18node_top_4b",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmothershiparmory",
     "Uid": "overworldmap18node_top_3"
   },
   "overworldmap18node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedthehiveconveyor",
     "Uid": "overworldmap18node_top_4a"
   },
   "overworldmap18node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_5",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap18node_top_4b"
   },
   "overworldmap18node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_6a,overworldmap18node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "betaraidersmaze",
     "Uid": "overworldmap18node_top_5"
   },
   "overworldmap18node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_7a",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap18node_top_6a"
   },
   "overworldmap18node_top_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_7b",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_top_6b"
   },
   "overworldmap18node_top_7a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_8",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_top_7a"
   },
   "overworldmap18node_top_7b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_8",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap18node_top_7b"
   },
   "overworldmap18node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_9a,overworldmap18node_top_9b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap18node_top_8"
   },
   "overworldmap18node_top_9a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_boss",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedthehiveconveyor",
     "Uid": "overworldmap18node_top_9a"
   },
   "overworldmap18node_top_9b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_boss",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_top_9b"
   },
   "overworldmap18node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap18",
     "NodeConnections": "",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap18node_top_boss"
   },
   "overworldmap18node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap18",
     "NodeConnections": "overworldmap18node_top_2,overworldmap18node_mid_1",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap18node_top_start"
   },
   "overworldmap19node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_3a,overworldmap19node_bot_3b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_bot_2"
   },
   "overworldmap19node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_4a",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedbeastlandsbeastcage",
     "Uid": "overworldmap19node_bot_3a"
   },
   "overworldmap19node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_4b",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap19node_bot_3b"
   },
   "overworldmap19node_bot_4a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_5",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedpolterheistbreaking",
     "Uid": "overworldmap19node_bot_4a"
   },
   "overworldmap19node_bot_4b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_5",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap19node_bot_4b"
   },
   "overworldmap19node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_mid_2,overworldmap19node_bot_6a,overworldmap19node_bot_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_bot_5"
   },
   "overworldmap19node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_boss,overworldmap19node_bot_extra",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedlibraryworms",
     "Uid": "overworldmap19node_bot_6a"
   },
   "overworldmap19node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_bot_boss,overworldmap19node_bot_extra",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedthehiveconveyor",
     "Uid": "overworldmap19node_bot_6b"
   },
   "overworldmap19node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap19",
     "NodeConnections": "",
-    "NodeType": "polterheistswamp",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap19node_bot_boss"
   },
   "overworldmap19node_bot_extra": {
@@ -17916,112 +17916,112 @@
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_mid_1,overworldmap19node_bot_2",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedsportiabasket",
     "Uid": "overworldmap19node_bot_start"
   },
   "overworldmap19node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_3,overworldmap19node_bot_2",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_mid_1"
   },
   "overworldmap19node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_8",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_mid_2"
   },
   "overworldmap19node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_3",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedbeastlandsbeastcage",
     "Uid": "overworldmap19node_top_2"
   },
   "overworldmap19node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_4a,overworldmap19node_top_4b",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap19node_top_3"
   },
   "overworldmap19node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_5",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap19node_top_4a"
   },
   "overworldmap19node_top_4b": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_5",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedthehiveconveyor",
     "Uid": "overworldmap19node_top_4b"
   },
   "overworldmap19node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_6a,overworldmap19node_top_6b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_top_5"
   },
   "overworldmap19node_top_6a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_7a,overworldmap19node_top_extra",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedpolterheistbreaking",
     "Uid": "overworldmap19node_top_6a"
   },
   "overworldmap19node_top_6b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_7b,overworldmap19node_top_extra",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedlibraryworms",
     "Uid": "overworldmap19node_top_6b"
   },
   "overworldmap19node_top_7a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_8",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap19node_top_7a"
   },
   "overworldmap19node_top_7b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_8",
-    "NodeType": "polterheistswamp",
+    "NodeType": "alpharaiderssquare",
     "Uid": "overworldmap19node_top_7b"
   },
   "overworldmap19node_top_8": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_9a,overworldmap19node_top_9b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap19node_top_8"
   },
   "overworldmap19node_top_9a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_boss",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap19node_top_9a"
   },
   "overworldmap19node_top_9b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_boss",
-    "NodeType": "polterheistclearing",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap19node_top_9b"
   },
   "overworldmap19node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap19",
     "NodeConnections": "",
-    "NodeType": "polterheistswamp",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap19node_top_boss"
   },
   "overworldmap19node_top_extra": {
@@ -18035,259 +18035,259 @@
     "ChestType": "chestbronze",
     "MapId": "overworldmap19",
     "NodeConnections": "overworldmap19node_top_2,overworldmap19node_mid_1",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedsportiabasket",
     "Uid": "overworldmap19node_top_start"
   },
   "overworldmap20node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_3a,overworldmap20node_bot_3b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_bot_2"
   },
   "overworldmap20node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_4a",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap20node_bot_3a"
   },
   "overworldmap20node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_4b",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap20node_bot_3b"
   },
   "overworldmap20node_bot_4a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_5",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedmothershiparmory",
     "Uid": "overworldmap20node_bot_4a"
   },
   "overworldmap20node_bot_4b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap20node_bot_4b"
   },
   "overworldmap20node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_6a,overworldmap20node_bot_6b,overworldmap20node_mid_2",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_bot_5"
   },
   "overworldmap20node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_extra,overworldmap20node_bot_boss",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedsportiascrum",
     "Uid": "overworldmap20node_bot_6a"
   },
   "overworldmap20node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_extra,overworldmap20node_bot_boss",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedboardlandiahold",
     "Uid": "overworldmap20node_bot_6b"
   },
   "overworldmap20node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap20",
     "NodeConnections": "",
-    "NodeType": "polterheistclearing",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap20node_bot_boss"
   },
   "overworldmap20node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_boss",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_bot_extra"
   },
   "overworldmap20node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_mid_1,overworldmap20node_bot_2",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap20node_bot_start"
   },
   "overworldmap20node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_bot_2,overworldmap20node_top_3",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_mid_1"
   },
   "overworldmap20node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_8",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_mid_2"
   },
   "overworldmap20node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_3",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap20node_top_2"
   },
   "overworldmap20node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_4a,overworldmap20node_top_4b",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap20node_top_3"
   },
   "overworldmap20node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_5",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedmothershiparmory",
     "Uid": "overworldmap20node_top_4a"
   },
   "overworldmap20node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_5",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedsportiascrum",
     "Uid": "overworldmap20node_top_4b"
   },
   "overworldmap20node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_6a,overworldmap20node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_top_5"
   },
   "overworldmap20node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_7a",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap20node_top_6a"
   },
   "overworldmap20node_top_6b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_7b",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedboardlandiahold",
     "Uid": "overworldmap20node_top_6b"
   },
   "overworldmap20node_top_7a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_8",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraidersdungeon",
     "Uid": "overworldmap20node_top_7a"
   },
   "overworldmap20node_top_7b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_8",
-    "NodeType": "polterheistclearing",
+    "NodeType": "betaraidersflank",
     "Uid": "overworldmap20node_top_7b"
   },
   "overworldmap20node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_9a,overworldmap20node_top_9b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap20node_top_8"
   },
   "overworldmap20node_top_9a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_boss",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "betaraidersweb",
     "Uid": "overworldmap20node_top_9a"
   },
   "overworldmap20node_top_9b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_boss",
-    "NodeType": "polterheistswamp",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap20node_top_9b"
   },
   "overworldmap20node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap20",
     "NodeConnections": "",
-    "NodeType": "polterheistclearing",
+    "NodeType": "alpharaidersdivided",
     "Uid": "overworldmap20node_top_boss"
   },
   "overworldmap20node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap20",
     "NodeConnections": "overworldmap20node_top_2,overworldmap20node_mid_1",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap20node_top_start"
   },
   "overworldmap21node_bot_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_3a,overworldmap21node_bot_3b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_bot_2"
   },
   "overworldmap21node_bot_3a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_4a",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap21node_bot_3a"
   },
   "overworldmap21node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_4b",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap21node_bot_3b"
   },
   "overworldmap21node_bot_4a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedwildsbrush",
     "Uid": "overworldmap21node_bot_4a"
   },
   "overworldmap21node_bot_4b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_5",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedshrinkeningpuddles",
     "Uid": "overworldmap21node_bot_4b"
   },
   "overworldmap21node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_6a,overworldmap21node_bot_6b,overworldmap21node_mid_2",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_bot_5"
   },
   "overworldmap21node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_boss,overworldmap21node_bot_extra",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedbeastlandsbeastcage",
     "Uid": "overworldmap21node_bot_6a"
   },
   "overworldmap21node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_boss,overworldmap21node_bot_extra",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedalpharaidersdefend",
     "Uid": "overworldmap21node_bot_6b"
   },
   "overworldmap21node_bot_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap21",
     "NodeConnections": "",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap21node_bot_boss"
   },
   "overworldmap21node_bot_extra": {
@@ -18301,112 +18301,112 @@
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_bot_2,overworldmap21node_mid_1",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedoasissands",
     "Uid": "overworldmap21node_bot_start"
   },
   "overworldmap21node_mid_1": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_3,overworldmap21node_bot_2",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_mid_1"
   },
   "overworldmap21node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_8",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_mid_2"
   },
   "overworldmap21node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_3",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap21node_top_2"
   },
   "overworldmap21node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_4a,overworldmap21node_top_4b",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap21node_top_3"
   },
   "overworldmap21node_top_4a": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_5,overworldmap21node_top_extra",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedwildsbrush",
     "Uid": "overworldmap21node_top_4a"
   },
   "overworldmap21node_top_4b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_5,overworldmap21node_top_extra",
-    "NodeType": "polterheistswamp",
+    "NodeType": "glitchedshrinkeningpuddles",
     "Uid": "overworldmap21node_top_4b"
   },
   "overworldmap21node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_6a,overworldmap21node_top_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_top_5"
   },
   "overworldmap21node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_7a",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedalpharaidersdefend",
     "Uid": "overworldmap21node_top_6a"
   },
   "overworldmap21node_top_6b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_7b",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedbeastlandsbeastcage",
     "Uid": "overworldmap21node_top_6b"
   },
   "overworldmap21node_top_7a": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_8",
-    "NodeType": "polterheistroad",
+    "NodeType": "alpharaiderssimple",
     "Uid": "overworldmap21node_top_7a"
   },
   "overworldmap21node_top_7b": {
     "ChestType": "chestboostedgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_8",
-    "NodeType": "polterheistswamp",
+    "NodeType": "alpharaidersdefend",
     "Uid": "overworldmap21node_top_7b"
   },
   "overworldmap21node_top_8": {
     "ChestType": "chestgold",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_9a,overworldmap21node_top_9b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedbetaraidersmaze",
     "Uid": "overworldmap21node_top_8"
   },
   "overworldmap21node_top_9a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_boss",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "alpharaidersforest",
     "Uid": "overworldmap21node_top_9a"
   },
   "overworldmap21node_top_9b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_boss",
-    "NodeType": "polterheistclearing",
+    "NodeType": "alpharaiderslake",
     "Uid": "overworldmap21node_top_9b"
   },
   "overworldmap21node_top_boss": {
     "ChestType": "chestboss",
     "MapId": "overworldmap21",
     "NodeConnections": "",
-    "NodeType": "polterheistroad",
+    "NodeType": "betaraiderslair",
     "Uid": "overworldmap21node_top_boss"
   },
   "overworldmap21node_top_extra": {
@@ -18420,196 +18420,196 @@
     "ChestType": "chestbronze",
     "MapId": "overworldmap21",
     "NodeConnections": "overworldmap21node_top_2,overworldmap21node_mid_1",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedoasissands",
     "Uid": "overworldmap21node_top_start"
   },
   "overworldmap22node_bot_2": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_3a,overworldmap22node_bot_3b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedshrinkeningpuddles",
     "Uid": "overworldmap22node_bot_2"
   },
   "overworldmap22node_bot_3a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_4a",
-    "NodeType": "polterheistroad",
+    "NodeType": "gitchedpolterheistforestmist",
     "Uid": "overworldmap22node_bot_3a"
   },
   "overworldmap22node_bot_3b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_4b",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedsportiabasket",
     "Uid": "overworldmap22node_bot_3b"
   },
   "overworldmap22node_bot_4a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_5",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap22node_bot_4a"
   },
   "overworldmap22node_bot_4b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedlibraryworms",
     "Uid": "overworldmap22node_bot_4b"
   },
   "overworldmap22node_bot_5": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_mid_2,overworldmap22node_bot_6a,overworldmap22node_bot_6b",
-    "NodeType": "halloweenmystery",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap22node_bot_5"
   },
   "overworldmap22node_bot_6a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_boss,overworldmap22node_bot_extra",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap22node_bot_6a"
   },
   "overworldmap22node_bot_6b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_boss,overworldmap22node_bot_extra",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap22node_bot_6b"
   },
   "overworldmap22node_bot_boss": {
     "ChestType": "chestbosssuper",
     "MapId": "overworldmap22",
     "NodeConnections": "",
-    "NodeType": "polterheistforestboss",
+    "NodeType": "glitchedboss",
     "Uid": "overworldmap22node_bot_boss"
   },
   "overworldmap22node_bot_extra": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_bot_boss",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap22node_bot_extra"
   },
   "overworldmap22node_bot_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_mid_1,overworldmap22node_bot_2",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap22node_bot_start"
   },
   "overworldmap22node_mid_1": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_3,overworldmap22node_bot_2",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedtabletoptowers",
     "Uid": "overworldmap22node_mid_1"
   },
   "overworldmap22node_mid_2": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_8",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap22node_mid_2"
   },
   "overworldmap22node_top_2": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_3",
-    "NodeType": "polterheistroad",
+    "NodeType": "gitchedpolterheistforestmist",
     "Uid": "overworldmap22node_top_2"
   },
   "overworldmap22node_top_3": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_4a,overworldmap22node_top_4b",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedsportiabasket",
     "Uid": "overworldmap22node_top_3"
   },
   "overworldmap22node_top_4a": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedlibraryworms",
     "Uid": "overworldmap22node_top_4a"
   },
   "overworldmap22node_top_4b": {
     "ChestType": "chestboostedtoken",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_5",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedcrucibleforge",
     "Uid": "overworldmap22node_top_4b"
   },
   "overworldmap22node_top_5": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_6a,overworldmap22node_top_6b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedretrotown",
     "Uid": "overworldmap22node_top_5"
   },
   "overworldmap22node_top_6a": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_7a",
-    "NodeType": "polterheistforestmist",
+    "NodeType": "glitchedfrontierambush",
     "Uid": "overworldmap22node_top_6a"
   },
   "overworldmap22node_top_6b": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_7b",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedcrashzonedepths",
     "Uid": "overworldmap22node_top_6b"
   },
   "overworldmap22node_top_7a": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_8",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedtombtrapped",
     "Uid": "overworldmap22node_top_7a"
   },
   "overworldmap22node_top_7b": {
     "ChestType": "chestboostedskin_maps12to22",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_8",
-    "NodeType": "polterheistroad",
+    "NodeType": "glitchedtabletoptowers",
     "Uid": "overworldmap22node_top_7b"
   },
   "overworldmap22node_top_8": {
     "ChestType": "chestsilver",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_9a,overworldmap22node_top_9b",
-    "NodeType": "polterheistforestmystery",
+    "NodeType": "glitchedshrinkeningpuddles",
     "Uid": "overworldmap22node_top_8"
   },
   "overworldmap22node_top_9a": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_boss",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedmoboatx",
     "Uid": "overworldmap22node_top_9a"
   },
   "overworldmap22node_top_9b": {
     "ChestType": "chestgold",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_boss",
-    "NodeType": "polterheistclearing",
+    "NodeType": "glitchedlibraryworms",
     "Uid": "overworldmap22node_top_9b"
   },
   "overworldmap22node_top_boss": {
     "ChestType": "chestbosssuper",
     "MapId": "overworldmap22",
     "NodeConnections": "",
-    "NodeType": "polterheistforestboss",
+    "NodeType": "glitchedboss",
     "Uid": "overworldmap22node_top_boss"
   },
   "overworldmap22node_top_start": {
     "ChestType": "chestbronze",
     "MapId": "overworldmap22",
     "NodeConnections": "overworldmap22node_top_2,overworldmap22node_mid_1",
-    "NodeType": "polterheistrivercrossing",
+    "NodeType": "glitchedbeastlandsbugmushroomfield",
     "Uid": "overworldmap22node_top_start"
   },
   "overworldmap23node_bot_2": {

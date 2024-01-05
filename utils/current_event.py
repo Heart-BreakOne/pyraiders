@@ -1,1 +1,1 @@
-current_event = "snowfall_02"
+current_event = "glitched_02"

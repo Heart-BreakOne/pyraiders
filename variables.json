@@ -1,3 +1,7 @@
 {
-  "map_node_url": "https://streamcap-prod1.s3.amazonaws.com/data/data.1f6c65d29463.json"
+  "map_node_url": "https://streamcap-prod1.s3.amazonaws.com/data/data.0ecaa6b0ef69.json",
+  "global_ignore": [
+    "captain1",
+    "captain2"
+  ]
 }

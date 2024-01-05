@@ -52,7 +52,7 @@ async def fill_slots():
             temporary_ignore = account["temporary_ignore"]
             has_pass = account["has_pass"]
             slots_quantity = account["slots"]
-
+            
             activeRaids = getActiveraids(
                 user_id, token, user_agent, proxy, proxy_user, proxy_password
             )
@@ -280,6 +280,20 @@ def fill_empty_slots(
             unique_data.append(entry)
 
     acceptable_captains = []
+    global_ignore = open_file("variables.json")
+    gb_list = global_ignore["global_ignore"]
+    if len(gb_list) != 0:
+                acceptable_captains = sorted(
+            (
+                entry
+                for entry in unique_data
+                if entry["twitchUserName"].upper() in map(str.upper, global_ignore)
+            ),
+            key=lambda x: global_ignore.index(x["twitchUserName"].upper())
+            if x["twitchUserName"].upper() in global_ignore
+            else float("inf"),
+        )
+    
     # User wants to use masterlist
     if len(masterlist) != 0:
         acceptable_captains = sorted(

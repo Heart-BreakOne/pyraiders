@@ -76,7 +76,7 @@ Potions not yet implemented.
         "proxy": "",
         "proxy_user": "",
         "proxy_password": "",
-        "user_potions": False,
+        "use_potions": False,
         "has_pass": False,
         "userId": "",
         "otherUserId": "",

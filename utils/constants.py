@@ -42,7 +42,7 @@ default_entry = [
         "proxy": "",
         "proxy_user": "",
         "proxy_password": "",
-        "user_potions": False,
+        "use_potions": False,
         "has_pass": False,
         "userId": "",
         "otherUserId": "",
@@ -86,7 +86,6 @@ units_dict =  [
     { "type": "melee", "name": "warbeast", "alt": "" },
     { "type": "melee", "name": "warrior", "alt": "" },
 ]
-
 
 py_accounts = "pyraiders_accounts.json"
 keys_to_remove = [
