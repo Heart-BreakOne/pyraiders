@@ -1,6 +1,7 @@
 import asyncio, sys
 import threading
 import time
+from utils.data_compat import update_data_structure
 from utils.settings import (
     write_file,
     open_file,
@@ -56,9 +57,13 @@ async def run():
     data = clean_temp_times(data)
 
     # Remove duplicate userIds
-    print("Removing duplicate accounts...")
+    print("Cleaning any duplicate accounts...")
     data = remove_duplicate_ids(data)
-
+    
+    # Update data structure so the old data is compliant with the new data structure
+    print("Making sure the data structure is up to date...")
+    data = update_data_structure(data)
+    
     # Write changes to storage
     write_file(constants.py_accounts, data)
     print("Saved changes.")

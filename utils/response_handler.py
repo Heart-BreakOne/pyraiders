@@ -28,6 +28,7 @@ def handle_error_response(response):
             print(
                 "Server responded with an error. Will wait 60 seconds before trying again."
             )
+            print(response)
             time.sleep(60)
             return True
     else:

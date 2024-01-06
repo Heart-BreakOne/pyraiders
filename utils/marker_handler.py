@@ -167,19 +167,27 @@ def calculate_placement(
     viewer_squares = make_imaginary_mkrs(MapData["PlayerPlacementRects"])
     purple_squares = make_imaginary_mkrs(MapData["HoldingZoneRects"])
     ally_squares = make_imaginary_mkrs(MapData["AllyPlacementRects"])
-    # No longer to be found on the MapData file
-    # neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
-    # m_list.extend(neutral_squares)
-    # f_neutral_squares = remove_overlap(neutral_squares, m_list)
+    try:
+        neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
+    except:
+        neutral_squares = []
+    
+    if viewer_squares == purple_squares:
+        purple_squares = []
+    if viewer_squares == neutral_squares:
+        neutral_squares = []
+
 
     m_list = []
     m_list.extend(all_units)
     m_list.extend(ally_squares)
-    m_list_no_purple = m_list
+    m_list.extend(neutral_squares)
     m_list.extend(purple_squares)
 
     f_viewer_squares = remove_overlap(viewer_squares, m_list)
-    f_purple_squares = remove_overlap(purple_squares, m_list_no_purple)
+    f_purple_squares = remove_overlap(purple_squares, m_list)
+    f_neutral_squares = remove_overlap(neutral_squares, m_list)
+
 
     markers = []
     if available_markers is not None or available_markers is not {}:
@@ -204,6 +212,8 @@ def calculate_placement(
         markers = f_viewer_squares
     if markers == None or markers == []:
         markers = f_purple_squares
+    if markers == None or markers == []:
+        markers = f_neutral_squares
     if markers == None or markers == []:
         print(
             f"Account: {name}: Something went wrong while trying to find an area to place at {cap_nm}."

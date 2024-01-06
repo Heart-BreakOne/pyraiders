@@ -1,8 +1,8 @@
 {
-    "version": "0.18.0-alpha",
+    "version": "0.19.0-alpha",
     "name": "PyRaiders",
     "author": "HeartBreak-One",
-    "description": "SR assistant for viewers and captains written in Python",
+    "description": "SR assistant for viewers written in Python",
     "repository": {
         "type": "git",
         "url": "https://github.com/Heart-BreakOne/pyraiders.git"
@@ -12,7 +12,7 @@
         "CLI",
         "SR assistant",
         "Twitch",
-        "Asynco",
+        "Asyncio",
         "PyQt",
         "Selenium"
     ],

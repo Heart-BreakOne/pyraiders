@@ -148,7 +148,7 @@ def place_the_unit(
                         + cap_nm
                     )
                     return 3
-                elif errorMsg == "OVER_UNIT":
+                elif errorMsg == "OVER_UNIT" or errorMsg == "OVER_ENEMY":
                     return 2
                 else:
                     print(
@@ -167,23 +167,24 @@ def place_the_unit(
             print(
                 f"Account "
                 + name
-                + ": Placement request failed with status code: {response.status_code}"
+                + ": Placement request failed with status code: "
+                + response.status_code
                 + " on captain "
                 + cap_nm
             )
-            print(url)
-            print(marker)
-            print(unitName)
+            #print(url)
+            #print(marker)
+            #print(unitName)
             return 1
 
     # The markers work for the unit, not the units for the marker.
     attempt = 0
 
     for unit in units:
-        if attempt == 20:
+        if attempt == 30:
             break
         for marker in usable_markers:
-            if attempt == 20:
+            if attempt == 30:
                 break
             marker_type = marker["type"].lower()
             # Find marker that matches the unit
@@ -204,10 +205,10 @@ def place_the_unit(
                 # Marker fits anything, place the unit
                 has_placed = place(unit, marker, is_epic)
                 if has_placed == 0:
-                    attempt = 20
+                    attempt = 30
                     break
                 elif has_placed == 3:
-                    attempt = 20
+                    attempt = 30
                     break
                 else:
                     attempt += 1
@@ -241,10 +242,10 @@ def place_the_unit(
                             )
                         has_placed = place(unit, marker, is_epic)
                         if has_placed == 0:
-                            attempt = 20
+                            attempt = 30
                             break
                         elif has_placed == 3:
-                            attempt = 20
+                            attempt = 30
                             break
                         else:
                             attempt += 1

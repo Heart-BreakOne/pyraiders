@@ -37,9 +37,9 @@ You can add as many accounts as you want with any method you prefer, you don't h
 
 ## Determine which units should be used 
 Run ```python3 helper_tools change_priority``` or ```python3 helper_tools c```
-Type the name of the account, a list of units will load, copy and paste the id of the unit you want to edit and set a priority number.
-0 -> Will be completely ignored.
-1 -> Highest priority.
+Type the name of the account, a list of units will load, copy and paste the id of the unit you want to edit and set a priority number.<br>
+0 -> Will be completely ignored.<br>
+1 -> Highest priority.<br>
 The higher the number, the lowest the priority. They all have a default of 1 meaning their priority is all the same.
 
 ## Quick access to your account (Requires selenium, chromedriver and a chromium browser)
