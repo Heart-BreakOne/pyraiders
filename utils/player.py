@@ -5,6 +5,7 @@ from utils.response_handler import handle_error_response
 from utils.time_generator import get_quarter
 from utils.settings import open_file, write_file
 from utils.game_requests import (
+    get_live_captains,
     get_request_strings,
     get_game_data,
     get_proxy_auth,
@@ -211,63 +212,14 @@ def fill_empty_slots(
     only_masterlist
 ):
     # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blocklist
-    live_captains_list = []
-    headers, proxies = get_request_strings(token, user_agent, proxy)
-    version, data_version = get_game_data(
-        token, user_agent, proxy, proxy_user, proxy_password
-    )
-    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
-    for i in range(6):
-        url = (
-            constants.gameDataURL
-            + "?cn=getCaptainsForSearch&isPlayingS=desc&isLiveS=desc&page="
-            + str(i)
-            + "&format=normalized&seed=0&resultsPerPage=30&filters=%7B%22favorite%22%3Afalse%2C%22isLive%22%3A1%2C%22ambassadors%22%3A%22false%22%7D&clientVersion="
-            + version
-            + "&clientPlatform=WebGL&gameDataVersion="
-            + data_version
-            + "&command=getCaptainsForSearch&isCaptain=0"
-        )
-        if has_proxy:
-            response = requests.get(
-                url, proxies=proxies, headers=headers, auth=proxy_auth
-            )
-        else:
-            response = requests.get(url, proxies=proxies, headers=headers)
-        live_captains_list.append(response.json())
-        has_error = handle_error_response(response)  
-        if has_error:
-            return
-        
-    for i in range(3):
-        url = (
-            constants.gameDataURL
-            + "?cn=getCaptainsForSearch&isPlayingS=desc&isLiveS=desc&page="
-            + str(i)
-            + "&format=normalized&seed=0&resultsPerPage=30&filters=%7B%22favorite%22%3Atrue%2C%22isLive%22%3A1%2C%22ambassadors%22%3A%22false%22%7D&clientVersion="
-            + version
-            + "&clientPlatform=WebGL&gameDataVersion="
-            + data_version
-            + "&command=getCaptainsForSearch&isCaptain=0"
-        )
-        if has_proxy:
-            response = requests.get(
-                url, proxies=proxies, headers=headers, auth=proxy_auth
-            )
-        else:
-            response = requests.get(url, proxies=proxies, headers=headers)
-            
-        has_error = handle_error_response(response)  
-        if has_error:
-            return
-        
-        live_captains_list.append(response.json())
 
-    merged_data = []
-    captains_data_list = [entry["data"]["captains"] for entry in live_captains_list]
-    merged_data = [
-        captain for captains_data in captains_data_list for captain in captains_data
-    ]
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    
+    merged_data = get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth)
+    if merged_data == []:
+        return
 
     unique_user_ids = set()
     unique_data = []

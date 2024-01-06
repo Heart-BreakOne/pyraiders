@@ -486,3 +486,68 @@ def check_potions(user_id, data_version, version, token, user_agent, proxy, prox
             return False
     else:
         return False
+    
+    
+def get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth):
+    live_captains_list = []
+    
+    for i in range(30):
+        url = (
+            constants.gameDataURL
+            + "?cn=getCaptainsForSearch&isPlayingS=desc&isLiveS=desc&page="
+            + str(i)
+            + "&format=normalized&seed=0&resultsPerPage=30&filters=%7B%22favorite%22%3Afalse%2C%22isLive%22%3A1%2C%22ambassadors%22%3A%22false%22%7D&clientVersion="
+            + version
+            + "&clientPlatform=WebGL&gameDataVersion="
+            + data_version
+            + "&command=getCaptainsForSearch&isCaptain=0"
+        )
+        if has_proxy:
+            response = requests.get(
+                url, proxies=proxies, headers=headers, auth=proxy_auth
+            )
+        else:
+            response = requests.get(url, proxies=proxies, headers=headers)
+            
+        has_error = handle_error_response(response)  
+        if has_error:
+            return []
+        #if captains_is_empty:
+            #break
+        live_captains_list.append(response.json())
+        if response.json()["data"]["captains"] == []:
+            break
+
+        
+    for i in range(30):
+        url = (
+            constants.gameDataURL
+            + "?cn=getCaptainsForSearch&isPlayingS=desc&isLiveS=desc&page="
+            + str(i)
+            + "&format=normalized&seed=0&resultsPerPage=30&filters=%7B%22favorite%22%3Atrue%2C%22isLive%22%3A1%2C%22ambassadors%22%3A%22false%22%7D&clientVersion="
+            + version
+            + "&clientPlatform=WebGL&gameDataVersion="
+            + data_version
+            + "&command=getCaptainsForSearch&isCaptain=0"
+        )
+        if has_proxy:
+            response = requests.get(
+                url, proxies=proxies, headers=headers, auth=proxy_auth
+            )
+        else:
+            response = requests.get(url, proxies=proxies, headers=headers)
+            
+        has_error = handle_error_response(response)  
+        if has_error:
+            return []
+        
+        live_captains_list.append(response.json())
+        if response.json()["data"]["captains"] == []:
+            break
+    
+
+    captains_data_list = [entry["data"]["captains"] for entry in live_captains_list]
+    merged_data = [
+        captain for captains_data in captains_data_list for captain in captains_data
+    ]    
+    return merged_data

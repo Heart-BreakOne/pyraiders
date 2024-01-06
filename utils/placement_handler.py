@@ -1,7 +1,7 @@
 import time, requests
 from datetime import datetime
 from utils import constants
-from utils.game_requests import check_potions, get_proxy_auth, get_request_strings
+from utils.game_requests import check_potions, get_live_captains, get_proxy_auth, get_request_strings
 from utils.settings import check_raid_type, validate_raid
 
 
@@ -87,7 +87,17 @@ def place_the_unit(
             + data_version
             + "&command=addToRaid&isCaptain=0"
         )
+        
+        #Check raid state
+        headers, proxies = get_request_strings(token, user_agent, proxy)
+        has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+        
+        merged_data = get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth)
+        for captain in merged_data:
+            if captain["twitchUserName"].lower() == cap_nm.lower() and captain["raidState"] != 4:
+                return 3
 
+        
         # Get new raid and recalculate
         # Check if raid is in valid placement
         now = datetime.utcnow()
@@ -98,8 +108,6 @@ def place_the_unit(
         if not check_raid_type(raid_type, time_difference):
             return 3
 
-        headers, proxies = get_request_strings(token, user_agent, proxy)
-        has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
         if has_proxy:
             response = requests.get(
                 url, proxies=proxies, headers=headers, auth=proxy_auth
