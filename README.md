@@ -83,6 +83,6 @@ Potions not yet implemented.
         "favorites_only": false,
         "favoriteCaptainIds": "",
         "slots": 3,
-        "units": "",
+        "units": ""
     }
 ```
