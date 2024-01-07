@@ -533,7 +533,7 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print("log 1" + captain_name + " is idling. Switching...")
+                print("log 1 " + captain_name + " is idling. Switching...")
             elif is_code_locked:
                 captain_id = raid["captainId"]
                 captain_name = raid["twitchUserName"]
@@ -547,7 +547,7 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print("log 2" + captain_name + " is using codes. Switching...")
+                print("log 2 " + captain_name + " is using codes. Switching...")
 
     # Remove captains that are on loyalty switch
     if switch_if_preserve_loyalty and preserve_loyalty != 0:
@@ -580,7 +580,7 @@ def clean_slots(
                             proxy_password,
                         )
                         print(
-                            "log 3"
+                            "log 3 "
                             + captain_name
                             + " is in a loyalty chest without loyalty. Switching..."
                         )

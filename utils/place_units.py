@@ -157,7 +157,7 @@ async def process_group(group):
                         chests = constants.regular_chests
                         if chest_type not in chests:
                             if account["switch_if_preserve_loyalty"]:
-                                print("log 4")
+                                print("log 4 ")
                                 leave_captain(
                                     cap_id,
                                     cap_nm,
