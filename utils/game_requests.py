@@ -390,7 +390,8 @@ def update_unit_cooldown():
             found = False
             for local_unit in local_units:
                 if local_unit["unitId"] == fetched_unit["unitId"]:
-                    local_unit.update({
+                    local_unit.update(
+                        {
                             "userId": fetched_unit["userId"],
                             "unitType": fetched_unit["unitType"],
                             "level": fetched_unit["level"],
@@ -399,11 +400,13 @@ def update_unit_cooldown():
                             "specializationUid": fetched_unit["specializationUid"],
                             "soulType": fetched_unit["soulType"],
                             "soulId": fetched_unit["soulId"],
-                        })
+                        }
+                    )
                     found = True
                     break
             if not found:
-                local_units.append({
+                local_units.append(
+                    {
                         "userId": fetched_unit["userId"],
                         "unitType": fetched_unit["unitType"],
                         "level": fetched_unit["level"],
@@ -417,7 +420,8 @@ def update_unit_cooldown():
                         if fetched_unit["unitType"] == "alliesballoonbuster"
                         else 1,
                         "level_up": False,
-                    })
+                    }
+                )
 
     write_file(constants.py_accounts, accounts)
 
@@ -464,7 +468,10 @@ def collect_raid_rewards(
         print(f"Account: {name}: Chest/savage FAILED TO COLLECT at {cap_nm} at {now}")
         print(url)
 
-def check_potions(user_id, data_version, version, token, user_agent, proxy, proxy_user, proxy_password):
+
+def check_potions(
+    user_id, data_version, version, token, user_agent, proxy, proxy_user, proxy_password
+):
     url = (
         constants.gameDataURL
         + "?cn=getUser&userId="
@@ -499,11 +506,13 @@ def check_potions(user_id, data_version, version, token, user_agent, proxy, prox
     else:
         print(url)
         return False
-    
-    
-def get_live_captains(name, headers, proxies, version, data_version, has_proxy, proxy_auth):
+
+
+def get_live_captains(
+    name, headers, proxies, version, data_version, has_proxy, proxy_auth
+):
     live_captains_list = []
-    
+
     for i in range(30):
         url = (
             constants.gameDataURL
@@ -521,19 +530,20 @@ def get_live_captains(name, headers, proxies, version, data_version, has_proxy, 
             )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
-            
-        has_error = handle_error_response(response)  
+
+        has_error = handle_error_response(response)
         if has_error:
             print("Account: " + name)
             print(url)
             return []
-        #if captains_is_empty:
-            #break
+        # if captains_is_empty:
+        # break
         live_captains_list.append(response.json())
         if response.json()["data"]["captains"] == []:
             break
 
-        
+        time.sleep(0.5)
+
     for i in range(30):
         url = (
             constants.gameDataURL
@@ -551,19 +561,20 @@ def get_live_captains(name, headers, proxies, version, data_version, has_proxy, 
             )
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
-            
-        has_error = handle_error_response(response)  
+
+        has_error = handle_error_response(response)
         if has_error:
             print(url)
             return []
-        
+
         live_captains_list.append(response.json())
         if response.json()["data"]["captains"] == []:
             break
-    
+
+        time.sleep(0.5)
 
     captains_data_list = [entry["data"]["captains"] for entry in live_captains_list]
     merged_data = [
         captain for captains_data in captains_data_list for captain in captains_data
-    ]    
+    ]
     return merged_data
