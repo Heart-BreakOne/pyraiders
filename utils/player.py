@@ -132,6 +132,7 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
 
     has_error = handle_error_response(response)
     if has_error:
+        print(url)
         return
 
     if response.status_code == 200:
@@ -476,6 +477,7 @@ def select_captain(
             )
         has_error = handle_error_response(response)
         if has_error:
+            print(url)
             return
 
     # get active raids again and count the occupied slots, that is the real amount of slots

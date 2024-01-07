@@ -56,6 +56,8 @@ def check_for_new_event():
 
     has_error = handle_error_response(response)
     if has_error:
+        print("UserId: " + userId)
+        print(url)
         return
 
     if response.status_code == 200:
@@ -131,6 +133,7 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
 
     has_error = handle_error_response(gameDataResponse)
     if has_error:
+        print(constants.gameDataURL)
         return
 
     # Check if the request was successful (status code 200)
@@ -169,6 +172,7 @@ def get_user_id(
 
     has_error = handle_error_response(response)
     if has_error:
+        print(url)
         return
 
     if response.status_code == 200:
@@ -261,6 +265,7 @@ def get_battlepass(
 
     has_error = handle_error_response(response)
     if has_error:
+        print(url)
         return
 
     if response.status_code == 200:
@@ -313,6 +318,7 @@ def leave_captain(
 
     has_error = handle_error_response(response)
     if has_error:
+        print(url)
         return
 
 
@@ -340,6 +346,7 @@ def get_units_data(
 
     has_error = handle_error_response(response)
     if has_error:
+        print(url)
         return
 
     if response.status_code == 200:
@@ -453,6 +460,9 @@ def collect_raid_rewards(
         now = datetime.now().strftime("%H:%M:%S")
         print(f"Account: {name}: Chest/savage collected at {cap_nm} at {now}")
         time.sleep(5)
+    else:
+        print(f"Account: {name}: Chest/savage FAILED TO COLLECT at {cap_nm} at {now}")
+        print(url)
 
 def check_potions(user_id, data_version, version, token, user_agent, proxy, proxy_user, proxy_password):
     url = (
@@ -487,6 +497,7 @@ def check_potions(user_id, data_version, version, token, user_agent, proxy, prox
         except:
             return False
     else:
+        print(url)
         return False
     
     
@@ -513,6 +524,7 @@ def get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_
             
         has_error = handle_error_response(response)  
         if has_error:
+            print(url)
             return []
         #if captains_is_empty:
             #break
@@ -541,6 +553,7 @@ def get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_
             
         has_error = handle_error_response(response)  
         if has_error:
+            print(url)
             return []
         
         live_captains_list.append(response.json())
