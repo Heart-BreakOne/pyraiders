@@ -135,6 +135,8 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
     if has_error:
         print(constants.gameDataURL)
         return
+    else:
+        print(constants.gameDataURL)
 
     # Check if the request was successful (status code 200)
     if gameDataResponse.status_code == 200:

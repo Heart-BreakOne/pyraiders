@@ -29,6 +29,7 @@ async def requester(account_name, token, user_agent, proxy, _, __, list_of_urls,
                 print(parsedResponse)
                 print(f"Couldn't make request for account {account_name}.")
                 _ = handle_error_response(response)
+                print(url)
                 return
             """"""
         
