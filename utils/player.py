@@ -105,6 +105,7 @@ async def fill_slots():
                     switch_on_idle,
                     minimum_idle_time,
                 )
+                print("clean_slot 1")
                 continue
                 place_units(user_id)
                 return
@@ -380,6 +381,7 @@ def fill_empty_slots(
             switch_on_idle,
             minimum_idle_time,
         )
+        print("clean_slot 2")
         return
 
 
@@ -432,6 +434,7 @@ def select_captain(
                 switch_on_idle,
                 minimum_idle_time,
             )
+            print("clean_slot 2")
             return
 
         url = (
