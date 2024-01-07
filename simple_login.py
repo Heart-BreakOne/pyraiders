@@ -1,4 +1,3 @@
-#import random
 import sys
 import time
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
@@ -7,9 +6,11 @@ from PyQt5.QtWidgets import QApplication
 from helper_tools import perform_account_addition
 from utils import constants
 from utils.settings import open_file
+
 ACCESS_INFO = None
 scapmpid = None
 scsession = None
+app = None
 
 # Receive user input before creating the qapp
 print("READ THIS WHILE YOU WAIT 10 SECONDS BEFORE PROCEEDING")
@@ -29,26 +30,40 @@ for account in accounts:
         print("Please enter an unique account name.")
         sys.exit()
 
+# Close the application
+def close_app():
+    global app
+    if app:
+        app.quit()
+
 # Start qapp
 app = QApplication([])
 
 # Captures cookie of interest and save to storage.
+is_adding = False
 def on_cookie_added(cookie):
+    
+    global is_adding
+    if is_adding:
+        return
+    is_adding = True
+    
     global ACCESS_INFO, scapmpid, scsession
     cookie_name = cookie.name().data().decode()
     cookie_value = cookie.value().data().decode()
     if cookie_name == "ACCESS_INFO":
         ACCESS_INFO = cookie_value
     elif cookie_name == "scapmpid":
-           scapmpid = cookie_value
+        scapmpid = cookie_value
     elif cookie_name == "scsession":
         scsession = cookie_value
-    if ACCESS_INFO != None and scapmpid != None and scsession != None:
+    if ACCESS_INFO and scapmpid and scsession:
         print("Adding account...")
         perform_account_addition(name, ACCESS_INFO, scapmpid, scsession)
         store.deleteAllCookies()
-        view.close()
-
+        close_app()
+    else:
+        is_adding = False
 
 view = QWebEngineView()
 page = QWebEnginePage()
