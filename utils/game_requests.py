@@ -564,6 +564,7 @@ def get_live_captains(
 
         has_error = handle_error_response(response)
         if has_error:
+            print("Account: " + name)
             print(url)
             return []
 
