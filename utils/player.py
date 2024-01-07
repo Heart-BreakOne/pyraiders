@@ -220,7 +220,7 @@ def fill_empty_slots(
     )
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
 
-    merged_data = get_live_captains(
+    merged_data = get_live_captains(user_name,
         headers, proxies, version, data_version, has_proxy, proxy_auth
     )
     if merged_data == []:

@@ -92,7 +92,7 @@ def place_the_unit(
         headers, proxies = get_request_strings(token, user_agent, proxy)
         has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
         
-        merged_data = get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth)
+        merged_data = get_live_captains(name, headers, proxies, version, data_version, has_proxy, proxy_auth)
         for captain in merged_data:
             if captain["twitchUserName"].lower() == cap_nm.lower() and captain["raidState"] != 4:
                 return 3

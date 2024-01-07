@@ -135,8 +135,6 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
     if has_error:
         print(constants.gameDataURL)
         return
-    else:
-        print(constants.gameDataURL)
 
     # Check if the request was successful (status code 200)
     if gameDataResponse.status_code == 200:
@@ -503,7 +501,7 @@ def check_potions(user_id, data_version, version, token, user_agent, proxy, prox
         return False
     
     
-def get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth):
+def get_live_captains(name, headers, proxies, version, data_version, has_proxy, proxy_auth):
     live_captains_list = []
     
     for i in range(30):
@@ -526,6 +524,7 @@ def get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_
             
         has_error = handle_error_response(response)  
         if has_error:
+            print("Account: " + name)
             print(url)
             return []
         #if captains_is_empty:
