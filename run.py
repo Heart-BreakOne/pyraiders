@@ -94,7 +94,6 @@ async def run():
     print("Unit placement manager has started.")
     slot_thread.start()
     print("Slot manager has started.")
-    
 
     print("All start up tasks performed!")
 

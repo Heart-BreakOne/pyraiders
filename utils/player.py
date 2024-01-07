@@ -53,7 +53,7 @@ async def fill_slots():
             temporary_ignore = account["temporary_ignore"]
             has_pass = account["has_pass"]
             slots_quantity = account["slots"]
-            
+
             activeRaids = getActiveraids(
                 user_id, token, user_agent, proxy, proxy_user, proxy_password
             )
@@ -88,7 +88,7 @@ async def fill_slots():
                     switch_on_idle,
                     minimum_idle_time,
                     favorites_only,
-                    only_masterlist
+                    only_masterlist,
                 )
                 continue
             else:
@@ -128,11 +128,11 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
         response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
     else:
         response = requests.get(url, proxies=proxies, headers=headers)
-    
-    has_error = handle_error_response(response)  
+
+    has_error = handle_error_response(response)
     if has_error:
         return
-    
+
     if response.status_code == 200:
         parsedResponse = response.json()
         raid_data = parsedResponse["data"]
@@ -161,7 +161,6 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
             rewards = raid["rewards"]
             postBattleComplete = raid["postBattleComplete"]
             hasRecievedRewards = raid["hasRecievedRewards"]
-            
 
             activeRaids.append(
                 {
@@ -182,7 +181,7 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
                     "battleResult": battleResult,
                     "rewards": rewards,
                     "postBattleComplete": postBattleComplete,
-                    "hasRecievedRewards": hasRecievedRewards
+                    "hasRecievedRewards": hasRecievedRewards,
                 }
             )
         return activeRaids
@@ -209,15 +208,19 @@ def fill_empty_slots(
     switch_on_idle,
     minimum_idle_time,
     favorites_only,
-    only_masterlist
+    only_masterlist,
 ):
     # Get list of active captains, filter it with the masterlist, favoriteCaptainsIds, blocklist
 
     headers, proxies = get_request_strings(token, user_agent, proxy)
-    version, data_version = get_game_data(token, user_agent, proxy, proxy_user, proxy_password)
+    version, data_version = get_game_data(
+        token, user_agent, proxy, proxy_user, proxy_password
+    )
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
-    
-    merged_data = get_live_captains(headers, proxies, version, data_version, has_proxy, proxy_auth)
+
+    merged_data = get_live_captains(
+        headers, proxies, version, data_version, has_proxy, proxy_auth
+    )
     if merged_data == []:
         return
 
@@ -235,7 +238,7 @@ def fill_empty_slots(
     global_ignore = open_file("variables.json")
     gb_list = global_ignore["global_ignore"]
     if len(gb_list) != 0:
-                acceptable_captains = sorted(
+        acceptable_captains = sorted(
             (
                 entry
                 for entry in unique_data
@@ -245,7 +248,7 @@ def fill_empty_slots(
             if x["twitchUserName"].upper() in global_ignore
             else float("inf"),
         )
-    
+
     # User wants to use masterlist
     if len(masterlist) != 0:
         acceptable_captains = sorted(
@@ -302,9 +305,9 @@ def fill_empty_slots(
 
     # Remove captains that are on the temporary idle list for the last 30 minutes
     # Convert the time strings to datetime variables
-    try: 
+    try:
         temporary_ignore_times = [
-        datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
+            datetime.strptime(entry["time"], "%Y-%m-%d %H:%M:%S")
             for entry in temporary_ignore
         ]
         current_time = datetime.utcnow()
@@ -324,8 +327,6 @@ def fill_empty_slots(
         ]
     except:
         pass
-        
-
 
     # The list left is ready to be used for placement, now figure out what slots are available
     # Initialize slots list
@@ -364,7 +365,7 @@ def fill_empty_slots(
             switch_on_idle,
             minimum_idle_time,
             favorites_only,
-            only_masterlist
+            only_masterlist,
         )
     else:
         clean_slots(
@@ -405,12 +406,12 @@ def select_captain(
     switch_on_idle,
     minimum_idle_time,
     favorites_only,
-    only_masterlist
+    only_masterlist,
 ):
     for i, slot in enumerate(possible_slots):
         slot_integer = int(slot)
         if i < len(acceptable_captains) and slot_integer < slots_quantity:
-            #RANDOMIZE THE INDEX SO DEFAULT ACCOUNTS ARE SPREAD THROUGHOUT THE CAPTAINS
+            # RANDOMIZE THE INDEX SO DEFAULT ACCOUNTS ARE SPREAD THROUGHOUT THE CAPTAINS
             if favorites_only or only_masterlist:
                 captain_id = acceptable_captains[i]["userId"]
                 captain_name = acceptable_captains[i]["twitchUserName"]
@@ -447,9 +448,11 @@ def select_captain(
             + version
             + "&clientPlatform=WebGL"
         )
-        
+
         if has_proxy:
-            response = requests.get(url, proxies=proxies, headers=headers, auth=proxy_auth)
+            response = requests.get(
+                url, proxies=proxies, headers=headers, auth=proxy_auth
+            )
             print(
                 "Account: "
                 + user_name
@@ -468,7 +471,7 @@ def select_captain(
                 + " to slot number "
                 + str(int(slot) + 1)
             )
-        has_error = handle_error_response(response)  
+        has_error = handle_error_response(response)
         if has_error:
             return
 
@@ -508,7 +511,7 @@ def clean_slots(
         for raid in activeRaids:
             time_str = raid["creationDate"]
             is_code_locked = raid["isCodeLocked"]
-            #This data object is not being stored so there's need to remove the milliseconds
+            # This data object is not being stored so there's need to remove the milliseconds
             current_time = datetime.utcnow()
             idle_time = timedelta(minutes=30 + minimum_idle_time)
             creation_time = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
@@ -527,7 +530,7 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print(captain_name + " is idling. Switching...")
+                print("log 1" + captain_name + " is idling. Switching...")
             elif is_code_locked:
                 captain_id = raid["captainId"]
                 captain_name = raid["twitchUserName"]
@@ -541,7 +544,7 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print(captain_name + " is using codes. Switching...")
+                print("log 2" + captain_name + " is using codes. Switching...")
 
     # Remove captains that are on loyalty switch
     if switch_if_preserve_loyalty and preserve_loyalty != 0:
@@ -574,7 +577,8 @@ def clean_slots(
                             proxy_password,
                         )
                         print(
-                            captain_name
+                            "log 3"
+                            + captain_name
                             + " is in a loyalty chest without loyalty. Switching..."
                         )
                     elif (

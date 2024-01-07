@@ -1,3 +1,4 @@
+from datetime import datetime
 import time
 import requests
 from utils import constants, current_event
@@ -449,7 +450,8 @@ def collect_raid_rewards(
 
     has_error = handle_error_response(response)
     if not has_error:
-        print(f"Account: {name}: Chest/savage collected on captain: {cap_nm}")
+        now = datetime.now().strftime("%H:%M:%S")
+        print(f"Account: {name}: Chest/savage collected at {cap_nm} at {now}")
         time.sleep(5)
 
 def check_potions(user_id, data_version, version, token, user_agent, proxy, proxy_user, proxy_password):

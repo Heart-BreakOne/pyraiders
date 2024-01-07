@@ -119,6 +119,8 @@ def calculate_placement(
         return []
 
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
+    if len(h_units) > 1999:
+        print(f"Account {name}: Captain {cap_nm} is full, can't place anymore. C'est la Révolution française")
     all_units = h_units + ai_units
     map_units = open_file(constants.map_units_path)
     cap_coors = {}
@@ -214,13 +216,13 @@ def calculate_placement(
         markers = f_purple_squares
     if markers == None or markers == []:
         markers = f_neutral_squares
-    if markers == None or markers == []:
+    if (markers == None or markers == []) and (len(h_units) < 2000):
         print(
             f"Account: {name}: Something went wrong while trying to find an area to place at {cap_nm}."
         )
 
     markers = shuffle_markers(markers, cap_coors, all_units)
-
+    
     return markers[:100]
 
 

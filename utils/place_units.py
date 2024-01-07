@@ -126,7 +126,6 @@ async def process_group(group):
                     version,
                     data_version,
                 )
-                continue
 
             # Check if raid is in active placement as everything from this point on would be a waste of resources.
             now = datetime.utcnow()
@@ -158,6 +157,7 @@ async def process_group(group):
                         chests = constants.regular_chests
                         if chest_type not in chests:
                             if account["switch_if_preserve_loyalty"]:
+                                print("log 4")
                                 leave_captain(
                                     cap_id,
                                     cap_nm,
@@ -167,10 +167,10 @@ async def process_group(group):
                                     proxy,
                                     proxy_user,
                                     proxy_password,
-                                )
+                                ) 
                                 continue
                             else:
-                                continue
+                                pass
 
             # Check if it is time and if there is time to place an unit
             last = raid["lastUnitPlacedTime"]
@@ -193,7 +193,7 @@ async def process_group(group):
             time.sleep(2)
             # Check if there are units available in order to save resources
             units = check_unit_availability(name, now)
-            if not units:
+            if not units or units == []:
                 continue
 
 
