@@ -2,6 +2,8 @@
 import inspect
 import time
 
+from utils.logger import log_to_file
+
 
 # Check if server responded with an error.
 def handle_error_response(response):
@@ -25,10 +27,9 @@ def handle_error_response(response):
             time.sleep(60)
             return True
         else:
-            print(
-                "Server responded with an error. Will wait 10 seconds before trying again."
-            )
-            print(response)
+            pr_str = f"Server responded with an error. Will wait 10 seconds before trying again. Response: {response}"
+            log_to_file(pr_str)
+            print("Server responded with an error. Will wait 10 seconds before trying again.")
             time.sleep(10)
             return True
     else:

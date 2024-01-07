@@ -23,10 +23,10 @@ def update_data(newDataKey, newDataValue, data):
 
 
 def update_data_structure(data):
-    print("The data structure is up to date.")
-    return data
-    newDataKey = None
-    newDataValue = None
+    #print("The data structure is up to date.")
+    #return data
+    newDataKey = "use_skins"
+    newDataValue = True
 
     new_data = update_data(newDataKey, newDataValue, data)
     if new_data != data:

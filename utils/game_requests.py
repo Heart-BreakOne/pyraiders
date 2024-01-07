@@ -1,8 +1,10 @@
 from datetime import datetime
+import random
 import time
 import requests
 from utils import constants, current_event
 from requests.auth import HTTPProxyAuth
+from utils.logger import log_to_file
 from utils.response_handler import handle_error_response
 from utils.settings import add_temporary_ignore, open_file, write_file
 
@@ -56,8 +58,7 @@ def check_for_new_event():
 
     has_error = handle_error_response(response)
     if has_error:
-        print("UserId: " + userId)
-        print(url)
+        log_to_file(f"Account: {userId}. URL: {url}")
         return
 
     if response.status_code == 200:
@@ -133,7 +134,7 @@ def get_game_data(token, user_agent, proxy, proxy_user, proxy_password):
 
     has_error = handle_error_response(gameDataResponse)
     if has_error:
-        print(constants.gameDataURL)
+        log_to_file(constants.gameDataURL)
         return
 
     # Check if the request was successful (status code 200)
@@ -172,7 +173,7 @@ def get_user_id(
 
     has_error = handle_error_response(response)
     if has_error:
-        print(url)
+        log_to_file(url)
         return
 
     if response.status_code == 200:
@@ -265,7 +266,7 @@ def get_battlepass(
 
     has_error = handle_error_response(response)
     if has_error:
-        print(url)
+        log_to_file(f"Account: {userId}. URL: {url}")
         return
 
     if response.status_code == 200:
@@ -318,7 +319,7 @@ def leave_captain(
 
     has_error = handle_error_response(response)
     if has_error:
-        print(url)
+        log_to_file(f"Account: {user_id}. Captain: {captain_name}. URL: {url}")
         return
 
 
@@ -346,7 +347,7 @@ def get_units_data(
 
     has_error = handle_error_response(response)
     if has_error:
-        print(url)
+        log_to_file(url)
         return
 
     if response.status_code == 200:
@@ -462,11 +463,14 @@ def collect_raid_rewards(
     has_error = handle_error_response(response)
     if not has_error:
         now = datetime.now().strftime("%H:%M:%S")
-        print(f"Account: {name}: Chest/savage collected at {cap_nm} at {now}")
+        pr_str = f"Account: {name}: Chest/savage collected at {cap_nm} at {now}"
+        print(pr_str)
+        log_to_file(pr_str)
         time.sleep(5)
     else:
-        print(f"Account: {name}: Chest/savage FAILED TO COLLECT at {cap_nm} at {now}")
-        print(url)
+        log_to_file(
+            f"Account: {name}: Chest/savage FAILED TO COLLECT at {cap_nm}. URL: {url}"
+        )
 
 
 def check_potions(
@@ -504,7 +508,7 @@ def check_potions(
         except:
             return False
     else:
-        print(url)
+        log_to_file(url)
         return False
 
 
@@ -533,8 +537,7 @@ def get_live_captains(
 
         has_error = handle_error_response(response)
         if has_error:
-            print("Account: " + name)
-            print(url)
+            log_to_file(f"Account: {name}. URL: {url}")
             return []
         # if captains_is_empty:
         # break
@@ -564,8 +567,7 @@ def get_live_captains(
 
         has_error = handle_error_response(response)
         if has_error:
-            print("Account: " + name)
-            print(url)
+            log_to_file(url)
             return []
 
         live_captains_list.append(response.json())
@@ -579,3 +581,62 @@ def get_live_captains(
         captain for captains_data in captains_data_list for captain in captains_data
     ]
     return merged_data
+
+
+def equip_skin(
+    user_id,
+    version,
+    data_version,
+    token,
+    user_agent,
+    proxy,
+    proxy_user,
+    proxy_password,
+    unitName,
+    cap_nm,
+    skin,
+):
+    # Check if user wants to use skins
+    accounts = open_file(constants.py_accounts)
+    for account in accounts:
+        if user_id == account["userId"]:
+            # User doesn't want to user skins
+            if not account["use_skins"]:
+                return skin
+            else:
+                # User wants to use skins, find a matching one
+                url = f"{constants.gameDataURL}?cn=getUserItems&userId={user_id}&isCaptain=0&gameDataVersion={data_version}&command=getUserItems&clientVersion={version}&clientPlatform=WebGL"
+                headers, proxies = get_request_strings(token, user_agent, proxy)
+                has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+                if has_proxy:
+                    response = requests.get(
+                        url, proxies=proxies, headers=headers, auth=proxy_auth
+                    )
+                else:
+                    response = requests.get(url, proxies=proxies, headers=headers)
+
+                has_error = handle_error_response(response)
+                if has_error:
+                    log_to_file(
+                        f"Account: {user_id}. Failed to get unit skins. URL: {url}"
+                    )
+                    return skin
+                else:
+                    skins = response.json()["data"]
+                    random.shuffle(skins)
+
+                    # Check for captain skins
+                    for sk in skins:
+                        skin_name = sk[
+                            "productId"
+                        ].lower()  # Using .lower() for lowercase conversion
+                        if unitName in skin_name and cap_nm.lower() in skin_name:
+                            return skin_name
+
+                    # Check for any skin
+                    for sk in skins:
+                        skin_name = sk["productId"].lower()
+                        if unitName in skin_name:
+                            return skin_name
+
+    return skin

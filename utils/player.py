@@ -1,6 +1,7 @@
 import asyncio, requests
 import random
 from datetime import datetime, timedelta
+from utils.logger import log_to_file
 from utils.response_handler import handle_error_response
 from utils.time_generator import get_quarter
 from utils.settings import open_file, write_file
@@ -105,7 +106,7 @@ async def fill_slots():
                     switch_on_idle,
                     minimum_idle_time,
                 )
-                print("clean_slot 1")
+                log_to_file("clean_slot 1")
                 continue
                 place_units(user_id)
                 return
@@ -132,7 +133,7 @@ def getActiveraids(user_id, token, user_agent, proxy, proxy_user, proxy_password
 
     has_error = handle_error_response(response)
     if has_error:
-        print(url)
+        log_to_file(url)
         return
 
     if response.status_code == 200:
@@ -220,8 +221,8 @@ def fill_empty_slots(
     )
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
 
-    merged_data = get_live_captains(user_name,
-        headers, proxies, version, data_version, has_proxy, proxy_auth
+    merged_data = get_live_captains(
+        user_name, headers, proxies, version, data_version, has_proxy, proxy_auth
     )
     if merged_data == []:
         return
@@ -382,7 +383,8 @@ def fill_empty_slots(
             switch_on_idle,
             minimum_idle_time,
         )
-        print("clean_slot 2")
+
+        log_to_file("clean_slot 2")
         return
 
 
@@ -435,7 +437,7 @@ def select_captain(
                 switch_on_idle,
                 minimum_idle_time,
             )
-            print("clean_slot 3")
+            log_to_file("clean_slot 3")
             return
 
         url = (
@@ -457,27 +459,17 @@ def select_captain(
             response = requests.get(
                 url, proxies=proxies, headers=headers, auth=proxy_auth
             )
-            print(
-                "Account: "
-                + user_name
-                + ". Added "
-                + captain_name
-                + " to slot number "
-                + str(int(slot) + 1)
-            )
+            pr_str = f"Account: {user_name}. Added {captain_name} to slot number {str(int(slot) + 1)}"
+            log_to_file(pr_str)
+            print(pr_str)
         else:
             response = requests.get(url, proxies=proxies, headers=headers)
-            print(
-                "Account: "
-                + user_name
-                + ". Added "
-                + captain_name
-                + " to slot number "
-                + str(int(slot) + 1)
-            )
+            pr_str = f"Account: {user_name}. Added {captain_name} to slot number {str(int(slot) + 1)}"
+            log_to_file(pr_str)
+            print(pr_str)
         has_error = handle_error_response(response)
         if has_error:
-            print(url)
+            log_to_file(f"Account: {user_name}. Captain: {captain_name}. URL: {url}")
             return
 
     # get active raids again and count the occupied slots, that is the real amount of slots
@@ -535,7 +527,9 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print("log 1 " + captain_name + " is idling. Switching...")
+                pr_str = f"log 1 {captain_name} is idling. Switching..."
+                log_to_file(pr_str)
+                print(pr_str)
             elif is_code_locked:
                 captain_id = raid["captainId"]
                 captain_name = raid["twitchUserName"]
@@ -549,13 +543,16 @@ def clean_slots(
                     proxy_user,
                     proxy_password,
                 )
-                print("log 2 " + captain_name + " is using codes. Switching...")
+                pr_str = f"log 2 {captain_name} is using codes. Switching..."
+                log_to_file(pr_str)
+                print(pr_str)
 
     # Remove captains that are on loyalty switch
     if switch_if_preserve_loyalty and preserve_loyalty != 0:
         activeRaids = getActiveraids(
             user_id, token, user_agent, proxy, proxy_user, proxy_password
         )
+        now = datetime.now().strftime("%H:%M:%S")
         for raid in activeRaids:
             raid_loyalty = raid["pveLoyaltyLevel"]
             if raid_loyalty < preserve_loyalty and raid["type"] == "1":
@@ -581,11 +578,9 @@ def clean_slots(
                             proxy_user,
                             proxy_password,
                         )
-                        print(
-                            "log 3 "
-                            + captain_name
-                            + " is in a loyalty chest without loyalty. Switching..."
-                        )
+                        pr_str = f"log 3 {captain_name} is in a loyalty chest without loyalty. Switching..."
+                        log_to_file(pr_str)
+                        print(pr_str)
                     elif (
                         "ChestType" in node_info
                         and node_info["ChestType"] in constants.regular_chests
@@ -593,9 +588,13 @@ def clean_slots(
                         # not a loyalty chest
                         pass
                     else:
-                        print("Couldn't find chest info")
+                        pr_str = f"log 4 {captain_name} Couldn't find chest info"
+                        log_to_file(pr_str)
+                        print(pr_str)
                 else:
-                    print("Couldn't find chest infos")
+                    pr_str = f"log 5 {captain_name} Couldn't find chest info"
+                    log_to_file(pr_str)
+                    print(pr_str)
 
     return
     place_units(user_id)

@@ -126,6 +126,7 @@ async def process_group(group):
                     version,
                     data_version,
                 )
+                continue
 
             # Check if raid is in active placement as everything from this point on would be a waste of resources.
             now = datetime.utcnow()

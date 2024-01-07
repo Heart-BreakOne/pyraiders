@@ -1,7 +1,14 @@
 import time, requests
 from datetime import datetime
 from utils import constants
-from utils.game_requests import check_potions, get_live_captains, get_proxy_auth, get_request_strings
+from utils.game_requests import (
+    check_potions,
+    equip_skin,
+    get_live_captains,
+    get_proxy_auth,
+    get_request_strings,
+)
+from utils.logger import log_to_file
 from utils.settings import check_raid_type, validate_raid
 
 
@@ -58,7 +65,9 @@ def place_the_unit(
             specializationUid = ""
         if skin == None:
             skin = ""
-
+        
+        # Check if user wants to equip a skin
+        skin = equip_skin(user_id, version, data_version, token, user_agent, proxy, proxy_user, proxy_password, unitName, cap_nm, skin)
         url = (
             constants.gameDataURL
             + "?cn=addToRaid&raidId="
@@ -87,17 +96,21 @@ def place_the_unit(
             + data_version
             + "&command=addToRaid&isCaptain=0"
         )
-        
-        #Check raid state
+
+        # Check raid state
         headers, proxies = get_request_strings(token, user_agent, proxy)
         has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
-        
-        merged_data = get_live_captains(name, headers, proxies, version, data_version, has_proxy, proxy_auth)
+
+        merged_data = get_live_captains(
+            name, headers, proxies, version, data_version, has_proxy, proxy_auth
+        )
         for captain in merged_data:
-            if captain["twitchUserName"].lower() == cap_nm.lower() and captain["raidState"] != 4:
+            if (
+                captain["twitchUserName"].lower() == cap_nm.lower()
+                and captain["raidState"] != 4
+            ):
                 return 3
 
-        
         # Get new raid and recalculate
         # Check if raid is in valid placement
         now = datetime.utcnow()
@@ -120,61 +133,31 @@ def place_the_unit(
             errorMsg = data.get("errorMessage")
             if status == "success" and errorMsg == None:
                 now = datetime.now().strftime("%H:%M:%S")
-                print(
-                    "Account "
-                    + name
-                    + ": "
-                    + unitName
-                    + " placed successfully at "
-                    + cap_nm
-                    + " at "
-                    + now
-                )
+                pr_str = f"Account {name}: {unitName} with skin {skin} placed successfully at {cap_nm} at {now}"
+                print(pr_str)
+                log_to_file(pr_str)
                 return 0
             else:
                 time.sleep(5)
                 # INVALID_RAID_STATE:5 = Battle ready soon. View Battlefield
-                if (
-                    errorMsg == "INVALID_RAID_STATE:2"
-                    or errorMsg == "INVALID_RAID_STATE:5"
-                    or errorMsg == "PERIOD_ENDED"
-                ):
-                    print(
-                        "Account "
-                        + name
-                        + ": Placement failed due to "
-                        + errorMsg
-                        + " on captain "
-                        + cap_nm
-                    )
+                if "INVALID_RAID_STATE" in errorMsg or errorMsg == "PERIOD_ENDED":
+                    pr_str = f"Account {name}: Placement failed due to {errorMsg} on captain {cap_nm}"
+                    log_to_file(pr_str)
+                    print(pr_str)
                     return 3
                 elif errorMsg == "OVER_UNIT" or errorMsg == "OVER_ENEMY":
+                    pr_str = f"Account {name}: Placement failed due to {errorMsg} on captain {cap_nm}"
+                    log_to_file(pr_str)
+                    # print(pr_str)
                     return 2
                 else:
-                    print(
-                        "Account "
-                        + name
-                        + ": Placement failed due to "
-                        + errorMsg
-                        + " on captain "
-                        + cap_nm
-                    )
-                    print(url)
-                    print(marker)
-                    print(unitName)
+                    pr_str = f"Account {name}: Placement failed due to {errorMsg} on captain {cap_nm}"
+                    log_to_file(pr_str)
+                    print(pr_str)
                     return 2
         else:
-            print(
-                f"Account "
-                + name
-                + ": Placement request failed with status code: "
-                + response.status_code
-                + " on captain "
-                + cap_nm
-            )
-            #print(url)
-            #print(marker)
-            #print(unitName)
+            pr_str = f"Account {name}: Placement request failed with status code: {response.status_code} on captain {cap_nm}. URL: {url}"
+            print(pr_str)
             return 1
 
     # The markers work for the unit, not the units for the marker.

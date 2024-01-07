@@ -1,6 +1,7 @@
 # This file handles requests that a legitimate browser session makes from time to time.
 
 import asyncio, requests
+from utils.logger import log_to_file
 from utils.response_handler import handle_error_response
 from utils.time_generator import get_twenty
 from utils import constants
@@ -25,11 +26,8 @@ async def requester(account_name, token, user_agent, proxy, _, __, list_of_urls,
                 #print(f"Random request successful for account {account_name}.")
                 pass
             else:
-                print(url)
-                print(parsedResponse)
-                print(f"Couldn't make request for account {account_name}.")
+                log_to_file(f"Couldn't make request for account {account_name}. Response: {parsedResponse}. URL: {url}")             
                 _ = handle_error_response(response)
-                print(url)
                 return
             """"""
         
