@@ -47,7 +47,7 @@ async def run():
     print("\nStarting up...")
     # Add user-agents, proxies and remove duplicates entries
     data = setup_accounts(data)
-
+    
     print("Checking configuration file...")
     # Load unitIds and units.
     data = set_user_data(data)

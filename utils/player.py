@@ -434,7 +434,7 @@ def select_captain(
                 switch_on_idle,
                 minimum_idle_time,
             )
-            print("clean_slot 2")
+            print("clean_slot 3")
             return
 
         url = (
