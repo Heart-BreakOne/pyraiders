@@ -42,10 +42,11 @@ def update_data_structure(data):
     newDataKey = "spec_option"
     newDataValue = None
     
-    #new_data = update_data(newDataKey, newDataValue, data)
+    newDataKey2 = "collect_quests"
+    newDataValue2 = True
+    new_data = update_data(newDataKey2, newDataValue2, data)
     
-    new_data = update_units(newDataKey, newDataValue, data)
-    
+    new_data = update_units(newDataKey, newDataValue, new_data)
     
     if new_data != data:
         print("The data structure has been updated with new values.")
