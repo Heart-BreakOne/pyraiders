@@ -21,14 +21,32 @@ def update_data(newDataKey, newDataValue, data):
 
     return new_data
 
+def update_units(newDataKey, newDataValue, data):
+    updated_data = []
+    for account in data:
+        updated_units = []
+        for unit in account["units"]:
+            updated_unit = unit.copy()
+            if newDataKey not in updated_unit:
+                updated_unit[newDataKey] = newDataValue
+            updated_units.append(updated_unit)
+        updated_account = account.copy()
+        updated_account["units"] = updated_units
+        updated_data.append(updated_account)
+    return updated_data
+
 
 def update_data_structure(data):
     #print("The data structure is up to date.")
     #return data
-    newDataKey = "use_skins"
-    newDataValue = True
-
-    new_data = update_data(newDataKey, newDataValue, data)
+    newDataKey = "spec_option"
+    newDataValue = None
+    
+    #new_data = update_data(newDataKey, newDataValue, data)
+    
+    new_data = update_units(newDataKey, newDataValue, data)
+    
+    
     if new_data != data:
         print("The data structure has been updated with new values.")
     else:

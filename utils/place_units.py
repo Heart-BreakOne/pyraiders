@@ -8,6 +8,7 @@ from utils.game_requests import (
     leave_captain,
     update_unit_cooldown,
 )
+from utils.logger import log_to_file
 from utils.marker_handler import calculate_placement
 from utils.placement_handler import place_the_unit
 from utils.settings import check_raid_type, open_file, validate_raid
@@ -40,9 +41,13 @@ async def place_unit_in_battlefield():
             await process_groups(groups)
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            pr_str = f"An error occurred: {e}"
+            print(pr_str)
+            log_to_file(pr_str)
         finally:
-            print("Placement system cycled.")
+            pr_str = "Placement system cycled."
+            print(pr_str)
+            log_to_file(pr_str)
             await asyncio.get_event_loop().run_in_executor(None, time.sleep, 20)
             is_running = False
 

@@ -112,9 +112,15 @@ def get_new_event_map(current_url):
                 unit_data.pop(key_to_remove, None)
         write_file(constants.map_units_path, units_json)
 
+        quests_json = response.json()["sheets"]["Quests"]
+        for quests in quests_json.values():
+            for key_to_remove in constants.quest_keys_rm:
+                quests.pop(key_to_remove, None)
+        write_file(constants.quest_nodes_path, quests_json)
+
         print("\nMap nodes updated successfully.\n")
     else:
-        print(f"\nError: {response.status_code}")
+        print(f"\nError updating game data: {response.status_code}")
 
 
 # Get the game version and data_version for the api calls
@@ -358,6 +364,7 @@ def get_units_data(
             else:
                 each_unit["priority"] = 10
             each_unit["level_up"] = False
+            each_unit["spec_option"]: None
             # add an integer key called priority to each item before saving
     return units
 
@@ -421,6 +428,7 @@ def update_unit_cooldown():
                         if fetched_unit["unitType"] == "alliesballoonbuster"
                         else 1,
                         "level_up": False,
+                        "spec_option": None
                     }
                 )
 
@@ -467,6 +475,9 @@ def collect_raid_rewards(
         print(pr_str)
         log_to_file(pr_str)
         time.sleep(5)
+        collect_quests(
+            token, name, user_agent, proxy, proxy_user, proxy_password, version, data_version
+        )
     else:
         log_to_file(
             f"Account: {name}: Chest/savage FAILED TO COLLECT at {cap_nm}. URL: {url}"
@@ -583,6 +594,7 @@ def get_live_captains(
     return merged_data
 
 
+# Equip skins. Captain skins have priority over a random skin.
 def equip_skin(
     user_id,
     version,
@@ -640,3 +652,98 @@ def equip_skin(
                             return skin_name
 
     return skin
+
+
+# After successfully collecting a chest/savage, check for quests.
+def collect_quests(
+    token, name, user_agent, proxy, proxy_user, proxy_password, version, data_version
+):
+    def collect_quest():
+        # Get a list of current quests
+        get_quests_url = (
+            constants.gameDataURL
+            + "?cn=getUserQuests&clientVersion="
+            + version
+            + "&clientPlatform=WebGL&gameDataVersion="
+            + data_version
+            + "&command=getUserQuests&isCaptain=0"
+        )
+        headers, proxies = get_request_strings(token, user_agent, proxy)
+        has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+        if has_proxy:
+            response = requests.get(
+            get_quests_url, proxies=proxies, headers=headers, auth=proxy_auth
+                    )
+        else:
+            response = requests.get(get_quests_url, proxies=proxies, headers=headers)
+        has_error = handle_error_response(response)
+        if has_error:
+            log_to_file(
+                     f"Account: {name}. Failed to get quests. URL: {get_quests_url}. Response: {response.json()}"
+                    )
+            return
+        else:
+            quest_nodes = open_file(constants.quest_nodes_path)
+            qs_data = response.json()["data"]
+            for q in qs_data:
+                quest_id = q["currentQuestId"]
+                quest_slot_id = q["questSlotId"]
+                
+                # There is no quest
+                if quest_id is None:
+                    continue
+                # Check if current quest has been completed
+                current_quest = q["currentQuestId"]
+                
+                if current_quest is not None and q["completedQuestIds"] is not None and  current_quest in q["completedQuestIds"]:
+                    continue
+
+                else:
+                    current_progress = q["currentProgress"]
+                    current_int = None
+                    try:
+                        current_int = int(current_progress)
+                    except ValueError:
+                        return  
+                    
+                    for node in quest_nodes:
+                        node_str = str(node)
+                        if node_str == quest_id:
+                            nd_key = quest_nodes[node_str]
+                            node_amount = nd_key["GoalAmount"]
+                            if current_int >= node_amount:
+                                collect_the_quest(quest_slot_id, token, name, user_agent, proxy, proxy_user, proxy_password, version, data_version)
+                                break
+                    pass
+        
+    # Check if user wants to collect quests
+    accounts = open_file(constants.py_accounts)
+    for account in accounts:
+        if account["name"] == name and not account["collect_quests"]:
+            return
+        if account["name"] == name and account["collect_quests"]:
+            log_to_file(f"Account {name}: Checking quests")
+            collect_quest()
+            break
+
+def collect_the_quest(node, token, name, user_agent, proxy, proxy_user, proxy_password, version, data_version):
+    url = f"{constants.gameDataURL}?cn=collectQuestReward&slotId={node}&autoComplete=False&clientVersion={version}&clientPlatform=WebGL&gameDataVersion={data_version}&command=collectQuestReward&isCaptain=0"
+    
+    headers, proxies = get_request_strings(token, user_agent, proxy)
+    has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
+    if has_proxy:
+        response = requests.get(
+        url, proxies=proxies, headers=headers, auth=proxy_auth
+                    )
+    else:
+        response = requests.get(url, proxies=proxies, headers=headers)
+    has_error = handle_error_response(response)
+    if has_error:
+        log_to_file(
+                     f"Account: {name}. Failed to get quests. URL: {url}. Response: {response.json()}"
+                    )
+        return
+    else:
+        pr_str = f"Account {name}: Collected {node} quest successfully."
+        print(pr_str)
+        log_to_file(pr_str)

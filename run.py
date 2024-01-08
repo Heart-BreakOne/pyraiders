@@ -83,7 +83,7 @@ async def run():
     #Update units cooldown
     update_unit_cooldown()
     print("Units cooldown updated.")
-
+    
     # Fill and clean slots
     slot_thread = threading.Thread(target=lambda: asyncio.run(fill_slots()))
     # Place units on the battlefield

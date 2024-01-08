@@ -15,6 +15,7 @@ mapPlacements = "https://d1vngzyege2qd5.cloudfront.net/prod1/"
 regular_chests = ["chestbronze", "chestsilver", "chestgold"]
 map_nodes_path = "assets/map_nodes.json"
 map_units_path = "assets/map_units.json"
+quest_nodes_path = "assets/quest_nodes.json"
 obstacles_path = "assets/obstacles.json"
 
 default_entry = [
@@ -53,38 +54,38 @@ default_entry = [
     }
 ]
 
-units_dict =  [
-    { "type": "melee", "name": "amazon", "alt": "" },
-    { "type": "ranged", "name": "archer", "alt": "" },
-    { "type": "ranged", "name": "artillery", "alt": "" },
-    { "type": "assassin", "name": "alliesballoonbuster", "alt": "balloonbuster" },
-    { "type": "melee", "name": "barbarian", "alt": "" },
-    { "type": "melee", "name": "berserker", "alt": "" },
-    { "type": "armored", "name": "blob", "alt": "" },
-    { "type": "ranged", "name": "bomber", "alt": "" },
-    { "type": "assassin", "name": "buster", "alt": "" },
-    { "type": "armored", "name": "centurion", "alt": "" },
-    { "type": "support", "name": "fairy", "alt": "" },
-    { "type": "support", "name": "flagbearer", "alt": "" },
-    { "type": "assassin", "name": "flyingarcher", "alt": "flyingrogue" },
-    { "type": "melee", "name": "gladiator", "alt": "" },
-    { "type": "support", "name": "healer", "alt": "" },
-    { "type": "melee", "name": "lancer", "alt": "" },
-    { "type": "ranged", "name": "mage", "alt": "" },
-    { "type": "support", "name": "monk", "alt": "" },
-    { "type": "ranged", "name": "musketeer", "alt": "" },
-    { "type": "support", "name": "necromancer", "alt": "" },
-    { "type": "armored", "name": "orcslayer", "alt": "" },
-    { "type": "armored", "name": "alliespaladin", "alt": "paladin" },
-    { "type": "assassin", "name": "rogue", "alt": "" },
-    { "type": "support", "name": "saint", "alt": "" },
-    { "type": "assassin", "name": "shinobi", "alt": "" },
-    { "type": "assassin", "name": "spy", "alt": "" },
-    { "type": "armored", "name": "tank", "alt": "" },
-    { "type": "support", "name": "templar", "alt": "" },
-    { "type": "armored", "name": "vampire", "alt": "" },
-    { "type": "melee", "name": "warbeast", "alt": "" },
-    { "type": "melee", "name": "warrior", "alt": "" },
+units_dict = [
+    {"type": "melee", "name": "amazon", "alt": ""},
+    {"type": "ranged", "name": "archer", "alt": ""},
+    {"type": "ranged", "name": "artillery", "alt": ""},
+    {"type": "assassin", "name": "alliesballoonbuster", "alt": "balloonbuster"},
+    {"type": "melee", "name": "barbarian", "alt": ""},
+    {"type": "melee", "name": "berserker", "alt": ""},
+    {"type": "armored", "name": "blob", "alt": ""},
+    {"type": "ranged", "name": "bomber", "alt": ""},
+    {"type": "assassin", "name": "buster", "alt": ""},
+    {"type": "armored", "name": "centurion", "alt": ""},
+    {"type": "support", "name": "fairy", "alt": ""},
+    {"type": "support", "name": "flagbearer", "alt": ""},
+    {"type": "assassin", "name": "flyingarcher", "alt": "flyingrogue"},
+    {"type": "melee", "name": "gladiator", "alt": ""},
+    {"type": "support", "name": "healer", "alt": ""},
+    {"type": "melee", "name": "lancer", "alt": ""},
+    {"type": "ranged", "name": "mage", "alt": ""},
+    {"type": "support", "name": "monk", "alt": ""},
+    {"type": "ranged", "name": "musketeer", "alt": ""},
+    {"type": "support", "name": "necromancer", "alt": ""},
+    {"type": "armored", "name": "orcslayer", "alt": ""},
+    {"type": "armored", "name": "alliespaladin", "alt": "paladin"},
+    {"type": "assassin", "name": "rogue", "alt": ""},
+    {"type": "support", "name": "saint", "alt": ""},
+    {"type": "assassin", "name": "shinobi", "alt": ""},
+    {"type": "assassin", "name": "spy", "alt": ""},
+    {"type": "armored", "name": "tank", "alt": ""},
+    {"type": "support", "name": "templar", "alt": ""},
+    {"type": "armored", "name": "vampire", "alt": ""},
+    {"type": "melee", "name": "warbeast", "alt": ""},
+    {"type": "melee", "name": "warrior", "alt": ""},
 ]
 
 py_accounts = "pyraiders_accounts.json"
@@ -94,6 +95,25 @@ keys_to_remove = [
     "OnLoseDialog",
     "OnStartDialog",
     "OnWinDialog",
+]
+quest_keys_rm = [
+    "AssetPathOverride",
+    "AssetScaleOverride",
+    "AutoCompleteCost",
+    "CompletionCooldown",
+    "CurrencyIdRequirement",
+    "CurrencyMaxRequirement",
+    "CurrencyMinRequirement",
+    "Description",
+    "Mode",
+    "Objective",
+    "RewardAmount",
+    "RewardItemId",
+    "Title",
+    "Type",
+    "UnitAsset",
+    "UnitLevelRequirement",
+    "UnitTypeRequirement",
 ]
 
 units_keys_rm = [
