@@ -41,7 +41,7 @@ async def place_unit_in_battlefield():
             await process_groups(groups)
 
         except Exception as e:
-            pr_str = f"An error occurred: {e}"
+            pr_str = f"log An error occurred: {e}"
             print(pr_str)
             log_to_file(pr_str)
         finally:
