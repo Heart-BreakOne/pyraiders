@@ -238,7 +238,9 @@ def shuffle_markers(markers, cap_coors, all_units):
     # Shuffle or get coordinates of interest.
     if cap_coors == {} and all_units == []:
         return random.shuffle(markers)
-    if len(cap_coors) == 0:
+    if len(cap_coors) == 0 and len(all_units) == 0:
+        return random.shuffle(markers)
+    elif len(cap_coors) == 0:
         f_l = [item for item in all_units if item["userId"] != ""]
         ref_unit = random.choice(f_l)
     else:
