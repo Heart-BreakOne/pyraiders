@@ -39,10 +39,12 @@ async def place_unit_in_battlefield():
             ]
 
             await process_groups(groups)
-
         except Exception as e:
             pr_str = f"log An error occurred: {e}"
             print(pr_str)
+            log_to_file(accounts)
+            log_to_file(accs_quantity)
+            log_to_file(group_size)
             log_to_file(pr_str)
         finally:
             pr_str = "Placement system cycled."
