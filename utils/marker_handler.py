@@ -226,6 +226,7 @@ def calculate_placement(
         )
 
     markers = shuffle_markers(markers, cap_coors, all_units)
+    markers = bump_vibes(markers)
     if markers == [] or markers == None:
         print("We have unexpected empty markers.]!")
         log_to_file(f"log-placement We have unexpected empty markers. {markers}")
@@ -366,3 +367,19 @@ def process_markers(raidPlan, map_width, map_height):
         dict_of_markers[key] = temp_list
 
     return dict_of_markers
+
+
+#Bump vibe markers to the end of the array
+def bump_vibes(markers_list):
+    
+    # Open the file and retrieve the marker priority
+    bump_marker = open_file("variables.json")
+    if not bump_marker["set_marker_priority"]:
+        return markers_list
+
+    vibe_markers = [marker for marker in markers_list if marker['type'] == 'Vibe']
+    non_vibe_markers = [marker for marker in markers_list if marker['type'] != 'Vibe']
+    
+    bumped_markers_list = non_vibe_markers + vibe_markers
+    
+    return bumped_markers_list

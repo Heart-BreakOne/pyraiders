@@ -48,7 +48,7 @@ async def place_unit_in_battlefield():
             log_to_file(group_size)
             log_to_file(pr_str)
         finally:
-            pr_str = "Placement system cycled."
+            pr_str = "PLACEMENT SYSTEM CYCLED"
             print(pr_str)
             log_to_file(pr_str)
             await asyncio.get_event_loop().run_in_executor(None, time.sleep, 20)

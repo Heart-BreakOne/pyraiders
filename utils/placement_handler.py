@@ -33,7 +33,6 @@ def place_the_unit(
     raid_type,
     creation_time,
 ):
-    can_epic = False
     is_epic = False
     log_to_file(f"log-placement Starting placement handler for {name} at {cap_nm}")
     def place(unit, marker, is_epic):
@@ -137,7 +136,7 @@ def place_the_unit(
             errorMsg = data.get("errorMessage")
             if status == "success" and errorMsg == None:
                 now = datetime.now().strftime("%H:%M:%S")
-                pr_str = f"Account {name}: {unitName} with skin {skin} placed successfully at {cap_nm} at {now}"
+                pr_str = f"Account {name}: {epic} {unitName} with skin {skin} placed successfully at {cap_nm} at {now}"
                 print(pr_str)
                 log_to_file(pr_str)
                 return 0
@@ -256,7 +255,7 @@ def calculate_epic_marker(
     proxy_user,
     proxy_password,
 ):
-    return False, marker
+    #return False, marker
 
     # Check if user has enough potions to use
     has_potions = check_potions(

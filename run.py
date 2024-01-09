@@ -2,6 +2,7 @@ import asyncio, sys
 import threading
 import time
 from utils.data_compat import update_data_structure
+from utils.logger import log_to_file
 from utils.settings import (
     write_file,
     open_file,
@@ -25,6 +26,7 @@ def custom_exception_handler(exc_type, exc_value, exc_traceback):
 
 
 async def run():
+    log_to_file("Beginning of a new log cycle")
     # Cheap error handling
     #sys.excepthook = custom_exception_handler
 
