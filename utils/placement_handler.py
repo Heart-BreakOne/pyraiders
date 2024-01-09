@@ -107,6 +107,8 @@ def place_the_unit(
             name, headers, proxies, version, data_version, has_proxy, proxy_auth
         )
         for captain in merged_data:
+            if captain == None:
+                continue
             if (
                 captain["twitchUserName"].lower() == cap_nm.lower()
                 and captain["raidState"] != 4

@@ -1,12 +1,10 @@
+
 logger.txt
 token.txt
-victory_states.json
 __pycache__
-tutorial.rb
 pyraiders_settings.json
 pyraiders_accounts.json
-.pyraiders_settings.json
-.pyraiders_accounts.json
+bkp_personal_pyraiders_accounts.json
 .DS_Store
 *.tm_build_errors
 build/*

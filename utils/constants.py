@@ -50,6 +50,7 @@ default_entry = [
         "favorites_only": False,
         "favoriteCaptainIds": "",
         "slots": 3,
+        "use_skins": True,
         "units": "",
     }
 ]

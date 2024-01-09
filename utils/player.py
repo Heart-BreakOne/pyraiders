@@ -229,10 +229,10 @@ def fill_empty_slots(
 
     unique_user_ids = set()
     unique_data = []
-
     # Clean up list to remove duplicate captains
     for entry in merged_data:
-        
+        if entry == None:
+            continue
         try:
             id = entry["userId"]
         except:

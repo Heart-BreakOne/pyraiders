@@ -115,9 +115,9 @@ async def process_group(group):
                 version,
                 data_version,
             )
-            log_to_file(f"log-placement Usable markers is {usable_markers}")
             log_to_file("log-placement Validating raid")
             if usable_markers == []:
+                log_to_file("log-placement There are no usable markers.")
                 return
 
             # Check if raid is over to collect rewards #also check rewards was not collected already
