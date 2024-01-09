@@ -232,7 +232,12 @@ def fill_empty_slots(
 
     # Clean up list to remove duplicate captains
     for entry in merged_data:
-        id = entry["userId"]
+        
+        try:
+            id = entry["userId"]
+        except:
+            log_to_file(f"id = entry[userId] {entry}")
+            continue
         if id not in unique_user_ids:
             unique_user_ids.add(id)
             unique_data.append(entry)

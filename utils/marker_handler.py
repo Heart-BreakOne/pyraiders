@@ -172,12 +172,14 @@ def calculate_placement(
     viewer_squares = make_imaginary_mkrs(MapData["PlayerPlacementRects"])
     purple_squares = make_imaginary_mkrs(MapData["HoldingZoneRects"])
     ally_squares = make_imaginary_mkrs(MapData["AllyPlacementRects"])
+    """
     try:
         neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
     except:
         log_to_file(f"Exception, no neutral zones: {MapData}")
-        neutral_squares = []
-    
+        
+    """
+    neutral_squares = []
     if viewer_squares == purple_squares:
         purple_squares = []
     if viewer_squares == neutral_squares:
