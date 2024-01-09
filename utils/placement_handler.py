@@ -35,8 +35,9 @@ def place_the_unit(
 ):
     can_epic = False
     is_epic = False
-
+    log_to_file(f"log-placement Starting placement handler for {name} at {cap_nm}")
     def place(unit, marker, is_epic):
+        log_to_file(f"log-placement Attempting placement for unit {unit} at marker {marker}")
         for d_unit in constants.units_dict:
             if (
                 unit["unitType"].lower() == d_unit["name"].lower()
@@ -68,6 +69,7 @@ def place_the_unit(
         
         # Check if user wants to equip a skin
         skin = equip_skin(user_id, version, data_version, token, user_agent, proxy, proxy_user, proxy_password, unitName, cap_nm, skin)
+        log_to_file(f"log-placement Skin is {skin}")
         url = (
             constants.gameDataURL
             + "?cn=addToRaid&raidId="
@@ -188,12 +190,15 @@ def place_the_unit(
                 # Marker fits anything, place the unit
                 has_placed = place(unit, marker, is_epic)
                 if has_placed == 0:
+                    log_to_file(f"log-placement Vibe Placemenet sucessful")
                     attempt = 30
                     break
                 elif has_placed == 3:
+                    log_to_file(f"log-placement Vibe Placement failed")
                     attempt = 30
                     break
                 else:
+                    log_to_file(f"log-placement Vibe Trying new placement")
                     attempt += 1
 
             else:
@@ -225,12 +230,15 @@ def place_the_unit(
                             )
                         has_placed = place(unit, marker, is_epic)
                         if has_placed == 0:
+                            log_to_file(f"log-placement Placement sucessful")
                             attempt = 30
                             break
                         elif has_placed == 3:
+                            log_to_file(f"log-placement Placement failed")
                             attempt = 30
                             break
                         else:
+                            log_to_file(f"log-placement Trying new placement")
                             attempt += 1
 
 

@@ -20,3 +20,6 @@ def get_any():
 
 def placement_minimum():
     return random.randint(6, 15)
+
+def get_five_min():
+    return 300

@@ -26,6 +26,7 @@ def calculate_placement(
     version,
     data_version,
 ):
+    log_to_file("log-placement Beginning to calculate markers")
     headers, proxies = get_request_strings(token, user_agent, proxy)
     has_proxy, proxy_auth = get_proxy_auth(proxy_user, proxy_password)
     # Data on where units have been placed.
@@ -119,7 +120,6 @@ def calculate_placement(
     except:
         log_to_file(f"Keys not found getRaid[data][placements] and ai_units = MapData[PlacementData]. h_units = {h_units}. ai_units = {ai_units}. Raid: {getRaid}. Map: {MapData}")
         return []
-
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
     if len(h_units) > 1999:
         print(f"Account {name}: Captain {cap_nm} is full, can't place anymore. C'est la Révolution française")
@@ -172,19 +172,17 @@ def calculate_placement(
     viewer_squares = make_imaginary_mkrs(MapData["PlayerPlacementRects"])
     purple_squares = make_imaginary_mkrs(MapData["HoldingZoneRects"])
     ally_squares = make_imaginary_mkrs(MapData["AllyPlacementRects"])
-    """
     try:
         neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
     except:
-        log_to_file(f"Exception, no neutral zones: {MapData}")
-        
-    """
-    neutral_squares = []
+        log_to_file(f"Non fatal exception, no neutral zones. Using default")
+        neutral_squares = []
+
+    
     if viewer_squares == purple_squares:
         purple_squares = []
     if viewer_squares == neutral_squares:
         neutral_squares = []
-
 
     m_list = []
     m_list.extend(all_units)
@@ -228,12 +226,14 @@ def calculate_placement(
         )
 
     markers = shuffle_markers(markers, cap_coors, all_units)
-    
+    if markers == [] or markers == None:
+        print("We have unexpected empty markers.]!")
+        log_to_file(f"log-placement We have unexpected empty markers. {markers}")
     return markers[:100]
-
 
 # Get markers that are closest to an unit of interest or shuffle everything.
 def shuffle_markers(markers, cap_coors, all_units):
+    log_to_file(f"log-placement Sorting markers based on distance to the captain")
     # Shuffle or get coordinates of interest.
     if cap_coors == {} and all_units == []:
         return random.shuffle(markers)
@@ -256,12 +256,13 @@ def shuffle_markers(markers, cap_coors, all_units):
     sorted_markers = sorted(markers, key=lambda x: x["distance_to_ref"])
     for marker in sorted_markers:
         del marker["distance_to_ref"]
-
+    
     return sorted_markers
 
 
 # Remove occupied markers since they can't be used
 def remove_overlap(squares_of_interest, overlapping_squares):
+    log_to_file(f"log-placement Removing units and markers overlap")
     if not squares_of_interest:
         return []
 
@@ -309,6 +310,7 @@ def remove_overlap(squares_of_interest, overlapping_squares):
 
 # Create imaginary markers since there aren't any on the map.
 def make_imaginary_mkrs(zones):
+    log_to_file(f"log-placement Creating imaginary markers to compensate lack there of")
     if zones == []:
         return []
     markers = []
@@ -338,6 +340,7 @@ def make_imaginary_mkrs(zones):
 
 # The markers have a coordinate system of top and left. Convert to cartesian system with 0,0 at the center
 def process_markers(raidPlan, map_width, map_height):
+    log_to_file(f"log-placement Normalizing markers and units data")
     # Check if there are markers
     markers = raidPlan["planData"]
     if markers is not None and "NoPlacement" in markers:

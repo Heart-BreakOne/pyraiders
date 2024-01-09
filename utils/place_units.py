@@ -17,14 +17,15 @@ from utils.player import getActiveraids
 
 async def place_unit_in_battlefield():
     is_running = False
-
+    log_to_file("log-placement Starting point of placement system")
     while True:
         if is_running:
             print("We are running already")
             return
         is_running = True
-
+        
         try:
+            
             # Divide the account into 4 groups for simultaneous processing
             accounts = open_file(constants.py_accounts)
             accs_quantity = len(accounts)
@@ -37,7 +38,7 @@ async def place_unit_in_battlefield():
                 accounts[i : i + group_size]
                 for i in range(0, len(accounts), group_size)
             ]
-
+            log_to_file("log-placement Groups have been processed")
             await process_groups(groups)
         except Exception as e:
             pr_str = f"log An error occurred: {e}"
@@ -56,9 +57,11 @@ async def place_unit_in_battlefield():
 
 # Split the groups into tasks so they can be run simultaneously
 async def process_groups(groups):
+    log_to_file("log-placement Beginning to process process groups")
     tasks = []
 
     for group in groups:
+        log_to_file("log-placement Processing group")
         task = asyncio.create_task(process_group(group))
         tasks.append(task)
     await asyncio.gather(*tasks)
@@ -67,6 +70,7 @@ async def process_groups(groups):
 # Process the accounts in groups. The task handler ensure they run simultaneously
 async def process_group(group):
     for account in group:
+        log_to_file("log-placement Processing account in the group")
         # Check if account is enabled
         if not account["powered_on"]:
             continue
@@ -94,7 +98,7 @@ async def process_group(group):
             raid_id = raid["raidId"]
             cap_nm = raid["twitchUserName"]
             cap_id = raid["captainId"]
-            
+            log_to_file("log-placement Calculating marker for raid")
             # Calculate the markers
             usable_markers = calculate_placement(
                 cap_id,
@@ -111,8 +115,11 @@ async def process_group(group):
                 version,
                 data_version,
             )
+            log_to_file(f"log-placement Usable markers is {usable_markers}")
+            log_to_file("log-placement Validating raid")
             if usable_markers == []:
                 return
+
             # Check if raid is over to collect rewards #also check rewards was not collected already
             if (
                 raid["hasRecievedRewards"] == "0"
@@ -150,7 +157,8 @@ async def process_group(group):
             blocklist = account["blocklist"]
             if raid["twitchUserName"].upper() in map(str.upper, blocklist):
                 continue
-
+            
+            log_to_file("log-placement Checking loyalty preservation")
             # Check if it's campaign and if user wants to preserver loyalty.
             if account["preserve_loyalty"] != 0 and raid_type == "1":
                 mapLoyalty = raid["pveLoyaltyLevel"]
@@ -191,21 +199,25 @@ async def process_group(group):
             if not validate_raid(raid):
                 continue
 
+            log_to_file("log-placement Checking unlimited placements")
             # Check raid type, check if an unit was placed, check if the user wants more units.
             un_key = constants.type_dict.get(raid_type)
             if last is not None and un_key is not None and not account[un_key]:
                 continue
 
             # update units cooldown
+            log_to_file("log-placement Updating unit cooldown")
             update_unit_cooldown()
             time.sleep(2)
             # Check if there are units available in order to save resources
+            log_to_file("log-placement Checking if there are available units")
             units = check_unit_availability(name, now)
             if not units or units == []:
                 continue
 
 
             #Place the unit
+            log_to_file("log-placement Placing the unit")
             place_the_unit(
                 can_epic,
                 raid,

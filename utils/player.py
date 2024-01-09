@@ -3,7 +3,7 @@ import random
 from datetime import datetime, timedelta
 from utils.logger import log_to_file
 from utils.response_handler import handle_error_response
-from utils.time_generator import get_quarter
+from utils.time_generator import get_five_min
 from utils.settings import open_file, write_file
 from utils.game_requests import (
     get_live_captains,
@@ -17,7 +17,7 @@ from utils import constants
 
 async def fill_slots():
     while True:
-        await asyncio.sleep(get_quarter())
+        await asyncio.sleep(get_five_min())
         # Fill empty slots.
         accounts = open_file(constants.py_accounts)
         for account in accounts:
