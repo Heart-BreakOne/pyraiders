@@ -3,6 +3,7 @@ import random
 import requests
 
 from utils import constants
+from utils.logger import log_to_file
 from utils.settings import open_file
 from utils.game_requests import get_proxy_auth, get_request_strings
 
@@ -116,6 +117,7 @@ def calculate_placement(
         h_units = getRaid["data"]["placements"]
         ai_units = MapData["PlacementData"]
     except:
+        log_to_file(f"Keys not found getRaid[data][placements] and ai_units = MapData[PlacementData]. h_units = {h_units}. ai_units = {ai_units}. Raid: {getRaid}. Map: {MapData}")
         return []
 
     # Units, enemies and allies all have the same properties, so they can be merged together for processing
@@ -146,7 +148,8 @@ def calculate_placement(
                     else:
                         unit["width"] = 0.8
                         unit["height"] = 0.8
-                except Exception as e:
+                except:
+                    log_to_file(f"Minor exception: unit_width = {units['Size']}. unit_height = {units['Size']}")
                     unit["width"] = units["Size"]
                     unit["height"] = units["Size"]
                 # Grabbing captain to user later
@@ -172,6 +175,7 @@ def calculate_placement(
     try:
         neutral_squares = make_imaginary_mkrs(MapData["NeutralPlacementRects"])
     except:
+        log_to_file(f"Exception, no neutral zones: {MapData}")
         neutral_squares = []
     
     if viewer_squares == purple_squares:

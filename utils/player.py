@@ -329,6 +329,7 @@ def fill_empty_slots(
             if entry["twitchUserName"].upper() not in captains_to_remove
         ]
     except:
+        log_to_file("An error happened while trying to fill empty slots")
         pass
 
     # The list left is ready to be used for placement, now figure out what slots are available

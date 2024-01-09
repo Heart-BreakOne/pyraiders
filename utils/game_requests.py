@@ -517,6 +517,7 @@ def check_potions(
             else:
                 return False
         except:
+            log_to_file(response)
             return False
     else:
         log_to_file(url)
@@ -704,6 +705,7 @@ def collect_quests(
                     try:
                         current_int = int(current_progress)
                     except ValueError:
+                        log_to_file(q)
                         return  
                     
                     for node in quest_nodes:

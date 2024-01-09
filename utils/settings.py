@@ -2,6 +2,7 @@ import json, random
 from datetime import datetime, timedelta
 import sys
 from utils import constants
+from utils.logger import log_to_file
 
 
 def open_file(file_name):
@@ -133,6 +134,7 @@ def clean_temp_times(accounts):
             account["temporary_ignore"] = temp_ignore_list
 
         except Exception as e:
+            log_to_file(e)
             print(e)
             sys.exit()
 
